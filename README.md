@@ -17,8 +17,7 @@ This is a map of the environmental monitoring locations in Southeast Alaska. Thi
 - Layers
   - Categorize monitoring locations by station owners or by the status of the location
   - Change the background layer preferences
-    
-![Screenshot 2024-06-21 145521](https://github.com/Sitka-Sound-Science-Center/monitoring_locations_web_map/assets/34327238/8d3df160-1c9f-49b2-a56d-7d5e28b6f1d1)
+![Screenshot 2024-06-21 145521](https://github.com/Sitka-Sound-Science-Center/monitoring_locations_web_map/assets/34327238/8e5954ad-abeb-4e6c-97ea-df885c3b2ab0)
 
 ##### Lower Right-Hand Corner:
 - Click the "i" icon for more information about the map
