@@ -6,8 +6,19 @@ This is a map of the environmental monitoring locations in Southeast Alaska. Thi
 **[Web Map](https://sitka-sound-science-center.github.io/monitoring_locations_web_map/#6/57.484/-138.573)**
 
 #### Features
-Upper Left Hand Corner:
+##### Upper Left-Hand Corner:
 - Click the plus (+) sign to zoom in
 - Click the minus (-) sign to zoom out
+- Click the raindrop symbol to show your location on the map and find monitoring locations around you
+![Screenshot 2024-06-21 144917](https://github.com/Sitka-Sound-Science-Center/monitoring_locations_web_map/assets/34327238/fbf1f1b9-8c9c-4913-afd4-17cc361beca9)
 
-![Screenshot 2024-06-21 142029](https://github.com/Sitka-Sound-Science-Center/monitoring_locations_web_map/assets/34327238/b92d72d5-a54e-436b-ac51-dd47ae1821b7)
+##### Upper Right-Hand Corner:
+- Title of Map: Southeast Alaska Monitoring Locations
+- Layers
+  - Categorize monitoring locations by station owners or by the status of the location
+  - Change the background layer preferences
+![Screenshot 2024-06-21 145521](https://github.com/Sitka-Sound-Science-Center/monitoring_locations_web_map/assets/34327238/3197ecaa-d00c-4a78-87ac-f7710b0e67b3)
+
+##### Lower Right-Hand Corner:
+- Click the "i" icon for more information about the map
+![Screenshot 2024-06-21 145615](https://github.com/Sitka-Sound-Science-Center/monitoring_locations_web_map/assets/34327238/77fbf271-7ab5-4d6d-a5bf-15d2c099d421)
