@@ -17,7 +17,7 @@
             height: 843px;
         }
         </style>
-        <title>Southeast Alaska Monitoring Locations</title>
+        <title>Southeast Alaska Environmental Monitoring Locations</title>
     </head>
     <body>
         <div id="map">
@@ -26,6 +26,7 @@
         <script src="js/leaflet.js"></script>
         <script src="js/L.Control.Layers.Tree.min.js"></script>
         <script src="js/L.Control.Locate.min.js"></script>
+        <script src="js/leaflet-svg-shape-markers.min.js"></script>
         <script src="js/leaflet.rotatedMarker.js"></script>
         <script src="js/leaflet.pattern.js"></script>
         <script src="js/leaflet-hash.js"></script>
@@ -43,11 +44,11 @@
 
             if (e.target.feature.geometry.type === 'LineString' || e.target.feature.geometry.type === 'MultiLineString') {
               highlightLayer.setStyle({
-                color: '#1c32b4',
+                color: '#ffff00',
               });
             } else {
               highlightLayer.setStyle({
-                fillColor: '#1c32b4',
+                fillColor: '#ffff00',
                 fillOpacity: 1
               });
             }
@@ -55,7 +56,7 @@
         }
         var map = L.map('map', {
             zoomControl:false, maxZoom:28, minZoom:1
-        }).fitBounds([[53.93607396309246,-150.1072654875579],[60.7178956460889,-127.0390420887906]]);
+        }).fitBounds([[56.99753885871858,-144.10761512272947],[60.275148368431225,-132.5735034233458]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -87,17 +88,17 @@
 				popup._contentNode.classList.remove('media');
 			}
 		}
-        var title = new L.Control({'position':'topright'});
+        var title = new L.Control({'position':'topleft'});
         title.onAdd = function (map) {
             this._div = L.DomUtil.create('div', 'info');
             this.update();
             return this._div;
         };
         title.update = function () {
-            this._div.innerHTML = '<h2>Southeast Alaska Monitoring Locations</h2>';
+            this._div.innerHTML = '<h2>Southeast Alaska Environmental Monitoring Locations</h2>';
         };
         title.addTo(map);
-        var abstract = new L.Control({'position':'bottomright'});
+        var abstract = new L.Control({'position':'topleft'});
         abstract.onAdd = function (map) {
             this._div = L.DomUtil.create('div',
             'leaflet-control abstract');
@@ -115,7 +116,7 @@
             abstract.show = function () {
                 this._div.classList.remove("abstract");
                 this._div.classList.add("abstractUncollapsed");
-                this._div.innerHTML = 'This is a map of the environmental monitoring locations in Southeast Alaska. This map was created by Sitka Sound Science Center Data Manager Ella Neumann as a deliverable for a USGS Landslide Monitoring and Risk Reduction Grant. Data have been provided by or collected from the National Weather Service, US National Forest Services, MesoWest, and other public data repositories. This map aims to shed light on the different types of monitoring stations in the region, the usage of the monitoring stations, and other descriptive information about the locations. We hope this map allows you to make connections, draw conclusions, and explore Southeast Alaska in new ways!<br /><br />Sitka Sound Science Center GitHub Repository: https://github.com/Sitka-Sound-Science-Center ';
+                this._div.innerHTML = 'This is a map of the environmental monitoring locations in Southeast Alaska. This map was created as a deliverable for a USGS Landslide Monitoring and Risk Reduction Grant. Data have been provided by or collected from the National Weather Service, US National Forest Services, MesoWest, and other public data repositories. This map aims to shed light on the different types of monitoring stations in the region, the usage of the monitoring stations, and other descriptive information about the locations. We hope this map allows you to make connections, draw conclusions, and explore Southeast Alaska in new ways!<br /><br />Upper Left-Hand Corner:<br />- Click the plus (+) sign to zoom in<br />- Click the minus (-) sign to zoom out<br />- Click the raindrop symbol to show your location on the map and find monitoring locations around you<br /><br />Upper Right-Hand Corner:<br />- Layers<br />  - Categorize monitoring locations by station owners or by the status of the location<br />  - Change the background layer preferences<br />';
         };
         abstract.addTo(map);
         var zoomControl = L.control.zoom({
@@ -125,22 +126,10 @@
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
         }
-        map.createPane('pane_OSMStandard_0');
-        map.getPane('pane_OSMStandard_0').style.zIndex = 400;
-        var layer_OSMStandard_0 = L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            pane: 'pane_OSMStandard_0',
-            opacity: 1.0,
-            attribution: '<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors, CC-BY-SA</a>',
-            minZoom: 1,
-            maxZoom: 28,
-            minNativeZoom: 0,
-            maxNativeZoom: 19
-        });
-        layer_OSMStandard_0;
-        map.createPane('pane_Positronretina_1');
-        map.getPane('pane_Positronretina_1').style.zIndex = 401;
-        var layer_Positronretina_1 = L.tileLayer('https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png', {
-            pane: 'pane_Positronretina_1',
+        map.createPane('pane_Positronretina_0');
+        map.getPane('pane_Positronretina_0').style.zIndex = 400;
+        var layer_Positronretina_0 = L.tileLayer('https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png', {
+            pane: 'pane_Positronretina_0',
             opacity: 1.0,
             attribution: '<a href="https://cartodb.com/basemaps/">Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.</a>',
             minZoom: 1,
@@ -148,8 +137,20 @@
             minNativeZoom: 0,
             maxNativeZoom: 20
         });
-        layer_Positronretina_1;
-        map.addLayer(layer_Positronretina_1);
+        layer_Positronretina_0;
+        map.createPane('pane_OSMStandard_1');
+        map.getPane('pane_OSMStandard_1').style.zIndex = 401;
+        var layer_OSMStandard_1 = L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            pane: 'pane_OSMStandard_1',
+            opacity: 1.0,
+            attribution: '<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors, CC-BY-SA</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_OSMStandard_1;
+        map.addLayer(layer_OSMStandard_1);
         function pop_MonitoringLocationsOwner_2(feature, layer) {
             layer.on({
                 mouseout: function(e) {
@@ -210,11 +211,59 @@
                         <td class="visible-with-data" id="elevation_ft">' + (feature.properties['elevation_ft'] !== null ? autolinker.link(feature.properties['elevation_ft'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Operational Status</th>\
+                        <th scope="row">Transmit Time</th>\
+                        <td class="visible-with-data" id="xmit_time">' + (feature.properties['xmit_time'] !== null ? autolinker.link(feature.properties['xmit_time'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Operation Status</th>\
                         <td class="visible-with-data" id="operational">' + (feature.properties['operational'] !== null ? autolinker.link(feature.properties['operational'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Soil Temperature</th>\
+                        <th scope="row">T</th>\
+                        <td class="visible-with-data" id="T">' + (feature.properties['T'] !== null ? autolinker.link(feature.properties['T'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">DP</th>\
+                        <td class="visible-with-data" id="DP">' + (feature.properties['DP'] !== null ? autolinker.link(feature.properties['DP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">WND</th>\
+                        <td class="visible-with-data" id="WND">' + (feature.properties['WND'] !== null ? autolinker.link(feature.properties['WND'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">VIS</th>\
+                        <td class="visible-with-data" id="VIS">' + (feature.properties['VIS'] !== null ? autolinker.link(feature.properties['VIS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SKY</th>\
+                        <td class="visible-with-data" id="SKY">' + (feature.properties['SKY'] !== null ? autolinker.link(feature.properties['SKY'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">WX</th>\
+                        <td class="visible-with-data" id="WX">' + (feature.properties['WX'] !== null ? autolinker.link(feature.properties['WX'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SLP</th>\
+                        <td class="visible-with-data" id="SLP">' + (feature.properties['SLP'] !== null ? autolinker.link(feature.properties['SLP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ALT</th>\
+                        <td class="visible-with-data" id="ALT">' + (feature.properties['ALT'] !== null ? autolinker.link(feature.properties['ALT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">PRC</th>\
+                        <td class="visible-with-data" id="PRC">' + (feature.properties['PRC'] !== null ? autolinker.link(feature.properties['PRC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SN</th>\
+                        <td class="visible-with-data" id="SN">' + (feature.properties['SN'] !== null ? autolinker.link(feature.properties['SN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SEA</th>\
+                        <td class="visible-with-data" id="SEA">' + (feature.properties['SEA'] !== null ? autolinker.link(feature.properties['SEA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Soil Temp</th>\
                         <td class="visible-with-data" id="SOIL TEMP">' + (feature.properties['SOIL TEMP'] !== null ? autolinker.link(feature.properties['SOIL TEMP'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
@@ -222,11 +271,47 @@
                         <td class="visible-with-data" id="SOIL MOIST">' + (feature.properties['SOIL MOIST'] !== null ? autolinker.link(feature.properties['SOIL MOIST'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Data Types</th>\
+                        <th scope="row">WHY</th>\
+                        <td class="visible-with-data" id="WHY">' + (feature.properties['WHY'] !== null ? autolinker.link(feature.properties['WHY'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Heated</th>\
+                        <td class="visible-with-data" id="Heated">' + (feature.properties['Heated'] !== null ? autolinker.link(feature.properties['Heated'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Seasonal</th>\
+                        <td class="visible-with-data" id="SEASONAL">' + (feature.properties['SEASONAL'] !== null ? autolinker.link(feature.properties['SEASONAL'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Site</th>\
+                        <td class="visible-with-data" id="SITE">' + (feature.properties['SITE'] !== null ? autolinker.link(feature.properties['SITE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Reliable</th>\
+                        <td class="visible-with-data" id="reliable">' + (feature.properties['reliable'] !== null ? autolinker.link(feature.properties['reliable'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Precipitation Reliable</th>\
+                        <td class="visible-with-data" id="precip reliable">' + (feature.properties['precip reliable'] !== null ? autolinker.link(feature.properties['precip reliable'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Temperature Reliable</th>\
+                        <td class="visible-with-data" id="temp reliable">' + (feature.properties['temp reliable'] !== null ? autolinker.link(feature.properties['temp reliable'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Wind Reliable</th>\
+                        <td class="visible-with-data" id="wind reliable">' + (feature.properties['wind reliable'] !== null ? autolinker.link(feature.properties['wind reliable'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Td reliable</th>\
+                        <td class="visible-with-data" id="Td reliable">' + (feature.properties['Td reliable'] !== null ? autolinker.link(feature.properties['Td reliable'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Types of Data</th>\
                         <td class="visible-with-data" id="data_and_types">' + (feature.properties['data_and_types'] !== null ? autolinker.link(feature.properties['data_and_types'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">MesoWest Location</th>\
+                        <th scope="row">Link to Meso West</th>\
                         <td class="visible-with-data" id="mesowest_link">' + (feature.properties['mesowest_link'] !== null ? autolinker.link(feature.properties['mesowest_link'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
@@ -250,7 +335,7 @@
                         <td class="visible-with-data" id="status_details">' + (feature.properties['status_details'] !== null ? autolinker.link(feature.properties['status_details'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Web Link to More Info</th>\
+                        <th scope="row">More Information</th>\
                         <td class="visible-with-data" id="data_web_link">' + (feature.properties['data_web_link'] !== null ? autolinker.link(feature.properties['data_web_link'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
@@ -262,12 +347,12 @@
                         <td class="visible-with-data" id="data_format">' + (feature.properties['data_format'] !== null ? autolinker.link(feature.properties['data_format'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Data Routing Procedure</th>\
+                        <th scope="row">Data Routing Procedures</th>\
                         <td class="visible-with-data" id="data_routing_procedure">' + (feature.properties['data_routing_procedure'] !== null ? autolinker.link(feature.properties['data_routing_procedure'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">API Services</th>\
-                        <td class="visible-with-data" id="api_services">' + (feature.properties['api_services'] !== null ? autolinker.link(feature.properties['api_services'].toLocaleString()) : '') + '</td>\
+                        <td>' + (feature.properties['api_services'] !== null ? autolinker.link(feature.properties['api_services'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Observation Frequency</th>\
@@ -294,1424 +379,1513 @@
                 case 'AEL&P':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(48,18,59,1.0)',
+                fillColor: 'rgba(215,25,28,1.0)',
                 interactive: true,
             }
                     break;
                 case 'AK DGGS':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(52,27,80,1.0)',
+                fillColor: 'rgba(217,32,31,1.0)',
                 interactive: true,
             }
                     break;
                 case 'AK DOT':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(55,35,101,1.0)',
+                fillColor: 'rgba(218,39,34,1.0)',
                 interactive: true,
             }
                     break;
                 case 'AKDOT':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(58,44,119,1.0)',
+                fillColor: 'rgba(220,45,37,1.0)',
                 interactive: true,
             }
                     break;
                 case 'Alaska Avalanche Information Center':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(61,52,137,1.0)',
+                fillColor: 'rgba(222,52,41,1.0)',
                 interactive: true,
             }
                     break;
                 case 'Alaska Department of Transportation':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(63,61,154,1.0)',
+                fillColor: 'rgba(224,59,44,1.0)',
                 interactive: true,
             }
                     break;
                 case 'Alaska Division of Geological & Geophysical Surveys':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(65,68,169,1.0)',
+                fillColor: 'rgba(225,66,47,1.0)',
                 interactive: true,
             }
                     break;
                 case 'Alaska Electric Light and Power':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(66,76,183,1.0)',
+                fillColor: 'rgba(227,72,50,1.0)',
                 interactive: true,
             }
                     break;
                 case 'Alaska Electric Light and Power/Snowbound Solutions LLC':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(68,85,196,1.0)',
+                fillColor: 'rgba(229,79,53,1.0)',
                 interactive: true,
             }
                     break;
                 case 'AOMC':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(69,92,208,1.0)',
+                fillColor: 'rgba(231,86,56,1.0)',
                 interactive: true,
             }
                     break;
                 case 'AOMC/OBS':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(70,100,218,1.0)',
+                fillColor: 'rgba(232,93,59,1.0)',
                 interactive: true,
             }
                     break;
                 case 'APRSWXNET/Citizen Weather Observer Program':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(70,107,227,1.0)',
+                fillColor: 'rgba(234,100,63,1.0)',
                 interactive: true,
             }
                     break;
                 case 'BIA/MIC':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(71,115,235,1.0)',
+                fillColor: 'rgba(236,106,66,1.0)',
                 interactive: true,
             }
                     break;
                 case 'BLM/USFS':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(71,122,242,1.0)',
+                fillColor: 'rgba(237,113,69,1.0)',
                 interactive: true,
             }
                     break;
                 case 'Bureau of Indian Affairs':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(70,129,247,1.0)',
+                fillColor: 'rgba(239,120,72,1.0)',
                 interactive: true,
             }
                     break;
                 case 'Canada':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(69,137,252,1.0)',
+                fillColor: 'rgba(241,127,75,1.0)',
                 interactive: true,
             }
                     break;
                 case 'Carl Dierking':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(67,144,254,1.0)',
+                fillColor: 'rgba(243,133,78,1.0)',
                 interactive: true,
             }
                     break;
                 case 'Caroline Stewart':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(65,151,255,1.0)',
+                fillColor: 'rgba(244,140,81,1.0)',
                 interactive: true,
             }
                     break;
                 case 'CBJ/AEL&P':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(60,159,254,1.0)',
+                fillColor: 'rgba(246,147,84,1.0)',
                 interactive: true,
             }
                     break;
                 case 'Constantine Mine':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(56,166,251,1.0)',
+                fillColor: 'rgba(248,154,88,1.0)',
                 interactive: true,
             }
                     break;
                 case 'COOP':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(51,173,247,1.0)',
+                fillColor: 'rgba(250,160,91,1.0)',
                 interactive: true,
             }
                     break;
                 case 'CWOP/PRIVATE':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(46,180,242,1.0)',
+                fillColor: 'rgba(251,167,94,1.0)',
                 interactive: true,
             }
                     break;
                 case 'DOI/USGS':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(40,188,235,1.0)',
+                fillColor: 'rgba(253,174,97,1.0)',
                 interactive: true,
             }
                     break;
                 case 'DOT':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(35,195,228,1.0)',
+                fillColor: 'rgba(253,178,101,1.0)',
                 interactive: true,
             }
                     break;
                 case 'Eaglecrest':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(31,201,221,1.0)',
+                fillColor: 'rgba(253,181,106,1.0)',
                 interactive: true,
             }
                     break;
                 case 'Env. Canada':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(27,207,214,1.0)',
+                fillColor: 'rgba(253,185,110,1.0)',
                 interactive: true,
             }
                     break;
                 case 'FAA':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(25,213,206,1.0)',
+                fillColor: 'rgba(253,189,114,1.0)',
                 interactive: true,
             }
                     break;
                 case 'FAA/Observer':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(24,218,198,1.0)',
+                fillColor: 'rgba(253,192,118,1.0)',
                 interactive: true,
             }
                     break;
                 case 'Haight & Assoc.':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(24,223,191,1.0)',
+                fillColor: 'rgba(254,196,123,1.0)',
                 interactive: true,
             }
                     break;
                 case 'Hydrometeorological Automated Data System':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(25,227,184,1.0)',
+                fillColor: 'rgba(254,200,127,1.0)',
                 interactive: true,
             }
                     break;
                 case 'Incorporated Research Institutions for Seismology':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(30,232,177,1.0)',
+                fillColor: 'rgba(254,203,131,1.0)',
                 interactive: true,
             }
                     break;
                 case 'Jerry Collison':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(35,235,169,1.0)',
+                fillColor: 'rgba(254,207,135,1.0)',
                 interactive: true,
             }
                     break;
                 case 'Jim Green':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(42,239,161,1.0)',
+                fillColor: 'rgba(254,211,140,1.0)',
                 interactive: true,
             }
                     break;
                 case 'John Hafendorfer':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(50,242,152,1.0)',
+                fillColor: 'rgba(254,215,144,1.0)',
                 interactive: true,
             }
                     break;
                 case 'Juneau Weather Forecast Office':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(60,245,142,1.0)',
+                fillColor: 'rgba(254,218,148,1.0)',
                 interactive: true,
             }
                     break;
                 case 'Ketchikan Public Utilities':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(69,248,133,1.0)',
+                fillColor: 'rgba(254,222,153,1.0)',
                 interactive: true,
             }
                     break;
                 case 'KPU':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(81,250,123,1.0)',
+                fillColor: 'rgba(254,226,157,1.0)',
                 interactive: true,
             }
                     break;
                 case 'KTOO':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(92,252,112,1.0)',
+                fillColor: 'rgba(254,229,161,1.0)',
                 interactive: true,
             }
                     break;
                 case 'Marine Exchange':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(103,253,103,1.0)',
+                fillColor: 'rgba(254,233,165,1.0)',
                 interactive: true,
             }
                     break;
                 case 'Meteoburst':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(115,254,94,1.0)',
+                fillColor: 'rgba(255,237,170,1.0)',
                 interactive: true,
             }
                     break;
                 case 'N WS':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(126,255,85,1.0)',
+                fillColor: 'rgba(255,240,174,1.0)',
                 interactive: true,
             }
                     break;
                 case 'National Climatic Data Center/Hydrometeorological Automated Data System':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(137,255,77,1.0)',
+                fillColor: 'rgba(255,244,178,1.0)',
                 interactive: true,
             }
                     break;
                 case 'National Weather Service':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(147,255,70,1.0)',
+                fillColor: 'rgba(255,248,182,1.0)',
                 interactive: true,
             }
                     break;
                 case 'National Weather Service/Federal Aviation Administration':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(156,254,64,1.0)',
+                fillColor: 'rgba(255,251,187,1.0)',
                 interactive: true,
             }
                     break;
                 case 'National Weather Service/Hydrometeorological Automated Data System':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(164,252,60,1.0)',
+                fillColor: 'rgba(255,255,191,1.0)',
                 interactive: true,
             }
                     break;
                 case 'Natural Resources Conservation Service':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(172,251,56,1.0)',
+                fillColor: 'rgba(251,253,190,1.0)',
                 interactive: true,
             }
                     break;
                 case 'NDBC':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(179,248,54,1.0)',
+                fillColor: 'rgba(247,252,189,1.0)',
                 interactive: true,
             }
                     break;
                 case 'NESDIS':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(187,245,52,1.0)',
+                fillColor: 'rgba(244,250,187,1.0)',
                 interactive: true,
             }
                     break;
                 case 'NFS':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(194,242,52,1.0)',
+                fillColor: 'rgba(240,249,186,1.0)',
                 interactive: true,
             }
                     break;
                 case 'NOAA/NMFS':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(202,238,52,1.0)',
+                fillColor: 'rgba(236,247,185,1.0)',
                 interactive: true,
             }
                     break;
                 case 'NOAA/NWS':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(209,234,52,1.0)',
+                fillColor: 'rgba(232,246,184,1.0)',
                 interactive: true,
             }
                     break;
                 case 'NOS':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(216,229,53,1.0)',
+                fillColor: 'rgba(228,244,182,1.0)',
                 interactive: true,
             }
                     break;
                 case 'NPS':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(222,224,55,1.0)',
+                fillColor: 'rgba(224,243,181,1.0)',
                 interactive: true,
             }
                     break;
                 case 'NRCS':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(227,219,56,1.0)',
+                fillColor: 'rgba(221,241,180,1.0)',
                 interactive: true,
             }
                     break;
                 case 'NTWC':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(233,213,57,1.0)',
+                fillColor: 'rgba(217,240,179,1.0)',
                 interactive: true,
             }
                     break;
                 case 'NWS':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(238,207,58,1.0)',
+                fillColor: 'rgba(213,238,178,1.0)',
                 interactive: true,
             }
                     break;
                 case 'NWS/DOT':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(242,201,58,1.0)',
+                fillColor: 'rgba(209,236,176,1.0)',
                 interactive: true,
             }
                     break;
                 case 'OBS/AOMC':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(246,195,58,1.0)',
+                fillColor: 'rgba(205,235,175,1.0)',
                 interactive: true,
             }
                     break;
                 case 'OBS/SOC':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(249,189,57,1.0)',
+                fillColor: 'rgba(202,233,174,1.0)',
                 interactive: true,
             }
                     break;
                 case 'private':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(251,183,55,1.0)',
+                fillColor: 'rgba(198,232,173,1.0)',
                 interactive: true,
             }
                     break;
                 case 'Private':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(253,175,53,1.0)',
+                fillColor: 'rgba(194,230,171,1.0)',
                 interactive: true,
             }
                     break;
                 case 'Private/CWOP':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(254,168,51,1.0)',
+                fillColor: 'rgba(190,229,170,1.0)',
                 interactive: true,
             }
                     break;
                 case 'Privite ':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(254,160,48,1.0)',
+                fillColor: 'rgba(186,227,169,1.0)',
                 interactive: true,
             }
                     break;
                 case 'RFC':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(254,152,44,1.0)',
+                fillColor: 'rgba(182,226,168,1.0)',
                 interactive: true,
             }
                     break;
                 case 'SEPA':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(254,143,41,1.0)',
+                fillColor: 'rgba(179,224,166,1.0)',
                 interactive: true,
             }
                     break;
                 case 'Sitka Sound Science Center':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(252,135,37,1.0)',
+                fillColor: 'rgba(175,223,165,1.0)',
                 interactive: true,
             }
                     break;
                 case 'SOC':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(251,126,33,1.0)',
+                fillColor: 'rgba(171,221,164,1.0)',
                 interactive: true,
             }
                     break;
                 case 'SPOTTER':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(249,117,29,1.0)',
+                fillColor: 'rgba(165,217,165,1.0)',
                 interactive: true,
             }
                     break;
                 case 'SSSC':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(246,109,25,1.0)',
+                fillColor: 'rgba(159,213,166,1.0)',
                 interactive: true,
             }
                     break;
                 case 'The Bureau of Land Management':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(243,100,22,1.0)',
+                fillColor: 'rgba(154,209,167,1.0)',
                 interactive: true,
             }
                     break;
                 case 'The Bureau of Land Management/Denali National Park':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(240,92,18,1.0)',
+                fillColor: 'rgba(148,205,168,1.0)',
                 interactive: true,
             }
                     break;
                 case 'The Bureau of Land Management/USDA Forest Service':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(236,84,15,1.0)',
+                fillColor: 'rgba(142,201,169,1.0)',
                 interactive: true,
             }
                     break;
                 case 'U.S. Geological Survey':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(233,77,13,1.0)',
+                fillColor: 'rgba(136,196,170,1.0)',
                 interactive: true,
             }
                     break;
                 case 'U.S. Geological Survey/Hydrometeorological Automated Data System':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(229,70,11,1.0)',
+                fillColor: 'rgba(130,192,171,1.0)',
                 interactive: true,
             }
                     break;
                 case 'UAS':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(224,64,9,1.0)',
+                fillColor: 'rgba(124,188,172,1.0)',
                 interactive: true,
             }
                     break;
                 case 'UCAR':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(220,59,7,1.0)',
+                fillColor: 'rgba(119,184,173,1.0)',
                 interactive: true,
             }
                     break;
                 case 'US Customer':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(214,53,6,1.0)',
+                fillColor: 'rgba(113,180,174,1.0)',
                 interactive: true,
             }
                     break;
                 case 'US Forest Service':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(208,47,5,1.0)',
+                fillColor: 'rgba(107,176,175,1.0)',
                 interactive: true,
             }
                     break;
                 case 'US Geological Survey Water Resources Division':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(202,42,4,1.0)',
+                fillColor: 'rgba(101,172,176,1.0)',
                 interactive: true,
             }
                     break;
                 case 'US Geological Survey Water Resources Division/Hydrometeorological Automated Data System':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(195,37,3,1.0)',
+                fillColor: 'rgba(95,168,177,1.0)',
                 interactive: true,
             }
                     break;
                 case 'USARRAY':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(189,32,2,1.0)',
+                fillColor: 'rgba(90,164,178,1.0)',
                 interactive: true,
             }
                     break;
                 case 'USDA/NRCS':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(181,28,1,1.0)',
+                fillColor: 'rgba(84,160,179,1.0)',
                 interactive: true,
             }
                     break;
                 case 'USFS':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(173,23,1,1.0)',
+                fillColor: 'rgba(78,156,180,1.0)',
                 interactive: true,
             }
                     break;
                 case 'USGS':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(166,20,1,1.0)',
+                fillColor: 'rgba(72,151,181,1.0)',
                 interactive: true,
             }
                     break;
                 case 'USGS/AK DOT':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(157,16,1,1.0)',
+                fillColor: 'rgba(66,147,182,1.0)',
                 interactive: true,
             }
                     break;
                 case 'Ward Cove Group':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(148,12,1,1.0)',
+                fillColor: 'rgba(60,143,183,1.0)',
                 interactive: true,
             }
                     break;
                 case 'WSO ANN/AOMC':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(138,9,2,1.0)',
+                fillColor: 'rgba(55,139,184,1.0)',
                 interactive: true,
             }
                     break;
                 case 'YAA':
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(129,6,2,1.0)',
+                fillColor: 'rgba(49,135,185,1.0)',
                 interactive: true,
             }
                     break;
                 default:
                     return {
                 pane: 'pane_MonitoringLocationsOwner_2',
-                radius: 4.0,
+                shape: 'triangle',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(122,4,3,1.0)',
+                fillColor: 'rgba(43,131,186,1.0)',
                 interactive: true,
             }
                     break;
@@ -1732,11 +1906,10 @@
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_MonitoringLocationsOwner_2_0(feature));
+                return L.shapeMarker(latlng, style_MonitoringLocationsOwner_2_0(feature));
             },
         });
         bounds_group.addLayer(layer_MonitoringLocationsOwner_2);
-        map.addLayer(layer_MonitoringLocationsOwner_2);
         function pop_MonitoringLocationsStatus_3(feature, layer) {
             layer.on({
                 mouseout: function(e) {
@@ -1797,11 +1970,59 @@
                         <td class="visible-with-data" id="elevation_ft">' + (feature.properties['elevation_ft'] !== null ? autolinker.link(feature.properties['elevation_ft'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Operational Status</th>\
+                        <th scope="row">Transmit Time</th>\
+                        <td class="visible-with-data" id="xmit_time">' + (feature.properties['xmit_time'] !== null ? autolinker.link(feature.properties['xmit_time'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Operation Status</th>\
                         <td class="visible-with-data" id="operational">' + (feature.properties['operational'] !== null ? autolinker.link(feature.properties['operational'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Soil Temperature</th>\
+                        <th scope="row">T</th>\
+                        <td class="visible-with-data" id="T">' + (feature.properties['T'] !== null ? autolinker.link(feature.properties['T'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">DP</th>\
+                        <td class="visible-with-data" id="DP">' + (feature.properties['DP'] !== null ? autolinker.link(feature.properties['DP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">WND</th>\
+                        <td class="visible-with-data" id="WND">' + (feature.properties['WND'] !== null ? autolinker.link(feature.properties['WND'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">VIS</th>\
+                        <td class="visible-with-data" id="VIS">' + (feature.properties['VIS'] !== null ? autolinker.link(feature.properties['VIS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SKY</th>\
+                        <td class="visible-with-data" id="SKY">' + (feature.properties['SKY'] !== null ? autolinker.link(feature.properties['SKY'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">WX</th>\
+                        <td class="visible-with-data" id="WX">' + (feature.properties['WX'] !== null ? autolinker.link(feature.properties['WX'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SLP</th>\
+                        <td class="visible-with-data" id="SLP">' + (feature.properties['SLP'] !== null ? autolinker.link(feature.properties['SLP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ALT</th>\
+                        <td class="visible-with-data" id="ALT">' + (feature.properties['ALT'] !== null ? autolinker.link(feature.properties['ALT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">PRC</th>\
+                        <td class="visible-with-data" id="PRC">' + (feature.properties['PRC'] !== null ? autolinker.link(feature.properties['PRC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SN</th>\
+                        <td class="visible-with-data" id="SN">' + (feature.properties['SN'] !== null ? autolinker.link(feature.properties['SN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SEA</th>\
+                        <td class="visible-with-data" id="SEA">' + (feature.properties['SEA'] !== null ? autolinker.link(feature.properties['SEA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Soil Temp</th>\
                         <td class="visible-with-data" id="SOIL TEMP">' + (feature.properties['SOIL TEMP'] !== null ? autolinker.link(feature.properties['SOIL TEMP'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
@@ -1809,11 +2030,47 @@
                         <td class="visible-with-data" id="SOIL MOIST">' + (feature.properties['SOIL MOIST'] !== null ? autolinker.link(feature.properties['SOIL MOIST'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Data Types</th>\
+                        <th scope="row">WHY</th>\
+                        <td class="visible-with-data" id="WHY">' + (feature.properties['WHY'] !== null ? autolinker.link(feature.properties['WHY'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Heated</th>\
+                        <td class="visible-with-data" id="Heated">' + (feature.properties['Heated'] !== null ? autolinker.link(feature.properties['Heated'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Seasonal</th>\
+                        <td class="visible-with-data" id="SEASONAL">' + (feature.properties['SEASONAL'] !== null ? autolinker.link(feature.properties['SEASONAL'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Site</th>\
+                        <td class="visible-with-data" id="SITE">' + (feature.properties['SITE'] !== null ? autolinker.link(feature.properties['SITE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Reliable</th>\
+                        <td class="visible-with-data" id="reliable">' + (feature.properties['reliable'] !== null ? autolinker.link(feature.properties['reliable'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Precipitation Reliable</th>\
+                        <td class="visible-with-data" id="precip reliable">' + (feature.properties['precip reliable'] !== null ? autolinker.link(feature.properties['precip reliable'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Temperature Reliable</th>\
+                        <td class="visible-with-data" id="temp reliable">' + (feature.properties['temp reliable'] !== null ? autolinker.link(feature.properties['temp reliable'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Wind Reliable</th>\
+                        <td class="visible-with-data" id="wind reliable">' + (feature.properties['wind reliable'] !== null ? autolinker.link(feature.properties['wind reliable'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Td reliable</th>\
+                        <td class="visible-with-data" id="Td reliable">' + (feature.properties['Td reliable'] !== null ? autolinker.link(feature.properties['Td reliable'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Types of Data</th>\
                         <td class="visible-with-data" id="data_and_types">' + (feature.properties['data_and_types'] !== null ? autolinker.link(feature.properties['data_and_types'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">MesoWest Location</th>\
+                        <th scope="row">Link to Meso West</th>\
                         <td class="visible-with-data" id="mesowest_link">' + (feature.properties['mesowest_link'] !== null ? autolinker.link(feature.properties['mesowest_link'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
@@ -1837,7 +2094,7 @@
                         <td class="visible-with-data" id="status_details">' + (feature.properties['status_details'] !== null ? autolinker.link(feature.properties['status_details'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Web Link to More Info</th>\
+                        <th scope="row">More Information</th>\
                         <td class="visible-with-data" id="data_web_link">' + (feature.properties['data_web_link'] !== null ? autolinker.link(feature.properties['data_web_link'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
@@ -1849,7 +2106,7 @@
                         <td class="visible-with-data" id="data_format">' + (feature.properties['data_format'] !== null ? autolinker.link(feature.properties['data_format'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Data Routing Procedure</th>\
+                        <th scope="row">Data Routing Procedures</th>\
                         <td class="visible-with-data" id="data_routing_procedure">' + (feature.properties['data_routing_procedure'] !== null ? autolinker.link(feature.properties['data_routing_procedure'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
@@ -1881,13 +2138,14 @@
                 case 'Active':
                     return {
                 pane: 'pane_MonitoringLocationsStatus_3',
-                radius: 4.0,
+                shape: 'diamond',
+                radius: 8.8,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(128,17,25,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(30,170,84,1.0)',
@@ -1897,13 +2155,14 @@
                 case 'Destroyed':
                     return {
                 pane: 'pane_MonitoringLocationsStatus_3',
-                radius: 4.0,
+                shape: 'diamond',
+                radius: 8.8,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(128,17,25,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(254,201,128,1.0)',
@@ -1913,13 +2172,14 @@
                 case 'Inactive':
                     return {
                 pane: 'pane_MonitoringLocationsStatus_3',
-                radius: 4.0,
+                shape: 'diamond',
+                radius: 8.8,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(128,17,25,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(214,12,15,1.0)',
@@ -1929,13 +2189,14 @@
                 default:
                     return {
                 pane: 'pane_MonitoringLocationsStatus_3',
-                radius: 4.0,
+                shape: 'diamond',
+                radius: 8.8,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(128,17,25,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(43,131,186,1.0)',
@@ -1959,7 +2220,7 @@
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_MonitoringLocationsStatus_3_0(feature));
+                return L.shapeMarker(latlng, style_MonitoringLocationsStatus_3_0(feature));
             },
         });
         bounds_group.addLayer(layer_MonitoringLocationsStatus_3);
@@ -2023,11 +2284,59 @@
                         <td class="visible-with-data" id="elevation_ft">' + (feature.properties['elevation_ft'] !== null ? autolinker.link(feature.properties['elevation_ft'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Operational Status</th>\
+                        <th scope="row">Transmit Time</th>\
+                        <td class="visible-with-data" id="xmit_time">' + (feature.properties['xmit_time'] !== null ? autolinker.link(feature.properties['xmit_time'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Operation Status</th>\
                         <td class="visible-with-data" id="operational">' + (feature.properties['operational'] !== null ? autolinker.link(feature.properties['operational'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Soil Temperature</th>\
+                        <th scope="row">T</th>\
+                        <td class="visible-with-data" id="T">' + (feature.properties['T'] !== null ? autolinker.link(feature.properties['T'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">DP</th>\
+                        <td class="visible-with-data" id="DP">' + (feature.properties['DP'] !== null ? autolinker.link(feature.properties['DP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">WND</th>\
+                        <td class="visible-with-data" id="WND">' + (feature.properties['WND'] !== null ? autolinker.link(feature.properties['WND'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">VIS</th>\
+                        <td class="visible-with-data" id="VIS">' + (feature.properties['VIS'] !== null ? autolinker.link(feature.properties['VIS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SKY</th>\
+                        <td class="visible-with-data" id="SKY">' + (feature.properties['SKY'] !== null ? autolinker.link(feature.properties['SKY'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">WX</th>\
+                        <td class="visible-with-data" id="WX">' + (feature.properties['WX'] !== null ? autolinker.link(feature.properties['WX'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SLP</th>\
+                        <td class="visible-with-data" id="SLP">' + (feature.properties['SLP'] !== null ? autolinker.link(feature.properties['SLP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ALT</th>\
+                        <td class="visible-with-data" id="ALT">' + (feature.properties['ALT'] !== null ? autolinker.link(feature.properties['ALT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">PRC</th>\
+                        <td class="visible-with-data" id="PRC">' + (feature.properties['PRC'] !== null ? autolinker.link(feature.properties['PRC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SN</th>\
+                        <td class="visible-with-data" id="SN">' + (feature.properties['SN'] !== null ? autolinker.link(feature.properties['SN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SEA</th>\
+                        <td class="visible-with-data" id="SEA">' + (feature.properties['SEA'] !== null ? autolinker.link(feature.properties['SEA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Soil Temp</th>\
                         <td class="visible-with-data" id="SOIL TEMP">' + (feature.properties['SOIL TEMP'] !== null ? autolinker.link(feature.properties['SOIL TEMP'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
@@ -2035,11 +2344,47 @@
                         <td class="visible-with-data" id="SOIL MOIST">' + (feature.properties['SOIL MOIST'] !== null ? autolinker.link(feature.properties['SOIL MOIST'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Data Types</th>\
+                        <th scope="row">WHY</th>\
+                        <td class="visible-with-data" id="WHY">' + (feature.properties['WHY'] !== null ? autolinker.link(feature.properties['WHY'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Heated</th>\
+                        <td class="visible-with-data" id="Heated">' + (feature.properties['Heated'] !== null ? autolinker.link(feature.properties['Heated'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Seasonal</th>\
+                        <td class="visible-with-data" id="SEASONAL">' + (feature.properties['SEASONAL'] !== null ? autolinker.link(feature.properties['SEASONAL'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Site</th>\
+                        <td class="visible-with-data" id="SITE">' + (feature.properties['SITE'] !== null ? autolinker.link(feature.properties['SITE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Reliable</th>\
+                        <td class="visible-with-data" id="reliable">' + (feature.properties['reliable'] !== null ? autolinker.link(feature.properties['reliable'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Precipitation Reliable</th>\
+                        <td class="visible-with-data" id="precip reliable">' + (feature.properties['precip reliable'] !== null ? autolinker.link(feature.properties['precip reliable'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Temperature Reliable</th>\
+                        <td class="visible-with-data" id="temp reliable">' + (feature.properties['temp reliable'] !== null ? autolinker.link(feature.properties['temp reliable'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Wind Reliable</th>\
+                        <td class="visible-with-data" id="wind reliable">' + (feature.properties['wind reliable'] !== null ? autolinker.link(feature.properties['wind reliable'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Td reliable</th>\
+                        <td class="visible-with-data" id="Td reliable">' + (feature.properties['Td reliable'] !== null ? autolinker.link(feature.properties['Td reliable'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Types of Data</th>\
                         <td class="visible-with-data" id="data_and_types">' + (feature.properties['data_and_types'] !== null ? autolinker.link(feature.properties['data_and_types'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">MesoWest Location</th>\
+                        <th scope="row">Link to Meso West</th>\
                         <td class="visible-with-data" id="mesowest_link">' + (feature.properties['mesowest_link'] !== null ? autolinker.link(feature.properties['mesowest_link'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
@@ -2063,7 +2408,7 @@
                         <td class="visible-with-data" id="status_details">' + (feature.properties['status_details'] !== null ? autolinker.link(feature.properties['status_details'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Web Link to More Info</th>\
+                        <th scope="row">More Information</th>\
                         <td class="visible-with-data" id="data_web_link">' + (feature.properties['data_web_link'] !== null ? autolinker.link(feature.properties['data_web_link'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
@@ -2075,7 +2420,7 @@
                         <td class="visible-with-data" id="data_format">' + (feature.properties['data_format'] !== null ? autolinker.link(feature.properties['data_format'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Data Routing Procedure</th>\
+                        <th scope="row">Data Routing Procedures</th>\
                         <td class="visible-with-data" id="data_routing_procedure">' + (feature.properties['data_routing_procedure'] !== null ? autolinker.link(feature.properties['data_routing_procedure'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
@@ -2114,7 +2459,7 @@
                 weight: 1,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(183,83,136,1.0)',
+                fillColor: 'rgba(222,91,152,1.0)',
                 interactive: true,
             }
         }
@@ -2137,13 +2482,14 @@
             },
         });
         bounds_group.addLayer(layer_MonitoringLocations_4);
+        map.addLayer(layer_MonitoringLocations_4);
         var baseMaps = {};
         var overlaysTree = [
             {label: '<img src="legend/MonitoringLocations_4.png" /> Monitoring Locations', layer: layer_MonitoringLocations_4},
             {label: 'Monitoring Locations (Status)<br /><table><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStatus_3_Active0.png" /></td><td>Active</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStatus_3_Destroyed1.png" /></td><td>Destroyed</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStatus_3_Inactive2.png" /></td><td>Inactive</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStatus_3_3.png" /></td><td></td></tr></table>', layer: layer_MonitoringLocationsStatus_3},
             {label: 'Monitoring Locations (Owner)<br /><table><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_AELP0.png" /></td><td>AEL&P</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_AKDGGS1.png" /></td><td>AK DGGS</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_AKDOT2.png" /></td><td>AK DOT</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_AKDOT3.png" /></td><td>AKDOT</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_AlaskaAvalancheInformationCenter4.png" /></td><td>Alaska Avalanche Information Center</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_AlaskaDepartmentofTransportation5.png" /></td><td>Alaska Department of Transportation</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_AlaskaDivisionofGeologicalGeophysicalSurveys6.png" /></td><td>Alaska Division of Geological & Geophysical Surveys</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_AlaskaElectricLightandPower7.png" /></td><td>Alaska Electric Light and Power</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_AlaskaElectricLightandPowerSnowboundSolutionsLLC8.png" /></td><td>Alaska Electric Light and Power/Snowbound Solutions LLC</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_AOMC9.png" /></td><td>AOMC</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_AOMCOBS10.png" /></td><td>AOMC/OBS</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_APRSWXNETCitizenWeatherObserverProgram11.png" /></td><td>APRSWXNET/Citizen Weather Observer Program</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_BIAMIC12.png" /></td><td>BIA/MIC</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_BLMUSFS13.png" /></td><td>BLM/USFS</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_BureauofIndianAffairs14.png" /></td><td>Bureau of Indian Affairs</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_Canada15.png" /></td><td>Canada</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_CarlDierking16.png" /></td><td>Carl Dierking</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_CarolineStewart17.png" /></td><td>Caroline Stewart</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_CBJAELP18.png" /></td><td>CBJ/AEL&P</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_ConstantineMine19.png" /></td><td>Constantine Mine</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_COOP20.png" /></td><td>COOP</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_CWOPPRIVATE21.png" /></td><td>CWOP/PRIVATE</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_DOIUSGS22.png" /></td><td>DOI/USGS</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_DOT23.png" /></td><td>DOT</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_Eaglecrest24.png" /></td><td>Eaglecrest</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_EnvCanada25.png" /></td><td>Env. Canada</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_FAA26.png" /></td><td>FAA</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_FAAObserver27.png" /></td><td>FAA/Observer</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_HaightAssoc28.png" /></td><td>Haight & Assoc.</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_HydrometeorologicalAutomatedDataSystem29.png" /></td><td>Hydrometeorological Automated Data System</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_IncorporatedResearchInstitutionsforSeismology30.png" /></td><td>Incorporated Research Institutions for Seismology</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_JerryCollison31.png" /></td><td>Jerry Collison</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_JimGreen32.png" /></td><td>Jim Green</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_JohnHafendorfer33.png" /></td><td>John Hafendorfer</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_JuneauWeatherForecastOffice34.png" /></td><td>Juneau Weather Forecast Office</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_KetchikanPublicUtilities35.png" /></td><td>Ketchikan Public Utilities</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_KPU36.png" /></td><td>KPU</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_KTOO37.png" /></td><td>KTOO</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_MarineExchange38.png" /></td><td>Marine Exchange</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_Meteoburst39.png" /></td><td>Meteoburst</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_NWS40.png" /></td><td>N WS</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_NationalClimaticDataCenterHydrometeorologicalAutomatedDataSystem41.png" /></td><td>National Climatic Data Center/Hydrometeorological Automated Data System</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_NationalWeatherService42.png" /></td><td>National Weather Service</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_NationalWeatherServiceFederalAviationAdministration43.png" /></td><td>National Weather Service/Federal Aviation Administration</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_NationalWeatherServiceHydrometeorologicalAutomatedDataSystem44.png" /></td><td>National Weather Service/Hydrometeorological Automated Data System</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_NaturalResourcesConservationService45.png" /></td><td>Natural Resources Conservation Service</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_NDBC46.png" /></td><td>NDBC</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_NESDIS47.png" /></td><td>NESDIS</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_NFS48.png" /></td><td>NFS</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_NOAANMFS49.png" /></td><td>NOAA/NMFS</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_NOAANWS50.png" /></td><td>NOAA/NWS</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_NOS51.png" /></td><td>NOS</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_NPS52.png" /></td><td>NPS</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_NRCS53.png" /></td><td>NRCS</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_NTWC54.png" /></td><td>NTWC</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_NWS55.png" /></td><td>NWS</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_NWSDOT56.png" /></td><td>NWS/DOT</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_OBSAOMC57.png" /></td><td>OBS/AOMC</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_OBSSOC58.png" /></td><td>OBS/SOC</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_private59.png" /></td><td>private</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_Private60.png" /></td><td>Private</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_PrivateCWOP61.png" /></td><td>Private/CWOP</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_Privite62.png" /></td><td>Privite </td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_RFC63.png" /></td><td>RFC</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_SEPA64.png" /></td><td>SEPA</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_SitkaSoundScienceCenter65.png" /></td><td>Sitka Sound Science Center</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_SOC66.png" /></td><td>SOC</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_SPOTTER67.png" /></td><td>SPOTTER</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_SSSC68.png" /></td><td>SSSC</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_TheBureauofLandManagement69.png" /></td><td>The Bureau of Land Management</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_TheBureauofLandManagementDenaliNationalPark70.png" /></td><td>The Bureau of Land Management/Denali National Park</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_TheBureauofLandManagementUSDAForestService71.png" /></td><td>The Bureau of Land Management/USDA Forest Service</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_USGeologicalSurvey72.png" /></td><td>U.S. Geological Survey</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_USGeologicalSurveyHydrometeorologicalAutomatedDataSystem73.png" /></td><td>U.S. Geological Survey/Hydrometeorological Automated Data System</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_UAS74.png" /></td><td>UAS</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_UCAR75.png" /></td><td>UCAR</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_USCustomer76.png" /></td><td>US Customer</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_USForestService77.png" /></td><td>US Forest Service</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_USGeologicalSurveyWaterResourcesDivision78.png" /></td><td>US Geological Survey Water Resources Division</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_USGeologicalSurveyWaterResourcesDivisionHydrometeorologicalAutomatedDataSystem79.png" /></td><td>US Geological Survey Water Resources Division/Hydrometeorological Automated Data System</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_USARRAY80.png" /></td><td>USARRAY</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_USDANRCS81.png" /></td><td>USDA/NRCS</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_USFS82.png" /></td><td>USFS</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_USGS83.png" /></td><td>USGS</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_USGSAKDOT84.png" /></td><td>USGS/AK DOT</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_WardCoveGroup85.png" /></td><td>Ward Cove Group</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_WSOANNAOMC86.png" /></td><td>WSO ANN/AOMC</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_YAA87.png" /></td><td>YAA</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOwner_2_88.png" /></td><td></td></tr></table>', layer: layer_MonitoringLocationsOwner_2},
-            {label: "Positron (retina)", layer: layer_Positronretina_1},
-            {label: "OSM Standard", layer: layer_OSMStandard_0},]
+            {label: "OSM Standard", layer: layer_OSMStandard_1},
+            {label: "Positron (retina)", layer: layer_Positronretina_0},]
         var lay = L.control.layers.tree(null, overlaysTree,{
             //namedToggle: true,
             //selectorBack: false,
