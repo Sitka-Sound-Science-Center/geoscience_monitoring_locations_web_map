@@ -30,7 +30,6 @@
         <script src="js/leaflet.js"></script>
         <script src="js/L.Control.Layers.Tree.min.js"></script>
         <script src="js/L.Control.Locate.min.js"></script>
-        <script src="js/leaflet-svg-shape-markers.min.js"></script>
         <script src="js/leaflet.rotatedMarker.js"></script>
         <script src="js/leaflet.pattern.js"></script>
         <script src="js/leaflet-hash.js"></script>
@@ -172,301 +171,6 @@
             });
             var popupContent = '<table>\
                     <tr>\
-                        <th scope="row">station_name</th>\
-                        <td>' + (feature.properties['station_name'] !== null ? autolinker.link(feature.properties['station_name'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">station_id</th>\
-                        <td>' + (feature.properties['station_id'] !== null ? autolinker.link(feature.properties['station_id'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">owner</th>\
-                        <td>' + (feature.properties['owner'] !== null ? autolinker.link(feature.properties['owner'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">owner_2</th>\
-                        <td>' + (feature.properties['owner_2'] !== null ? autolinker.link(feature.properties['owner_2'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">station_type</th>\
-                        <td>' + (feature.properties['station_type'] !== null ? autolinker.link(feature.properties['station_type'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">project</th>\
-                        <td>' + (feature.properties['project'] !== null ? autolinker.link(feature.properties['project'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">real_time</th>\
-                        <td>' + (feature.properties['real_time'] !== null ? autolinker.link(feature.properties['real_time'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">latitude</th>\
-                        <td>' + (feature.properties['latitude'] !== null ? autolinker.link(feature.properties['latitude'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">longitude</th>\
-                        <td>' + (feature.properties['longitude'] !== null ? autolinker.link(feature.properties['longitude'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">elevation_ft</th>\
-                        <td>' + (feature.properties['elevation_ft'] !== null ? autolinker.link(feature.properties['elevation_ft'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">transmit_time</th>\
-                        <td>' + (feature.properties['transmit_time'] !== null ? autolinker.link(feature.properties['transmit_time'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">operational</th>\
-                        <td>' + (feature.properties['operational'] !== null ? autolinker.link(feature.properties['operational'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">data_provider</th>\
-                        <td>' + (feature.properties['data_provider'] !== null ? autolinker.link(feature.properties['data_provider'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">data_and_types</th>\
-                        <td>' + (feature.properties['data_and_types'] !== null ? autolinker.link(feature.properties['data_and_types'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">temperature</th>\
-                        <td>' + (feature.properties['temperature'] !== null ? autolinker.link(feature.properties['temperature'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">dew_point</th>\
-                        <td>' + (feature.properties['dew_point'] !== null ? autolinker.link(feature.properties['dew_point'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">wind</th>\
-                        <td>' + (feature.properties['wind'] !== null ? autolinker.link(feature.properties['wind'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">visability</th>\
-                        <td>' + (feature.properties['visability'] !== null ? autolinker.link(feature.properties['visability'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">sky_conditions</th>\
-                        <td>' + (feature.properties['sky_conditions'] !== null ? autolinker.link(feature.properties['sky_conditions'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">sea_level_pressure</th>\
-                        <td>' + (feature.properties['sea_level_pressure'] !== null ? autolinker.link(feature.properties['sea_level_pressure'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">wave_swell_height</th>\
-                        <td>' + (feature.properties['wave_swell_height'] !== null ? autolinker.link(feature.properties['wave_swell_height'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">altimeter</th>\
-                        <td>' + (feature.properties['altimeter'] !== null ? autolinker.link(feature.properties['altimeter'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">precipitation</th>\
-                        <td>' + (feature.properties['precipitation'] !== null ? autolinker.link(feature.properties['precipitation'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">snow_amount</th>\
-                        <td>' + (feature.properties['snow_amount'] !== null ? autolinker.link(feature.properties['snow_amount'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">heated</th>\
-                        <td>' + (feature.properties['heated'] !== null ? autolinker.link(feature.properties['heated'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">seasonal</th>\
-                        <td>' + (feature.properties['seasonal'] !== null ? autolinker.link(feature.properties['seasonal'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">reliable</th>\
-                        <td>' + (feature.properties['reliable'] !== null ? autolinker.link(feature.properties['reliable'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">precip reliable</th>\
-                        <td>' + (feature.properties['precip reliable'] !== null ? autolinker.link(feature.properties['precip reliable'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">temp reliable</th>\
-                        <td>' + (feature.properties['temp reliable'] !== null ? autolinker.link(feature.properties['temp reliable'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">wind reliable</th>\
-                        <td>' + (feature.properties['wind reliable'] !== null ? autolinker.link(feature.properties['wind reliable'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Td reliable</th>\
-                        <td>' + (feature.properties['Td reliable'] !== null ? autolinker.link(feature.properties['Td reliable'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">camera</th>\
-                        <td>' + (feature.properties['camera'] !== null ? autolinker.link(feature.properties['camera'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">mesowest_link</th>\
-                        <td>' + (feature.properties['mesowest_link'] !== null ? autolinker.link(feature.properties['mesowest_link'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">web_link</th>\
-                        <td>' + (feature.properties['web_link'] !== null ? autolinker.link(feature.properties['web_link'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">contact_person</th>\
-                        <td>' + (feature.properties['contact_person'] !== null ? autolinker.link(feature.properties['contact_person'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">contact_email</th>\
-                        <td>' + (feature.properties['contact_email'] !== null ? autolinker.link(feature.properties['contact_email'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">maintainer</th>\
-                        <td>' + (feature.properties['maintainer'] !== null ? autolinker.link(feature.properties['maintainer'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">next_maint_date</th>\
-                        <td>' + (feature.properties['next_maint_date'] !== null ? autolinker.link(feature.properties['next_maint_date'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">status_details</th>\
-                        <td>' + (feature.properties['status_details'] !== null ? autolinker.link(feature.properties['status_details'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">sensor_specifications</th>\
-                        <td>' + (feature.properties['sensor_specifications'] !== null ? autolinker.link(feature.properties['sensor_specifications'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">data_format</th>\
-                        <td>' + (feature.properties['data_format'] !== null ? autolinker.link(feature.properties['data_format'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">data_routing_procedure</th>\
-                        <td>' + (feature.properties['data_routing_procedure'] !== null ? autolinker.link(feature.properties['data_routing_procedure'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">api_services</th>\
-                        <td>' + (feature.properties['api_services'] !== null ? autolinker.link(feature.properties['api_services'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">obs_frequency</th>\
-                        <td>' + (feature.properties['obs_frequency'] !== null ? autolinker.link(feature.properties['obs_frequency'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">operation_period</th>\
-                        <td>' + (feature.properties['operation_period'] !== null ? autolinker.link(feature.properties['operation_period'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">additional_info</th>\
-                        <td>' + (feature.properties['additional_info'] !== null ? autolinker.link(feature.properties['additional_info'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
-			layer.on('popupopen', function(e) {
-				addClassToPopupIfMedia(content, e.popup);
-			});
-			layer.bindPopup(content, { maxHeight: 400 });
-        }
-
-        function style_MonitoringLocationsStatus_2_0(feature) {
-            switch(String(feature.properties['operational'])) {
-                case 'Active':
-                    return {
-                pane: 'pane_MonitoringLocationsStatus_2',
-                shape: 'triangle',
-                radius: 5.6,
-                opacity: 1,
-                color: 'rgba(255,255,255,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 2.0,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(76,175,62,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Destroyed':
-                    return {
-                pane: 'pane_MonitoringLocationsStatus_2',
-                shape: 'triangle',
-                radius: 5.6,
-                opacity: 1,
-                color: 'rgba(255,255,255,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 2.0,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(253,174,97,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'Inactive':
-                    return {
-                pane: 'pane_MonitoringLocationsStatus_2',
-                shape: 'triangle',
-                radius: 5.6,
-                opacity: 1,
-                color: 'rgba(255,255,255,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 2.0,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(232,42,55,1.0)',
-                interactive: true,
-            }
-                    break;
-                default:
-                    return {
-                pane: 'pane_MonitoringLocationsStatus_2',
-                shape: 'triangle',
-                radius: 5.6,
-                opacity: 1,
-                color: 'rgba(255,255,255,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 2.0,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(43,131,186,1.0)',
-                interactive: true,
-            }
-                    break;
-            }
-        }
-        map.createPane('pane_MonitoringLocationsStatus_2');
-        map.getPane('pane_MonitoringLocationsStatus_2').style.zIndex = 402;
-        map.getPane('pane_MonitoringLocationsStatus_2').style['mix-blend-mode'] = 'normal';
-        var layer_MonitoringLocationsStatus_2 = new L.geoJson(json_MonitoringLocationsStatus_2, {
-            attribution: '',
-            interactive: true,
-            dataVar: 'json_MonitoringLocationsStatus_2',
-            layerName: 'layer_MonitoringLocationsStatus_2',
-            pane: 'pane_MonitoringLocationsStatus_2',
-            onEachFeature: pop_MonitoringLocationsStatus_2,
-            pointToLayer: function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.shapeMarker(latlng, style_MonitoringLocationsStatus_2_0(feature));
-            },
-        });
-        bounds_group.addLayer(layer_MonitoringLocationsStatus_2);
-        function pop_MonitoringLocations_3(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    for (var i in e.target._eventParents) {
-                        if (typeof e.target._eventParents[i].resetStyle === 'function') {
-                            e.target._eventParents[i].resetStyle(e.target);
-                        }
-                    }
-                },
-                mouseover: highlightFeature,
-            });
-            var popupContent = '<table>\
-                    <tr>\
                         <th scope="row">Station Name</th>\
                         <td>' + (feature.properties['station_name'] !== null ? autolinker.link(feature.properties['station_name'].toLocaleString()) : '') + '</td>\
                     </tr>\
@@ -479,8 +183,8 @@
                         <td>' + (feature.properties['owner'] !== null ? autolinker.link(feature.properties['owner'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Owner 2</th>\
-                        <td>' + (feature.properties['owner_2'] !== null ? autolinker.link(feature.properties['owner_2'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Second Owner</th>\
+                        <td class="visible-with-data" id="owner_2">' + (feature.properties['owner_2'] !== null ? autolinker.link(feature.properties['owner_2'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Station Type</th>\
@@ -519,10 +223,6 @@
                         <td>' + (feature.properties['data_provider'] !== null ? autolinker.link(feature.properties['data_provider'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Data and Types</th>\
-                        <td>' + (feature.properties['data_and_types'] !== null ? autolinker.link(feature.properties['data_and_types'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
                         <th scope="row">Temperature</th>\
                         <td>' + (feature.properties['temperature'] !== null ? autolinker.link(feature.properties['temperature'].toLocaleString()) : '') + '</td>\
                     </tr>\
@@ -535,7 +235,7 @@
                         <td>' + (feature.properties['wind'] !== null ? autolinker.link(feature.properties['wind'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Visability</th>\
+                        <th scope="row">Visabilitiy</th>\
                         <td>' + (feature.properties['visability'] !== null ? autolinker.link(feature.properties['visability'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
@@ -551,23 +251,23 @@
                         <td>' + (feature.properties['wave_swell_height'] !== null ? autolinker.link(feature.properties['wave_swell_height'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Altimeter</th>\
-                        <td>' + (feature.properties['altimeter'] !== null ? autolinker.link(feature.properties['altimeter'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Altimeter Reading</th>\
+                        <td>' + (feature.properties['altimeter_reading'] !== null ? autolinker.link(feature.properties['altimeter_reading'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Precipitation</th>\
                         <td>' + (feature.properties['precipitation'] !== null ? autolinker.link(feature.properties['precipitation'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Amount of Snow</th>\
+                        <th scope="row">Snow Information</th>\
                         <td>' + (feature.properties['snow_amount'] !== null ? autolinker.link(feature.properties['snow_amount'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Heated</th>\
+                        <th scope="row">Heated Station</th>\
                         <td>' + (feature.properties['heated'] !== null ? autolinker.link(feature.properties['heated'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Seasonal</th>\
+                        <th scope="row">Seasonally Operational</th>\
                         <td>' + (feature.properties['seasonal'] !== null ? autolinker.link(feature.properties['seasonal'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
@@ -593,6 +293,301 @@
                     <tr>\
                         <th scope="row">Camera</th>\
                         <td>' + (feature.properties['camera'] !== null ? autolinker.link(feature.properties['camera'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Additional Data and Types</th>\
+                        <td class="visible-with-data" id="additional_information">' + (feature.properties['additional_information'] !== null ? autolinker.link(feature.properties['additional_information'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">MesoWest Link</th>\
+                        <td>' + (feature.properties['mesowest_link'] !== null ? autolinker.link(feature.properties['mesowest_link'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Web Link</th>\
+                        <td>' + (feature.properties['web_link'] !== null ? autolinker.link(feature.properties['web_link'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Contact Person</th>\
+                        <td>' + (feature.properties['contact_person'] !== null ? autolinker.link(feature.properties['contact_person'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Contact Email</th>\
+                        <td>' + (feature.properties['contact_email'] !== null ? autolinker.link(feature.properties['contact_email'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Maintainer</th>\
+                        <td>' + (feature.properties['maintainer'] !== null ? autolinker.link(feature.properties['maintainer'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Next Maintenance Date</th>\
+                        <td>' + (feature.properties['next_maint_date'] !== null ? autolinker.link(feature.properties['next_maint_date'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Status Details</th>\
+                        <td>' + (feature.properties['status_details'] !== null ? autolinker.link(feature.properties['status_details'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Sensor Specifications</th>\
+                        <td>' + (feature.properties['sensor_specifications'] !== null ? autolinker.link(feature.properties['sensor_specifications'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Data Format</strong><br />' + (feature.properties['data_format'] !== null ? autolinker.link(feature.properties['data_format'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Data Routing Procedure</th>\
+                        <td>' + (feature.properties['data_routing_procedure'] !== null ? autolinker.link(feature.properties['data_routing_procedure'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">API Services</th>\
+                        <td>' + (feature.properties['api_services'] !== null ? autolinker.link(feature.properties['api_services'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Observation Frequency</th>\
+                        <td>' + (feature.properties['obs_frequency'] !== null ? autolinker.link(feature.properties['obs_frequency'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Operation Period</th>\
+                        <td>' + (feature.properties['operation_period'] !== null ? autolinker.link(feature.properties['operation_period'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Additional Information</th>\
+                        <td>' + (feature.properties['additional_info'] !== null ? autolinker.link(feature.properties['additional_info'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+			layer.on('popupopen', function(e) {
+				addClassToPopupIfMedia(content, e.popup);
+			});
+			layer.bindPopup(content, { maxHeight: 400 });
+        }
+
+        function style_MonitoringLocationsStatus_2_0(feature) {
+            switch(String(feature.properties['operational'])) {
+                case 'Active':
+                    return {
+                pane: 'pane_MonitoringLocationsStatus_2',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(33,165,13,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Destroyed':
+                    return {
+                pane: 'pane_MonitoringLocationsStatus_2',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,174,97,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Inactive':
+                    return {
+                pane: 'pane_MonitoringLocationsStatus_2',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(202,0,17,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_MonitoringLocationsStatus_2',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(43,131,186,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_MonitoringLocationsStatus_2');
+        map.getPane('pane_MonitoringLocationsStatus_2').style.zIndex = 402;
+        map.getPane('pane_MonitoringLocationsStatus_2').style['mix-blend-mode'] = 'normal';
+        var layer_MonitoringLocationsStatus_2 = new L.geoJson(json_MonitoringLocationsStatus_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_MonitoringLocationsStatus_2',
+            layerName: 'layer_MonitoringLocationsStatus_2',
+            pane: 'pane_MonitoringLocationsStatus_2',
+            onEachFeature: pop_MonitoringLocationsStatus_2,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_MonitoringLocationsStatus_2_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_MonitoringLocationsStatus_2);
+        map.addLayer(layer_MonitoringLocationsStatus_2);
+        function pop_MonitoringLocations_3(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (var i in e.target._eventParents) {
+                        if (typeof e.target._eventParents[i].resetStyle === 'function') {
+                            e.target._eventParents[i].resetStyle(e.target);
+                        }
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Station Name</th>\
+                        <td>' + (feature.properties['station_name'] !== null ? autolinker.link(feature.properties['station_name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Station ID</th>\
+                        <td>' + (feature.properties['station_id'] !== null ? autolinker.link(feature.properties['station_id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Owner</th>\
+                        <td>' + (feature.properties['owner'] !== null ? autolinker.link(feature.properties['owner'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Second Owner</th>\
+                        <td class="visible-with-data" id="owner_2">' + (feature.properties['owner_2'] !== null ? autolinker.link(feature.properties['owner_2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Station Type</th>\
+                        <td>' + (feature.properties['station_type'] !== null ? autolinker.link(feature.properties['station_type'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Project</th>\
+                        <td>' + (feature.properties['project'] !== null ? autolinker.link(feature.properties['project'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Real Time</th>\
+                        <td>' + (feature.properties['real_time'] !== null ? autolinker.link(feature.properties['real_time'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Latitude</th>\
+                        <td>' + (feature.properties['latitude'] !== null ? autolinker.link(feature.properties['latitude'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Longitude</th>\
+                        <td>' + (feature.properties['longitude'] !== null ? autolinker.link(feature.properties['longitude'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Elevation (ft)</th>\
+                        <td>' + (feature.properties['elevation_ft'] !== null ? autolinker.link(feature.properties['elevation_ft'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Transmit Time</th>\
+                        <td>' + (feature.properties['transmit_time'] !== null ? autolinker.link(feature.properties['transmit_time'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Operational</th>\
+                        <td>' + (feature.properties['operational'] !== null ? autolinker.link(feature.properties['operational'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Data Provider</th>\
+                        <td>' + (feature.properties['data_provider'] !== null ? autolinker.link(feature.properties['data_provider'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Temperature</th>\
+                        <td>' + (feature.properties['temperature'] !== null ? autolinker.link(feature.properties['temperature'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Dew Point</th>\
+                        <td>' + (feature.properties['dew_point'] !== null ? autolinker.link(feature.properties['dew_point'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Wind</th>\
+                        <td>' + (feature.properties['wind'] !== null ? autolinker.link(feature.properties['wind'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Visabilitiy</th>\
+                        <td>' + (feature.properties['visability'] !== null ? autolinker.link(feature.properties['visability'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Sky Conditions</th>\
+                        <td>' + (feature.properties['sky_conditions'] !== null ? autolinker.link(feature.properties['sky_conditions'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Sea Level Pressure</th>\
+                        <td>' + (feature.properties['sea_level_pressure'] !== null ? autolinker.link(feature.properties['sea_level_pressure'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Wave Swell Height</th>\
+                        <td>' + (feature.properties['wave_swell_height'] !== null ? autolinker.link(feature.properties['wave_swell_height'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Altimeter Reading</th>\
+                        <td>' + (feature.properties['altimeter_reading'] !== null ? autolinker.link(feature.properties['altimeter_reading'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Precipitation</th>\
+                        <td>' + (feature.properties['precipitation'] !== null ? autolinker.link(feature.properties['precipitation'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Snow Information</th>\
+                        <td>' + (feature.properties['snow_amount'] !== null ? autolinker.link(feature.properties['snow_amount'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Heated Station</th>\
+                        <td>' + (feature.properties['heated'] !== null ? autolinker.link(feature.properties['heated'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Seasonally Operational</th>\
+                        <td>' + (feature.properties['seasonal'] !== null ? autolinker.link(feature.properties['seasonal'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Reliable</th>\
+                        <td>' + (feature.properties['reliable'] !== null ? autolinker.link(feature.properties['reliable'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Precipitation Reliable</th>\
+                        <td>' + (feature.properties['precip reliable'] !== null ? autolinker.link(feature.properties['precip reliable'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Temperature Reliable</th>\
+                        <td>' + (feature.properties['temp reliable'] !== null ? autolinker.link(feature.properties['temp reliable'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Wind Reliable</th>\
+                        <td>' + (feature.properties['wind reliable'] !== null ? autolinker.link(feature.properties['wind reliable'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">TD Reliable</th>\
+                        <td>' + (feature.properties['Td reliable'] !== null ? autolinker.link(feature.properties['Td reliable'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Camera</th>\
+                        <td>' + (feature.properties['camera'] !== null ? autolinker.link(feature.properties['camera'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Additional Data and Types</th>\
+                        <td class="visible-with-data" id="additional_information">' + (feature.properties['additional_information'] !== null ? autolinker.link(feature.properties['additional_information'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">MesoWest Link</th>\
@@ -643,7 +638,7 @@
                         <td>' + (feature.properties['obs_frequency'] !== null ? autolinker.link(feature.properties['obs_frequency'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Observation Period</th>\
+                        <th scope="row">Operation Period</th>\
                         <td>' + (feature.properties['operation_period'] !== null ? autolinker.link(feature.properties['operation_period'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
@@ -670,7 +665,7 @@
                 weight: 1,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(255,93,182,1.0)',
+                fillColor: 'rgba(247,133,207,1.0)',
                 interactive: true,
             }
         }
@@ -730,7 +725,7 @@
         document.getElementById("all").appendChild(col1);
         document.getElementById("all").appendChild(col2);
         col1.appendChild(mapDiv)
-        var Filters = {"owner": "str","operational": "str","station_type": "str"};
+        var Filters = {"station_type": "str","owner": "str","operational": "str"};
         function filterFunc() {
           map.eachLayer(function(lyr){
           if ("options" in lyr && "dataVar" in lyr["options"]){
@@ -820,6 +815,77 @@
           }
           })
         }
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_station_type = document.createElement('div');
+            div_station_type.id = "div_station_type";
+            div_station_type.className= "filterselect";
+            document.getElementById("menu").appendChild(div_station_type);
+            sel_station_type = document.createElement('select');
+            sel_station_type.multiple = true;
+            sel_station_type.size = 10;
+            sel_station_type.id = "sel_station_type";
+            var station_type_options_str = "<option value='' unselected></option>";
+            sel_station_type.onchange = function(){filterFunc()};
+            station_type_options_str  += '<option value="NULL">NULL</option>';
+            station_type_options_str  += '<option value="Automated Weather Observing System">Automated Weather Observing System</option>';
+            station_type_options_str  += '<option value="C-MAN">C-MAN</option>';
+            station_type_options_str  += '<option value="CANADIAN">CANADIAN</option>';
+            station_type_options_str  += '<option value="Cambell">Cambell</option>';
+            station_type_options_str  += '<option value="Campbell">Campbell</option>';
+            station_type_options_str  += '<option value="Dam level">Dam level</option>';
+            station_type_options_str  += '<option value="FTS">FTS</option>';
+            station_type_options_str  += '<option value="Federal Aviation Administration">Federal Aviation Administration</option>';
+            station_type_options_str  += '<option value="Federal Aviation Administration Webcam">Federal Aviation Administration Webcam</option>';
+            station_type_options_str  += '<option value="Fixed Structure Weather Station">Fixed Structure Weather Station</option>';
+            station_type_options_str  += '<option value="Forest Practices">Forest Practices</option>';
+            station_type_options_str  += '<option value="Geostationary Satellite Server">Geostationary Satellite Server</option>';
+            station_type_options_str  += '<option value="HANDAR">HANDAR</option>';
+            station_type_options_str  += '<option value="HOBO ONSET">HOBO ONSET</option>';
+            station_type_options_str  += '<option value="Igauge">Igauge</option>';
+            station_type_options_str  += '<option value="Igauge Tipping Bucket Network">Igauge Tipping Bucket Network</option>';
+            station_type_options_str  += '<option value="LARC">LARC</option>';
+            station_type_options_str  += '<option value="MAREX">MAREX</option>';
+            station_type_options_str  += '<option value="National Water Level Observation Network (NWLON)">National Water Level Observation Network (NWLON)</option>';
+            station_type_options_str  += '<option value="Navy Oceanographic Meteorological Automatic Device (NOMAD) buoy ">Navy Oceanographic Meteorological Automatic Device (NOMAD) buoy </option>';
+            station_type_options_str  += '<option value="PROFILER">PROFILER</option>';
+            station_type_options_str  += '<option value="Piezometer">Piezometer</option>';
+            station_type_options_str  += '<option value="RAMOS">RAMOS</option>';
+            station_type_options_str  += '<option value="Rain gauge">Rain gauge</option>';
+            station_type_options_str  += '<option value="Remote Automated Weather Station">Remote Automated Weather Station</option>';
+            station_type_options_str  += '<option value="River Gauge">River Gauge</option>';
+            station_type_options_str  += '<option value="River GaugeF">River GaugeF</option>';
+            station_type_options_str  += '<option value="River gauge">River gauge</option>';
+            station_type_options_str  += '<option value="River/Lake Gauge">River/Lake Gauge</option>';
+            station_type_options_str  += '<option value="SNOCOR">SNOCOR</option>';
+            station_type_options_str  += '<option value="Seismometer">Seismometer</option>';
+            station_type_options_str  += '<option value="Snow Telemetry (SNOTEL) Network">Snow Telemetry (SNOTEL) Network</option>';
+            station_type_options_str  += '<option value="Staff Gauge">Staff Gauge</option>';
+            station_type_options_str  += '<option value="Surface Water, Stream">Surface Water, Stream</option>';
+            station_type_options_str  += '<option value="The ASOS Monitoring Center (AOMC)">The ASOS Monitoring Center (AOMC)</option>';
+            station_type_options_str  += '<option value="Tipping Bucket Network">Tipping Bucket Network</option>';
+            station_type_options_str  += '<option value="U.S. Climate Reference Network">U.S. Climate Reference Network</option>';
+            station_type_options_str  += '<option value="UCAR">UCAR</option>';
+            station_type_options_str  += '<option value="Unknown">Unknown</option>';
+            station_type_options_str  += '<option value="Unknown ">Unknown </option>';
+            station_type_options_str  += '<option value="Weather Station">Weather Station</option>';
+            sel_station_type.innerHTML = station_type_options_str;
+            div_station_type.appendChild(sel_station_type);
+            var lab_station_type = document.createElement('div');
+            lab_station_type.innerHTML = 'station_type';
+            lab_station_type.className = 'filterlabel';
+            div_station_type.appendChild(lab_station_type);
+            var reset_station_type = document.createElement('div');
+            reset_station_type.innerHTML = 'clear filter';
+            reset_station_type.className = 'filterlabel';
+            reset_station_type.onclick = function() {
+                var options = document.getElementById("sel_station_type").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_station_type.appendChild(reset_station_type);
             document.getElementById("menu").appendChild(
                 document.createElement("div"));
             var div_owner = document.createElement('div');
@@ -919,78 +985,6 @@
                 filterFunc();
             };
             div_operational.appendChild(reset_operational);
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_station_type = document.createElement('div');
-            div_station_type.id = "div_station_type";
-            div_station_type.className= "filterselect";
-            document.getElementById("menu").appendChild(div_station_type);
-            sel_station_type = document.createElement('select');
-            sel_station_type.multiple = true;
-            sel_station_type.size = 10;
-            sel_station_type.id = "sel_station_type";
-            var station_type_options_str = "<option value='' unselected></option>";
-            sel_station_type.onchange = function(){filterFunc()};
-            station_type_options_str  += '<option value="NULL">NULL</option>';
-            station_type_options_str  += '<option value="Automated Weather Observing System">Automated Weather Observing System</option>';
-            station_type_options_str  += '<option value="C-MAN">C-MAN</option>';
-            station_type_options_str  += '<option value="CANADIAN">CANADIAN</option>';
-            station_type_options_str  += '<option value="Cambell">Cambell</option>';
-            station_type_options_str  += '<option value="Campbell">Campbell</option>';
-            station_type_options_str  += '<option value="Dam level">Dam level</option>';
-            station_type_options_str  += '<option value="FTS">FTS</option>';
-            station_type_options_str  += '<option value="Federal Aviation Administration">Federal Aviation Administration</option>';
-            station_type_options_str  += '<option value="Federal Aviation Administration Webcam">Federal Aviation Administration Webcam</option>';
-            station_type_options_str  += '<option value="Fixed Structure Weather Station">Fixed Structure Weather Station</option>';
-            station_type_options_str  += '<option value="Forest Practices">Forest Practices</option>';
-            station_type_options_str  += '<option value="Geostationary Satellite Server">Geostationary Satellite Server</option>';
-            station_type_options_str  += '<option value="HANDAR">HANDAR</option>';
-            station_type_options_str  += '<option value="HOBO ONSET">HOBO ONSET</option>';
-            station_type_options_str  += '<option value="Igage">Igage</option>';
-            station_type_options_str  += '<option value="Igage Tipping Bucket Network">Igage Tipping Bucket Network</option>';
-            station_type_options_str  += '<option value="LARC">LARC</option>';
-            station_type_options_str  += '<option value="MAREX">MAREX</option>';
-            station_type_options_str  += '<option value="National Water Level Observation Network (NWLON)">National Water Level Observation Network (NWLON)</option>';
-            station_type_options_str  += '<option value="Navy Oceanographic Meteorological Automatic Device (NOMAD) buoy ">Navy Oceanographic Meteorological Automatic Device (NOMAD) buoy </option>';
-            station_type_options_str  += '<option value="PROFILER">PROFILER</option>';
-            station_type_options_str  += '<option value="Piezometer">Piezometer</option>';
-            station_type_options_str  += '<option value="RAMOS">RAMOS</option>';
-            station_type_options_str  += '<option value="Rain Guage">Rain Guage</option>';
-            station_type_options_str  += '<option value="Remote Automated Weather Station">Remote Automated Weather Station</option>';
-            station_type_options_str  += '<option value="River Gage">River Gage</option>';
-            station_type_options_str  += '<option value="River Gauge">River Gauge</option>';
-            station_type_options_str  += '<option value="River GaugeF">River GaugeF</option>';
-            station_type_options_str  += '<option value="River gauge">River gauge</option>';
-            station_type_options_str  += '<option value="River/Lake Guage">River/Lake Guage</option>';
-            station_type_options_str  += '<option value="SNOCOR">SNOCOR</option>';
-            station_type_options_str  += '<option value="Seismometer">Seismometer</option>';
-            station_type_options_str  += '<option value="Snow Telemetry (SNOTEL) Network">Snow Telemetry (SNOTEL) Network</option>';
-            station_type_options_str  += '<option value="Staff Gauge">Staff Gauge</option>';
-            station_type_options_str  += '<option value="Surface Water, Stream">Surface Water, Stream</option>';
-            station_type_options_str  += '<option value="The ASOS Monitoring Center (AOMC)">The ASOS Monitoring Center (AOMC)</option>';
-            station_type_options_str  += '<option value="Tipping Bucket Network">Tipping Bucket Network</option>';
-            station_type_options_str  += '<option value="U.S. Climate Reference Network">U.S. Climate Reference Network</option>';
-            station_type_options_str  += '<option value="UCAR">UCAR</option>';
-            station_type_options_str  += '<option value="Unknown">Unknown</option>';
-            station_type_options_str  += '<option value="Unknown ">Unknown </option>';
-            station_type_options_str  += '<option value="Weather Station">Weather Station</option>';
-            sel_station_type.innerHTML = station_type_options_str;
-            div_station_type.appendChild(sel_station_type);
-            var lab_station_type = document.createElement('div');
-            lab_station_type.innerHTML = 'station_type';
-            lab_station_type.className = 'filterlabel';
-            div_station_type.appendChild(lab_station_type);
-            var reset_station_type = document.createElement('div');
-            reset_station_type.innerHTML = 'clear filter';
-            reset_station_type.className = 'filterlabel';
-            reset_station_type.onclick = function() {
-                var options = document.getElementById("sel_station_type").options;
-                for (var i=0; i < options.length; i++) {
-                    options[i].selected = false;
-                }
-                filterFunc();
-            };
-            div_station_type.appendChild(reset_station_type);
         </script>
     </body>
 </html>
