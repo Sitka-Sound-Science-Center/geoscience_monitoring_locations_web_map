@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="css/L.Control.Locate.min.css">
         <link rel="stylesheet" href="css/qgis2web.css">
         <link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-search.css">
         <link rel="stylesheet" href="css/filter.css">
 <link rel="stylesheet" href="css/nouislider.min.css">
         <link rel="stylesheet" href="css/leaflet-measure.css">
@@ -39,6 +40,7 @@
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
         <script src="js/leaflet-measure.js"></script>
+        <script src="js/leaflet-search.js"></script>
         <script src="js/tailDT.js"></script>
 <script src="js/nouislider.min.js"></script>
 <script src="js/wNumb.js"></script>
@@ -62,7 +64,7 @@
         }
         var map = L.map('map', {
             zoomControl:false, maxZoom:28, minZoom:1
-        }).fitBounds([[54.203069731146854,-147.84637281352676],[60.97841516187072,-124.63210025907014]]);
+        }).fitBounds([[53.06311295315628,-149.06091696032863],[60.03188372151567,-121.5634476387816]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -122,7 +124,7 @@
             abstract.show = function () {
                 this._div.classList.remove("abstract");
                 this._div.classList.add("abstractUncollapsed");
-                this._div.innerHTML = 'This is an interactive web map of environmental monitoring locations in Southeast Alaska. The map aims to shed light on the different types of monitoring stations in the region, the usage of the monitoring stations, and other descriptive information about the locations. We hope this map allows you to make connections, draw conclusions, and explore Southeast Alaska in new ways! <br /><br />Upper Left-Hand Corner: <br />- Click the plus (+) sign to zoom in<br />- Click the minus (-) sign to zoom out<br />- Click the raindrop symbol to show your location on the map and find monitoring locations around you<br />- Click the ruler to measure the distance between two points on the map<br /><br />Upper Right-Hand Corner:<br />- Layers<br />  - Categorize monitoring locations by station owners or by the status of the location<br />  - Change the background layer preferences<br /><br />Right-Hand Side:<br />-Filter the map by Project, Station Type, Operational Status, and/or Owner.<br /><br />Deliverable for a USGS Landslide Monitoring and Risk Reduction Grant. Data have been provided by or collected from the National Weather Service, US National Forest Services, MesoWest, and other public data repositories. Map created by Sitka Sound Science Center Data Manager Ella Neumann. Please email Ella at eneumann@sitkascience.org with questions, comments, or suggestions regarding the map. ';
+                this._div.innerHTML = 'This is an interactive web map of environmental monitoring locations in Southeast Alaska. The map aims to shed light on the different types of monitoring stations in the region, the usage of the monitoring stations, and other descriptive information about the locations. We hope this map allows you to make connections, draw conclusions, and explore Southeast Alaska in new ways! <br /><br />Upper Left-Hand Corner: <br />- Click the plus (+) sign to zoom in<br />- Click the minus (-) sign to zoom out<br />- Click the raindrop symbol to show your location on the map and find monitoring locations around you<br />- Click the ruler to measure the distance between two points on the map<br />- Click the binoculars to search by monitoring location names<br /><br />Upper Right-Hand Corner:<br />- Layers<br />  - Categorize monitoring locations by station owners or by the status of the location<br />  - Change the background layer preferences<br /><br />Right-Hand Side:<br />-Filter the map by Project, Station Type, Operational Status, and/or Owner.<br /><br />Deliverable for a USGS Landslide Monitoring and Risk Reduction Grant. Data have been provided by or collected from the National Weather Service, US National Forest Services, MesoWest, and other public data repositories. Map created by Sitka Sound Science Center Data Manager Ella Neumann. Please email Ella at eneumann@sitkascience.org with questions, comments, or suggestions regarding the map. ';
         };
         abstract.addTo(map);
         var zoomControl = L.control.zoom({
@@ -188,7 +190,7 @@
                         <td>' + (feature.properties['station_id'] !== null ? autolinker.link(feature.properties['station_id'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Station Owner</th>\
+                        <th scope="row">Owner</th>\
                         <td>' + (feature.properties['owner'] !== null ? autolinker.link(feature.properties['owner'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
@@ -204,7 +206,7 @@
                         <td>' + (feature.properties['project'] !== null ? autolinker.link(feature.properties['project'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Real Time?</th>\
+                        <th scope="row">Real Time</th>\
                         <td>' + (feature.properties['real_time'] !== null ? autolinker.link(feature.properties['real_time'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
@@ -216,7 +218,7 @@
                         <td>' + (feature.properties['longitude'] !== null ? autolinker.link(feature.properties['longitude'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Elevation (ft)</th>\
+                        <th scope="row">Elevation (ft) </th>\
                         <td>' + (feature.properties['elevation_ft'] !== null ? autolinker.link(feature.properties['elevation_ft'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
@@ -272,7 +274,7 @@
                         <td>' + (feature.properties['precipitation'] !== null ? autolinker.link(feature.properties['precipitation'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Snow Depth or Amount</th>\
+                        <th scope="row">Snow Amount</th>\
                         <td>' + (feature.properties['snow_amount'] !== null ? autolinker.link(feature.properties['snow_amount'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
@@ -284,23 +286,23 @@
                         <td>' + (feature.properties['seasonal'] !== null ? autolinker.link(feature.properties['seasonal'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Used for Forecasting</th>\
+                        <th scope="row">Used for Forecasting?</th>\
                         <td>' + (feature.properties['reliable_forcsting'] !== null ? autolinker.link(feature.properties['reliable_forcsting'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Precipitation Used for Forecasting</th>\
+                        <th scope="row">Precipitation Used for Forecasting?</th>\
                         <td>' + (feature.properties['precip_reliable'] !== null ? autolinker.link(feature.properties['precip_reliable'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Temperature Used for Forecasting</th>\
+                        <th scope="row">Temperature Used for Forecasting?</th>\
                         <td>' + (feature.properties['temp_reliable'] !== null ? autolinker.link(feature.properties['temp_reliable'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Wind Used for Forecasting</th>\
+                        <th scope="row">Wind Used for Forcasting?</th>\
                         <td>' + (feature.properties['wind_reliable'] !== null ? autolinker.link(feature.properties['wind_reliable'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Dew Point</th>\
+                        <th scope="row">Dew Point Used for Forcasting?</th>\
                         <td>' + (feature.properties['dewpoint_reliable'] !== null ? autolinker.link(feature.properties['dewpoint_reliable'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
@@ -440,7 +442,7 @@
                         <td>' + (feature.properties['station_id'] !== null ? autolinker.link(feature.properties['station_id'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Station Owner</th>\
+                        <th scope="row">Owner</th>\
                         <td>' + (feature.properties['owner'] !== null ? autolinker.link(feature.properties['owner'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
@@ -456,7 +458,7 @@
                         <td>' + (feature.properties['project'] !== null ? autolinker.link(feature.properties['project'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Real Time?</th>\
+                        <th scope="row">Real Time</th>\
                         <td>' + (feature.properties['real_time'] !== null ? autolinker.link(feature.properties['real_time'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
@@ -468,7 +470,7 @@
                         <td>' + (feature.properties['longitude'] !== null ? autolinker.link(feature.properties['longitude'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Elevation (ft)</th>\
+                        <th scope="row">Elevation (ft) </th>\
                         <td>' + (feature.properties['elevation_ft'] !== null ? autolinker.link(feature.properties['elevation_ft'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
@@ -524,7 +526,7 @@
                         <td>' + (feature.properties['precipitation'] !== null ? autolinker.link(feature.properties['precipitation'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Snow Depth or Amount</th>\
+                        <th scope="row">Snow Amount</th>\
                         <td>' + (feature.properties['snow_amount'] !== null ? autolinker.link(feature.properties['snow_amount'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
@@ -536,23 +538,23 @@
                         <td>' + (feature.properties['seasonal'] !== null ? autolinker.link(feature.properties['seasonal'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Used for Forecasting</th>\
+                        <th scope="row">Used for Forecasting?</th>\
                         <td>' + (feature.properties['reliable_forcsting'] !== null ? autolinker.link(feature.properties['reliable_forcsting'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Precipitation Used for Forecasting</th>\
+                        <th scope="row">Precipitation Used for Forecasting?</th>\
                         <td>' + (feature.properties['precip_reliable'] !== null ? autolinker.link(feature.properties['precip_reliable'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Temperature Used for Forecasting</th>\
+                        <th scope="row">Temperature Used for Forecasting?</th>\
                         <td>' + (feature.properties['temp_reliable'] !== null ? autolinker.link(feature.properties['temp_reliable'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Wind Used for Forecasting</th>\
+                        <th scope="row">Wind Used for Forcasting?</th>\
                         <td>' + (feature.properties['wind_reliable'] !== null ? autolinker.link(feature.properties['wind_reliable'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Dew Point</th>\
+                        <th scope="row">Dew Point Used for Forcasting?</th>\
                         <td>' + (feature.properties['dewpoint_reliable'] !== null ? autolinker.link(feature.properties['dewpoint_reliable'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
@@ -636,6 +638,13 @@
         });
         lay.addTo(map);
         setBounds();
+        map.addControl(new L.Control.Search({
+            layer: layer_MonitoringLocations_3,
+            initial: false,
+            hideMarkerOnCollapse: true,
+            propertyName: 'station_name'}));
+        document.getElementsByClassName('search-button')[0].className +=
+         ' fa fa-binoculars';
         var mapDiv = document.getElementById('map');
         var row = document.createElement('div');
         row.className="row";
@@ -655,7 +664,7 @@
         document.getElementById("all").appendChild(col1);
         document.getElementById("all").appendChild(col2);
         col1.appendChild(mapDiv)
-        var Filters = {"project": "str","station_type": "str","operational": "str","owner": "str"};
+        var Filters = {"station_type": "str","operational": "str","owner": "str","project": "str"};
         function filterFunc() {
           map.eachLayer(function(lyr){
           if ("options" in lyr && "dataVar" in lyr["options"]){
@@ -747,66 +756,6 @@
         }
             document.getElementById("menu").appendChild(
                 document.createElement("div"));
-            var div_project = document.createElement('div');
-            div_project.id = "div_project";
-            div_project.className= "filterselect";
-            document.getElementById("menu").appendChild(div_project);
-            sel_project = document.createElement('select');
-            sel_project.multiple = true;
-            sel_project.size = 10;
-            sel_project.id = "sel_project";
-            var project_options_str = "<option value='' unselected></option>";
-            sel_project.onchange = function(){filterFunc()};
-            project_options_str  += '<option value="Alaska Road Weather Information System">Alaska Road Weather Information System</option>';
-            project_options_str  += '<option value="Alaska Youth Stewards">Alaska Youth Stewards</option>';
-            project_options_str  += '<option value="Alternatives to Clearcutting (ATC)">Alternatives to Clearcutting (ATC)</option>';
-            project_options_str  += '<option value="Cedar Decline">Cedar Decline</option>';
-            project_options_str  += '<option value="Cooperative Stand-Density Study (CSDS)">Cooperative Stand-Density Study (CSDS)</option>';
-            project_options_str  += '<option value="Davis">Davis</option>';
-            project_options_str  += '<option value="Dwarf Mistletoe Plots">Dwarf Mistletoe Plots</option>';
-            project_options_str  += '<option value="HANDAR">HANDAR</option>';
-            project_options_str  += '<option value="Heceta Commercial Thinning">Heceta Commercial Thinning</option>';
-            project_options_str  += '<option value="Hydrometeorological Automated Data System">Hydrometeorological Automated Data System</option>';
-            project_options_str  += '<option value="Insect Monitoring">Insect Monitoring</option>';
-            project_options_str  += '<option value="Juneau Carbon">Juneau Carbon</option>';
-            project_options_str  += '<option value="Maybeso Experimental Forest">Maybeso Experimental Forest</option>';
-            project_options_str  += '<option value="National Atmospheric Deposition Program (NADP)">National Atmospheric Deposition Program (NADP)</option>';
-            project_options_str  += '<option value="Prince of Wales Commercial Thinning (POW-CT)">Prince of Wales Commercial Thinning (POW-CT)</option>';
-            project_options_str  += '<option value="Pruning + PCT (Petruncio-JFSL)">Pruning + PCT (Petruncio-JFSL)</option>';
-            project_options_str  += '<option value="Remote Automated Weather Station">Remote Automated Weather Station</option>';
-            project_options_str  += '<option value="Second Growth Management Project (SGMP)">Second Growth Management Project (SGMP)</option>';
-            project_options_str  += '<option value="Service&apos;s Cooperative Observer Program (COOP)">Service&apos;s Cooperative Observer Program (COOP)</option>';
-            project_options_str  += '<option value="Sitka Mesonet: Igauge Tipping Bucket Network">Sitka Mesonet: Igauge Tipping Bucket Network</option>';
-            project_options_str  += '<option value="Spruce Beetle Plots">Spruce Beetle Plots</option>';
-            project_options_str  += '<option value="Taylor Even-Age Plot">Taylor Even-Age Plot</option>';
-            project_options_str  += '<option value="Tongass-Wide Young Growth Study (TWYGS)">Tongass-Wide Young Growth Study (TWYGS)</option>';
-            project_options_str  += '<option value="University of Oregon - HOBO ONSET">University of Oregon - HOBO ONSET</option>';
-            project_options_str  += '<option value="Unknown">Unknown</option>';
-            project_options_str  += '<option value="Verstovia Extended Rotation">Verstovia Extended Rotation</option>';
-            project_options_str  += '<option value="Watershed Restoration & Ecosystem Monitoring (WREM)">Watershed Restoration & Ecosystem Monitoring (WREM)</option>';
-            project_options_str  += '<option value="Wet Soil Monitoring">Wet Soil Monitoring</option>';
-            project_options_str  += '<option value="Yellow Cedar Plantings">Yellow Cedar Plantings</option>';
-            project_options_str  += '<option value="Yellow Cedar Steckling">Yellow Cedar Steckling</option>';
-            project_options_str  += '<option value="Yellow-cedar common garden">Yellow-cedar common garden</option>';
-            sel_project.innerHTML = project_options_str;
-            div_project.appendChild(sel_project);
-            var lab_project = document.createElement('div');
-            lab_project.innerHTML = 'project';
-            lab_project.className = 'filterlabel';
-            div_project.appendChild(lab_project);
-            var reset_project = document.createElement('div');
-            reset_project.innerHTML = 'clear filter';
-            reset_project.className = 'filterlabel';
-            reset_project.onclick = function() {
-                var options = document.getElementById("sel_project").options;
-                for (var i=0; i < options.length; i++) {
-                    options[i].selected = false;
-                }
-                filterFunc();
-            };
-            div_project.appendChild(reset_project);
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
             var div_station_type = document.createElement('div');
             div_station_type.id = "div_station_type";
             div_station_type.className= "filterselect";
@@ -833,6 +782,7 @@
             station_type_options_str  += '<option value="Igauge">Igauge</option>';
             station_type_options_str  += '<option value="LARC">LARC</option>';
             station_type_options_str  += '<option value="MAREX">MAREX</option>';
+            station_type_options_str  += '<option value="Marine Exchange of Alaska">Marine Exchange of Alaska</option>';
             station_type_options_str  += '<option value="National Water Level Observation Network (NWLON)">National Water Level Observation Network (NWLON)</option>';
             station_type_options_str  += '<option value="Navy Oceanographic Meteorological Automatic Device (NOMAD) buoy ">Navy Oceanographic Meteorological Automatic Device (NOMAD) buoy </option>';
             station_type_options_str  += '<option value="PROFILER">PROFILER</option>';
@@ -855,7 +805,6 @@
             station_type_options_str  += '<option value="U.S. Climate Reference Network">U.S. Climate Reference Network</option>';
             station_type_options_str  += '<option value="UCAR">UCAR</option>';
             station_type_options_str  += '<option value="Unknown">Unknown</option>';
-            station_type_options_str  += '<option value="Unknown ">Unknown </option>';
             station_type_options_str  += '<option value="Weather Station">Weather Station</option>';
             sel_station_type.innerHTML = station_type_options_str;
             div_station_type.appendChild(sel_station_type);
@@ -882,12 +831,11 @@
             document.getElementById("menu").appendChild(div_operational);
             sel_operational = document.createElement('select');
             sel_operational.multiple = true;
-            sel_operational.size = 3;
+            sel_operational.size = 2;
             sel_operational.id = "sel_operational";
             var operational_options_str = "<option value='' unselected></option>";
             sel_operational.onchange = function(){filterFunc()};
             operational_options_str  += '<option value="Active">Active</option>';
-            operational_options_str  += '<option value="Destroyed">Destroyed</option>';
             operational_options_str  += '<option value="Inactive">Inactive</option>';
             sel_operational.innerHTML = operational_options_str;
             div_operational.appendChild(sel_operational);
@@ -927,11 +875,10 @@
             owner_options_str  += '<option value="Environment Canada">Environment Canada</option>';
             owner_options_str  += '<option value="Federal Aviation Administration">Federal Aviation Administration</option>';
             owner_options_str  += '<option value="Haight & Associates Inc">Haight & Associates Inc</option>';
-            owner_options_str  += '<option value="Hydrometeorological Automated Data System">Hydrometeorological Automated Data System</option>';
             owner_options_str  += '<option value="Incorporated Research Institutions for Seismology">Incorporated Research Institutions for Seismology</option>';
             owner_options_str  += '<option value="Juneau Weather Forecast Office">Juneau Weather Forecast Office</option>';
             owner_options_str  += '<option value="Ketchikan Public Utilities">Ketchikan Public Utilities</option>';
-            owner_options_str  += '<option value="Marine Exchange">Marine Exchange</option>';
+            owner_options_str  += '<option value="Marine Exchange of Alaska">Marine Exchange of Alaska</option>';
             owner_options_str  += '<option value="Metlakatla Indian Community">Metlakatla Indian Community</option>';
             owner_options_str  += '<option value="National Data Buoy Center">National Data Buoy Center</option>';
             owner_options_str  += '<option value="National Oceanic and Atmospheric Administration">National Oceanic and Atmospheric Administration</option>';
@@ -940,7 +887,6 @@
             owner_options_str  += '<option value="National Weather Service">National Weather Service</option>';
             owner_options_str  += '<option value="Natural Resources Conservation Service">Natural Resources Conservation Service</option>';
             owner_options_str  += '<option value="Private">Private</option>';
-            owner_options_str  += '<option value="Privite ">Privite </option>';
             owner_options_str  += '<option value="Sitka Sound Science Center">Sitka Sound Science Center</option>';
             owner_options_str  += '<option value="Southeast Alaska Power Agency">Southeast Alaska Power Agency</option>';
             owner_options_str  += '<option value="The Bureau of Land Management">The Bureau of Land Management</option>';
@@ -970,6 +916,66 @@
                 filterFunc();
             };
             div_owner.appendChild(reset_owner);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_project = document.createElement('div');
+            div_project.id = "div_project";
+            div_project.className= "filterselect";
+            document.getElementById("menu").appendChild(div_project);
+            sel_project = document.createElement('select');
+            sel_project.multiple = true;
+            sel_project.size = 10;
+            sel_project.id = "sel_project";
+            var project_options_str = "<option value='' unselected></option>";
+            sel_project.onchange = function(){filterFunc()};
+            project_options_str  += '<option value="Alaska Road Weather Information System">Alaska Road Weather Information System</option>';
+            project_options_str  += '<option value="Alaska Youth Stewards">Alaska Youth Stewards</option>';
+            project_options_str  += '<option value="Alternatives to Clearcutting (ATC)">Alternatives to Clearcutting (ATC)</option>';
+            project_options_str  += '<option value="Cedar Decline">Cedar Decline</option>';
+            project_options_str  += '<option value="Cooperative Stand-Density Study (CSDS)">Cooperative Stand-Density Study (CSDS)</option>';
+            project_options_str  += '<option value="Davis">Davis</option>';
+            project_options_str  += '<option value="Dwarf Mistletoe Plots">Dwarf Mistletoe Plots</option>';
+            project_options_str  += '<option value="HANDAR">HANDAR</option>';
+            project_options_str  += '<option value="Heceta Commercial Thinning">Heceta Commercial Thinning</option>';
+            project_options_str  += '<option value="Hydrometeorological Automated Data System">Hydrometeorological Automated Data System</option>';
+            project_options_str  += '<option value="Insect Monitoring">Insect Monitoring</option>';
+            project_options_str  += '<option value="Juneau Carbon">Juneau Carbon</option>';
+            project_options_str  += '<option value="Maybeso Experimental Forest">Maybeso Experimental Forest</option>';
+            project_options_str  += '<option value="National Atmospheric Deposition Program (NADP)">National Atmospheric Deposition Program (NADP)</option>';
+            project_options_str  += '<option value="Prince of Wales Commercial Thinning (POW-CT)">Prince of Wales Commercial Thinning (POW-CT)</option>';
+            project_options_str  += '<option value="Pruning + PCT (Petruncio-JFSL)">Pruning + PCT (Petruncio-JFSL)</option>';
+            project_options_str  += '<option value="Remote Automated Weather Station">Remote Automated Weather Station</option>';
+            project_options_str  += '<option value="Second Growth Management Project (SGMP)">Second Growth Management Project (SGMP)</option>';
+            project_options_str  += '<option value="Service&apos;s Cooperative Observer Program (COOP)">Service&apos;s Cooperative Observer Program (COOP)</option>';
+            project_options_str  += '<option value="Sitka Mesonet: Igage Tipping Bucket Network">Sitka Mesonet: Igage Tipping Bucket Network</option>';
+            project_options_str  += '<option value="Spruce Beetle Plots">Spruce Beetle Plots</option>';
+            project_options_str  += '<option value="Taylor Even-Age Plot">Taylor Even-Age Plot</option>';
+            project_options_str  += '<option value="Tongass-Wide Young Growth Study (TWYGS)">Tongass-Wide Young Growth Study (TWYGS)</option>';
+            project_options_str  += '<option value="University of Oregon - HOBO ONSET">University of Oregon - HOBO ONSET</option>';
+            project_options_str  += '<option value="Unknown">Unknown</option>';
+            project_options_str  += '<option value="Verstovia Extended Rotation">Verstovia Extended Rotation</option>';
+            project_options_str  += '<option value="Watershed Restoration & Ecosystem Monitoring (WREM)">Watershed Restoration & Ecosystem Monitoring (WREM)</option>';
+            project_options_str  += '<option value="Wet Soil Monitoring">Wet Soil Monitoring</option>';
+            project_options_str  += '<option value="Yellow Cedar Plantings">Yellow Cedar Plantings</option>';
+            project_options_str  += '<option value="Yellow Cedar Steckling">Yellow Cedar Steckling</option>';
+            project_options_str  += '<option value="Yellow-cedar common garden">Yellow-cedar common garden</option>';
+            sel_project.innerHTML = project_options_str;
+            div_project.appendChild(sel_project);
+            var lab_project = document.createElement('div');
+            lab_project.innerHTML = 'project';
+            lab_project.className = 'filterlabel';
+            div_project.appendChild(lab_project);
+            var reset_project = document.createElement('div');
+            reset_project.innerHTML = 'clear filter';
+            reset_project.className = 'filterlabel';
+            reset_project.onclick = function() {
+                var options = document.getElementById("sel_project").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_project.appendChild(reset_project);
         </script>
     </body>
 </html>
