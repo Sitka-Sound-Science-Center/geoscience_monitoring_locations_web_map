@@ -64,7 +64,7 @@
         }
         var map = L.map('map', {
             zoomControl:false, maxZoom:28, minZoom:1
-        }).fitBounds([[53.06311295315628,-149.06091696032863],[60.03188372151567,-121.5634476387816]]);
+        }).fitBounds([[53.06311295315626,-146.91931857678367],[60.03188372151562,-123.70504602232705]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -664,7 +664,7 @@
         document.getElementById("all").appendChild(col1);
         document.getElementById("all").appendChild(col2);
         col1.appendChild(mapDiv)
-        var Filters = {"station_type": "str","operational": "str","owner": "str","project": "str"};
+        var Filters = {"station_type": "str","owner": "str","operational": "str","project": "str"};
         function filterFunc() {
           map.eachLayer(function(lyr){
           if ("options" in lyr && "dataVar" in lyr["options"]){
@@ -825,37 +825,6 @@
             div_station_type.appendChild(reset_station_type);
             document.getElementById("menu").appendChild(
                 document.createElement("div"));
-            var div_operational = document.createElement('div');
-            div_operational.id = "div_operational";
-            div_operational.className= "filterselect";
-            document.getElementById("menu").appendChild(div_operational);
-            sel_operational = document.createElement('select');
-            sel_operational.multiple = true;
-            sel_operational.size = 2;
-            sel_operational.id = "sel_operational";
-            var operational_options_str = "<option value='' unselected></option>";
-            sel_operational.onchange = function(){filterFunc()};
-            operational_options_str  += '<option value="Active">Active</option>';
-            operational_options_str  += '<option value="Inactive">Inactive</option>';
-            sel_operational.innerHTML = operational_options_str;
-            div_operational.appendChild(sel_operational);
-            var lab_operational = document.createElement('div');
-            lab_operational.innerHTML = 'operational';
-            lab_operational.className = 'filterlabel';
-            div_operational.appendChild(lab_operational);
-            var reset_operational = document.createElement('div');
-            reset_operational.innerHTML = 'clear filter';
-            reset_operational.className = 'filterlabel';
-            reset_operational.onclick = function() {
-                var options = document.getElementById("sel_operational").options;
-                for (var i=0; i < options.length; i++) {
-                    options[i].selected = false;
-                }
-                filterFunc();
-            };
-            div_operational.appendChild(reset_operational);
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
             var div_owner = document.createElement('div');
             div_owner.id = "div_owner";
             div_owner.className= "filterselect";
@@ -916,6 +885,37 @@
                 filterFunc();
             };
             div_owner.appendChild(reset_owner);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_operational = document.createElement('div');
+            div_operational.id = "div_operational";
+            div_operational.className= "filterselect";
+            document.getElementById("menu").appendChild(div_operational);
+            sel_operational = document.createElement('select');
+            sel_operational.multiple = true;
+            sel_operational.size = 2;
+            sel_operational.id = "sel_operational";
+            var operational_options_str = "<option value='' unselected></option>";
+            sel_operational.onchange = function(){filterFunc()};
+            operational_options_str  += '<option value="Active">Active</option>';
+            operational_options_str  += '<option value="Inactive">Inactive</option>';
+            sel_operational.innerHTML = operational_options_str;
+            div_operational.appendChild(sel_operational);
+            var lab_operational = document.createElement('div');
+            lab_operational.innerHTML = 'operational';
+            lab_operational.className = 'filterlabel';
+            div_operational.appendChild(lab_operational);
+            var reset_operational = document.createElement('div');
+            reset_operational.innerHTML = 'clear filter';
+            reset_operational.className = 'filterlabel';
+            reset_operational.onclick = function() {
+                var options = document.getElementById("sel_operational").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_operational.appendChild(reset_operational);
             document.getElementById("menu").appendChild(
                 document.createElement("div"));
             var div_project = document.createElement('div');
