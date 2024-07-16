@@ -1,22 +1,32 @@
 ## Southeast Alaska Environmental Monitoring Locations Map
 
 ### About
-This is a map of the environmental monitoring locations in Southeast Alaska. This map was created as a deliverable for a USGS Landslide Monitoring and Risk Reduction Grant. Data have been provided by or collected from the National Weather Service, US National Forest Services, MesoWest, and other public data repositories. This map aims to shed light on the different types of monitoring stations in the region, the usage of the monitoring stations, and other descriptive information about the locations. We hope this map allows you to make connections, draw conclusions, and explore Southeast Alaska in new ways!
+This is an interactive web map of environmental monitoring locations in Southeast Alaska. The map aims to shed light on the different types of monitoring stations in the region, the usage of the monitoring stations, and other descriptive information about the locations. We hope this map allows you to make connections, draw conclusions, and explore Southeast Alaska in new ways! 
 
-![Screenshot 2024-06-21 162534](https://github.com/Sitka-Sound-Science-Center/monitoring_locations_web_map/assets/34327238/ad975f72-5fd8-48ce-9ff4-368c6d6bf9c3)
+![Screenshot 2024-07-16 113256](https://github.com/user-attachments/assets/f6ea353e-4d0b-41f9-85cf-7adc60461007)
 
 #### Features
-##### Upper Left-Hand Corner:
-- Title of Map: Southeast Alaska Monitoring Locations
-- Click the "i" icon for more information about the map
+##### Upper Left-Hand Corner: 
+- Click the (i) icon to see more information about the web map
 - Click the plus (+) sign to zoom in
 - Click the minus (-) sign to zoom out
 - Click the raindrop symbol to show your location on the map and find monitoring locations around you
-![Screenshot 2024-06-21 162620](https://github.com/Sitka-Sound-Science-Center/monitoring_locations_web_map/assets/34327238/0f2796bc-931e-4627-954b-821b1af3f1c6)
+- Click the ruler to measure the distance between two points on the map
+  
+![Screenshot 2024-07-16 114155](https://github.com/user-attachments/assets/33991910-5859-4267-b350-fe167f599be5)
 
+- Click the binoculars to search by monitoring location names
+  
+![Screenshot 2024-07-16 113821](https://github.com/user-attachments/assets/e30fc4f9-23ab-42ff-8a9e-fff353a96230)
 
 ##### Upper Right-Hand Corner:
 - Layers
-  - Categorize monitoring locations by station owners or by the status of the location
+  - Categorize monitoring locations by the status of the location (Active or Inactive)
   - Change the background layer preferences
-![Screenshot 2024-06-21 162803](https://github.com/Sitka-Sound-Science-Center/monitoring_locations_web_map/assets/34327238/0528644e-23c7-437c-9c66-13838ce06995)
+![Screenshot 2024-07-16 113358](https://github.com/user-attachments/assets/fac6a86f-69ba-4ec8-9302-69a998fb52f9)
+
+##### Right-Hand Side:
+-Filter the map by Project, Station Type, Operational Status, and/or Owner.
+
+### Additional Information
+Deliverable for a USGS Landslide Monitoring and Risk Reduction Grant. Data have been provided by or collected from the National Weather Service, US National Forest Services, MesoWest, and other public data repositories. Map created by Sitka Sound Science Center Data Manager Ella Neumann. Please email Ella at eneumann@sitkascience.org with questions, comments, or suggestions regarding the map. 
