@@ -632,7 +632,7 @@
         document.getElementById("all").appendChild(col1);
         document.getElementById("all").appendChild(col2);
         col1.appendChild(mapDiv)
-        var Filters = {"station_type": "str","owner": "str","project": "str","operational": "str"};
+        var Filters = {"owner": "str","project": "str","operational": "str"};
         function filterFunc() {
           map.eachLayer(function(lyr){
           if ("options" in lyr && "dataVar" in lyr["options"]){
@@ -722,51 +722,6 @@
           }
           })
         }
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_station_type = document.createElement('div');
-            div_station_type.id = "div_station_type";
-            div_station_type.className= "filterselect";
-            document.getElementById("menu").appendChild(div_station_type);
-            sel_station_type = document.createElement('select');
-            sel_station_type.multiple = true;
-            sel_station_type.size = 10;
-            sel_station_type.id = "sel_station_type";
-            var station_type_options_str = "<option value='' unselected></option>";
-            sel_station_type.onchange = function(){filterFunc()};
-            station_type_options_str  += '<option value="Automated Weather Observing System">Automated Weather Observing System</option>';
-            station_type_options_str  += '<option value="Coastal-Marine Automated Network">Coastal-Marine Automated Network</option>';
-            station_type_options_str  += '<option value="Dam level">Dam level</option>';
-            station_type_options_str  += '<option value="Forest Practices">Forest Practices</option>';
-            station_type_options_str  += '<option value="Geostationary Satellite Server">Geostationary Satellite Server</option>';
-            station_type_options_str  += '<option value="Rain Gauge">Rain Gauge</option>';
-            station_type_options_str  += '<option value="Rain Gauge/Piezometer">Rain Gauge/Piezometer</option>';
-            station_type_options_str  += '<option value="Seismometer">Seismometer</option>';
-            station_type_options_str  += '<option value="Snow Telemetry (SNOTEL) Network">Snow Telemetry (SNOTEL) Network</option>';
-            station_type_options_str  += '<option value="Soil Hydrology Monitoring">Soil Hydrology Monitoring</option>';
-            station_type_options_str  += '<option value="Staff Gauge">Staff Gauge</option>';
-            station_type_options_str  += '<option value="Stream Gauge">Stream Gauge</option>';
-            station_type_options_str  += '<option value="Tide Gauge">Tide Gauge</option>';
-            station_type_options_str  += '<option value="Unknown">Unknown</option>';
-            station_type_options_str  += '<option value="Weather Station">Weather Station</option>';
-            station_type_options_str  += '<option value="Wind Profiler">Wind Profiler</option>';
-            sel_station_type.innerHTML = station_type_options_str;
-            div_station_type.appendChild(sel_station_type);
-            var lab_station_type = document.createElement('div');
-            lab_station_type.innerHTML = 'station_type';
-            lab_station_type.className = 'filterlabel';
-            div_station_type.appendChild(lab_station_type);
-            var reset_station_type = document.createElement('div');
-            reset_station_type.innerHTML = 'clear filter';
-            reset_station_type.className = 'filterlabel';
-            reset_station_type.onclick = function() {
-                var options = document.getElementById("sel_station_type").options;
-                for (var i=0; i < options.length; i++) {
-                    options[i].selected = false;
-                }
-                filterFunc();
-            };
-            div_station_type.appendChild(reset_station_type);
             document.getElementById("menu").appendChild(
                 document.createElement("div"));
             var div_owner = document.createElement('div');
