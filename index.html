@@ -64,7 +64,7 @@
         }
         var map = L.map('map', {
             zoomControl:false, maxZoom:28, minZoom:1
-        }).fitBounds([[53.92454194852393,-147.4774264939473],[60.74733790865237,-124.26315393949072]]);
+        }).fitBounds([[53.92454194852394,-147.4774264939473],[60.74733790865237,-124.26315393949069]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -632,7 +632,7 @@
         document.getElementById("all").appendChild(col1);
         document.getElementById("all").appendChild(col2);
         col1.appendChild(mapDiv)
-        var Filters = {"station_type": "str","owner": "str","project": "str","operational": "str"};
+        var Filters = {"project": "str","operational": "str","station_type": "str","owner": "str"};
         function filterFunc() {
           map.eachLayer(function(lyr){
           if ("options" in lyr && "dataVar" in lyr["options"]){
@@ -722,113 +722,6 @@
           }
           })
         }
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_station_type = document.createElement('div');
-            div_station_type.id = "div_station_type";
-            div_station_type.className= "filterselect";
-            document.getElementById("menu").appendChild(div_station_type);
-            sel_station_type = document.createElement('select');
-            sel_station_type.multiple = true;
-            sel_station_type.size = 10;
-            sel_station_type.id = "sel_station_type";
-            var station_type_options_str = "<option value='' unselected></option>";
-            sel_station_type.onchange = function(){filterFunc()};
-            station_type_options_str  += '<option value="Automated Weather Observing System">Automated Weather Observing System</option>';
-            station_type_options_str  += '<option value="Coastal-Marine Automated Network">Coastal-Marine Automated Network</option>';
-            station_type_options_str  += '<option value="Dam level">Dam level</option>';
-            station_type_options_str  += '<option value="Forest Practices">Forest Practices</option>';
-            station_type_options_str  += '<option value="Geostationary Satellite Server">Geostationary Satellite Server</option>';
-            station_type_options_str  += '<option value="Rain Gauge">Rain Gauge</option>';
-            station_type_options_str  += '<option value="Rain Gauge/Piezometer">Rain Gauge/Piezometer</option>';
-            station_type_options_str  += '<option value="Seismometer">Seismometer</option>';
-            station_type_options_str  += '<option value="Snow Telemetry (SNOTEL) Network">Snow Telemetry (SNOTEL) Network</option>';
-            station_type_options_str  += '<option value="Soil Hydrology Monitoring">Soil Hydrology Monitoring</option>';
-            station_type_options_str  += '<option value="Staff Gauge">Staff Gauge</option>';
-            station_type_options_str  += '<option value="Stream Gauge">Stream Gauge</option>';
-            station_type_options_str  += '<option value="Tide Gauge">Tide Gauge</option>';
-            station_type_options_str  += '<option value="Unknown">Unknown</option>';
-            station_type_options_str  += '<option value="Weather Station">Weather Station</option>';
-            station_type_options_str  += '<option value="Wind Profiler">Wind Profiler</option>';
-            sel_station_type.innerHTML = station_type_options_str;
-            div_station_type.appendChild(sel_station_type);
-            var lab_station_type = document.createElement('div');
-            lab_station_type.innerHTML = 'Station Type'; // calling this Station Type instead of station_type ESN
-            lab_station_type.className = 'filterlabel';
-            div_station_type.appendChild(lab_station_type);
-            var reset_station_type = document.createElement('div');
-            reset_station_type.innerHTML = 'clear filter';
-            reset_station_type.className = 'filterlabel';
-            reset_station_type.onclick = function() {
-                var options = document.getElementById("sel_station_type").options;
-                for (var i=0; i < options.length; i++) {
-                    options[i].selected = false;
-                }
-                filterFunc();
-            };
-            div_station_type.appendChild(reset_station_type);
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_owner = document.createElement('div');
-            div_owner.id = "div_owner";
-            div_owner.className= "filterselect";
-            document.getElementById("menu").appendChild(div_owner);
-            sel_owner = document.createElement('select');
-            sel_owner.multiple = true;
-            sel_owner.size = 10;
-            sel_owner.id = "sel_owner";
-            var owner_options_str = "<option value='' unselected></option>";
-            sel_owner.onchange = function(){filterFunc()};
-            owner_options_str  += '<option value="Alaska Avalanche Information Center">Alaska Avalanche Information Center</option>';
-            owner_options_str  += '<option value="Alaska Department of Transportation">Alaska Department of Transportation</option>';
-            owner_options_str  += '<option value="Alaska Division of Geological & Geophysical Surveys">Alaska Division of Geological & Geophysical Surveys</option>';
-            owner_options_str  += '<option value="Alaska Electric Light and Power Company">Alaska Electric Light and Power Company</option>';
-            owner_options_str  += '<option value="Constantine Mine">Constantine Mine</option>';
-            owner_options_str  += '<option value="Eaglecrest">Eaglecrest</option>';
-            owner_options_str  += '<option value="Environment Canada">Environment Canada</option>';
-            owner_options_str  += '<option value="Federal Aviation Administration">Federal Aviation Administration</option>';
-            owner_options_str  += '<option value="Haight & Associates Inc">Haight & Associates Inc</option>';
-            owner_options_str  += '<option value="Incorporated Research Institutions for Seismology">Incorporated Research Institutions for Seismology</option>';
-            owner_options_str  += '<option value="Juneau Weather Forecast Office">Juneau Weather Forecast Office</option>';
-            owner_options_str  += '<option value="Ketchikan Public Utilities">Ketchikan Public Utilities</option>';
-            owner_options_str  += '<option value="Marine Exchange of Alaska">Marine Exchange of Alaska</option>';
-            owner_options_str  += '<option value="Metlakatla Indian Community">Metlakatla Indian Community</option>';
-            owner_options_str  += '<option value="National Data Buoy Center">National Data Buoy Center</option>';
-            owner_options_str  += '<option value="National Oceanic and Atmospheric Administration">National Oceanic and Atmospheric Administration</option>';
-            owner_options_str  += '<option value="National Park Service">National Park Service</option>';
-            owner_options_str  += '<option value="National Tsunami Warning Center (NTWC)">National Tsunami Warning Center (NTWC)</option>';
-            owner_options_str  += '<option value="National Weather Service">National Weather Service</option>';
-            owner_options_str  += '<option value="Natural Resources Conservation Service">Natural Resources Conservation Service</option>';
-            owner_options_str  += '<option value="Private">Private</option>';
-            owner_options_str  += '<option value="Sitka Sound Science Center">Sitka Sound Science Center</option>';
-            owner_options_str  += '<option value="Southeast Alaska Power Agency">Southeast Alaska Power Agency</option>';
-            owner_options_str  += '<option value="The Bureau of Land Management">The Bureau of Land Management</option>';
-            owner_options_str  += '<option value="U.S. Department of the Interior">U.S. Department of the Interior</option>';
-            owner_options_str  += '<option value="U.S. Forest Service">U.S. Forest Service</option>';
-            owner_options_str  += '<option value="U.S. Geological Survey">U.S. Geological Survey</option>';
-            owner_options_str  += '<option value="USArray">USArray</option>';
-            owner_options_str  += '<option value="University Corporation for Atmospheric Research">University Corporation for Atmospheric Research</option>';
-            owner_options_str  += '<option value="University of Alaska Southeast">University of Alaska Southeast</option>';
-            owner_options_str  += '<option value="Unknown">Unknown</option>';
-            owner_options_str  += '<option value="Ward Cove Group">Ward Cove Group</option>';
-            owner_options_str  += '<option value="Yukon Avalanche Association">Yukon Avalanche Association</option>';
-            sel_owner.innerHTML = owner_options_str;
-            div_owner.appendChild(sel_owner);
-            var lab_owner = document.createElement('div');
-            lab_owner.innerHTML = 'owner';
-            lab_owner.className = 'filterlabel';
-            div_owner.appendChild(lab_owner);
-            var reset_owner = document.createElement('div');
-            reset_owner.innerHTML = 'clear filter';
-            reset_owner.className = 'filterlabel';
-            reset_owner.onclick = function() {
-                var options = document.getElementById("sel_owner").options;
-                for (var i=0; i < options.length; i++) {
-                    options[i].selected = false;
-                }
-                filterFunc();
-            };
-            div_owner.appendChild(reset_owner);
             document.getElementById("menu").appendChild(
                 document.createElement("div"));
             var div_project = document.createElement('div');
@@ -927,6 +820,113 @@
                 filterFunc();
             };
             div_operational.appendChild(reset_operational);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_station_type = document.createElement('div');
+            div_station_type.id = "div_station_type";
+            div_station_type.className= "filterselect";
+            document.getElementById("menu").appendChild(div_station_type);
+            sel_station_type = document.createElement('select');
+            sel_station_type.multiple = true;
+            sel_station_type.size = 10;
+            sel_station_type.id = "sel_station_type";
+            var station_type_options_str = "<option value='' unselected></option>";
+            sel_station_type.onchange = function(){filterFunc()};
+            station_type_options_str  += '<option value="Automated Weather Observing System">Automated Weather Observing System</option>';
+            station_type_options_str  += '<option value="Coastal-Marine Automated Network">Coastal-Marine Automated Network</option>';
+            station_type_options_str  += '<option value="Dam level">Dam level</option>';
+            station_type_options_str  += '<option value="Forest Practices">Forest Practices</option>';
+            station_type_options_str  += '<option value="Geostationary Satellite Server">Geostationary Satellite Server</option>';
+            station_type_options_str  += '<option value="Rain Gauge">Rain Gauge</option>';
+            station_type_options_str  += '<option value="Rain Gauge/Piezometer">Rain Gauge/Piezometer</option>';
+            station_type_options_str  += '<option value="Seismometer">Seismometer</option>';
+            station_type_options_str  += '<option value="Snow Telemetry (SNOTEL) Network">Snow Telemetry (SNOTEL) Network</option>';
+            station_type_options_str  += '<option value="Soil Hydrology Monitoring">Soil Hydrology Monitoring</option>';
+            station_type_options_str  += '<option value="Staff Gauge">Staff Gauge</option>';
+            station_type_options_str  += '<option value="Stream Gauge">Stream Gauge</option>';
+            station_type_options_str  += '<option value="Tide Gauge">Tide Gauge</option>';
+            station_type_options_str  += '<option value="Unknown">Unknown</option>';
+            station_type_options_str  += '<option value="Weather Station">Weather Station</option>';
+            station_type_options_str  += '<option value="Wind Profiler">Wind Profiler</option>';
+            sel_station_type.innerHTML = station_type_options_str;
+            div_station_type.appendChild(sel_station_type);
+            var lab_station_type = document.createElement('div');
+            lab_station_type.innerHTML = 'station_type';
+            lab_station_type.className = 'filterlabel';
+            div_station_type.appendChild(lab_station_type);
+            var reset_station_type = document.createElement('div');
+            reset_station_type.innerHTML = 'clear filter';
+            reset_station_type.className = 'filterlabel';
+            reset_station_type.onclick = function() {
+                var options = document.getElementById("sel_station_type").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_station_type.appendChild(reset_station_type);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_owner = document.createElement('div');
+            div_owner.id = "div_owner";
+            div_owner.className= "filterselect";
+            document.getElementById("menu").appendChild(div_owner);
+            sel_owner = document.createElement('select');
+            sel_owner.multiple = true;
+            sel_owner.size = 10;
+            sel_owner.id = "sel_owner";
+            var owner_options_str = "<option value='' unselected></option>";
+            sel_owner.onchange = function(){filterFunc()};
+            owner_options_str  += '<option value="Alaska Avalanche Information Center">Alaska Avalanche Information Center</option>';
+            owner_options_str  += '<option value="Alaska Department of Transportation">Alaska Department of Transportation</option>';
+            owner_options_str  += '<option value="Alaska Division of Geological & Geophysical Surveys">Alaska Division of Geological & Geophysical Surveys</option>';
+            owner_options_str  += '<option value="Alaska Electric Light and Power Company">Alaska Electric Light and Power Company</option>';
+            owner_options_str  += '<option value="Constantine Mine">Constantine Mine</option>';
+            owner_options_str  += '<option value="Eaglecrest">Eaglecrest</option>';
+            owner_options_str  += '<option value="Environment Canada">Environment Canada</option>';
+            owner_options_str  += '<option value="Federal Aviation Administration">Federal Aviation Administration</option>';
+            owner_options_str  += '<option value="Haight & Associates Inc">Haight & Associates Inc</option>';
+            owner_options_str  += '<option value="Incorporated Research Institutions for Seismology">Incorporated Research Institutions for Seismology</option>';
+            owner_options_str  += '<option value="Juneau Weather Forecast Office">Juneau Weather Forecast Office</option>';
+            owner_options_str  += '<option value="Ketchikan Public Utilities">Ketchikan Public Utilities</option>';
+            owner_options_str  += '<option value="Marine Exchange of Alaska">Marine Exchange of Alaska</option>';
+            owner_options_str  += '<option value="Metlakatla Indian Community">Metlakatla Indian Community</option>';
+            owner_options_str  += '<option value="National Data Buoy Center">National Data Buoy Center</option>';
+            owner_options_str  += '<option value="National Oceanic and Atmospheric Administration">National Oceanic and Atmospheric Administration</option>';
+            owner_options_str  += '<option value="National Park Service">National Park Service</option>';
+            owner_options_str  += '<option value="National Tsunami Warning Center (NTWC)">National Tsunami Warning Center (NTWC)</option>';
+            owner_options_str  += '<option value="National Weather Service">National Weather Service</option>';
+            owner_options_str  += '<option value="Natural Resources Conservation Service">Natural Resources Conservation Service</option>';
+            owner_options_str  += '<option value="Private">Private</option>';
+            owner_options_str  += '<option value="Sitka Sound Science Center">Sitka Sound Science Center</option>';
+            owner_options_str  += '<option value="Southeast Alaska Power Agency">Southeast Alaska Power Agency</option>';
+            owner_options_str  += '<option value="The Bureau of Land Management">The Bureau of Land Management</option>';
+            owner_options_str  += '<option value="U.S. Department of the Interior">U.S. Department of the Interior</option>';
+            owner_options_str  += '<option value="U.S. Forest Service">U.S. Forest Service</option>';
+            owner_options_str  += '<option value="U.S. Geological Survey">U.S. Geological Survey</option>';
+            owner_options_str  += '<option value="USArray">USArray</option>';
+            owner_options_str  += '<option value="University Corporation for Atmospheric Research">University Corporation for Atmospheric Research</option>';
+            owner_options_str  += '<option value="University of Alaska Southeast">University of Alaska Southeast</option>';
+            owner_options_str  += '<option value="Unknown">Unknown</option>';
+            owner_options_str  += '<option value="Ward Cove Group">Ward Cove Group</option>';
+            owner_options_str  += '<option value="Yukon Avalanche Association">Yukon Avalanche Association</option>';
+            sel_owner.innerHTML = owner_options_str;
+            div_owner.appendChild(sel_owner);
+            var lab_owner = document.createElement('div');
+            lab_owner.innerHTML = 'owner';
+            lab_owner.className = 'filterlabel';
+            div_owner.appendChild(lab_owner);
+            var reset_owner = document.createElement('div');
+            reset_owner.innerHTML = 'clear filter';
+            reset_owner.className = 'filterlabel';
+            reset_owner.onclick = function() {
+                var options = document.getElementById("sel_owner").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_owner.appendChild(reset_owner);
         </script>
     </body>
 </html>
