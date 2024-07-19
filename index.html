@@ -732,7 +732,7 @@
             sel_project.multiple = true;
             sel_project.size = 10;
             sel_project.id = "sel_project";
-            //var project_options_str = "<option value='NULL' unselected></option>";
+            //var project_options_str = "<option value='' unselected></option>";
             var project_options_str;
             sel_project.onchange = function(){filterFunc()};
             project_options_str  += '<option value="Alaska Road Weather Information System">Alaska Road Weather Information System</option>';
@@ -799,7 +799,8 @@
             sel_operational.multiple = true;
             sel_operational.size = 2;
             sel_operational.id = "sel_operational";
-            var operational_options_str = "<option value='' unselected></option>";
+            //var operational_options_str = "<option value='' unselected></option>";
+            var operational_options_str;
             sel_operational.onchange = function(){filterFunc()};
             operational_options_str  += '<option value="Active">Active</option>';
             operational_options_str  += '<option value="Inactive">Inactive</option>';
@@ -830,7 +831,8 @@
             sel_station_type.multiple = true;
             sel_station_type.size = 10;
             sel_station_type.id = "sel_station_type";
-            var station_type_options_str = "<option value='' unselected></option>";
+            //var station_type_options_str = "<option value='' unselected></option>";
+            var station_type_options_str;
             sel_station_type.onchange = function(){filterFunc()};
             station_type_options_str  += '<option value="Automated Weather Observing System">Automated Weather Observing System</option>';
             station_type_options_str  += '<option value="Coastal-Marine Automated Network">Coastal-Marine Automated Network</option>';
@@ -875,7 +877,8 @@
             sel_owner.multiple = true;
             sel_owner.size = 10;
             sel_owner.id = "sel_owner";
-            var owner_options_str = "<option value='' unselected></option>";
+            //var owner_options_str = "<option value='' unselected></option>";
+            var owner_options_str;
             sel_owner.onchange = function(){filterFunc()};
             owner_options_str  += '<option value="Alaska Avalanche Information Center">Alaska Avalanche Information Center</option>';
             owner_options_str  += '<option value="Alaska Department of Transportation">Alaska Department of Transportation</option>';
