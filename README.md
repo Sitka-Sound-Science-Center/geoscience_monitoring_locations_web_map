@@ -3,7 +3,7 @@
 ### About
 This is an interactive web map of environmental monitoring locations in Southeast Alaska. The map aims to shed light on the different types of monitoring stations in the region, the usage of the monitoring stations, and other descriptive information about the locations. We hope this map allows you to make connections, draw conclusions, and explore Southeast Alaska in new ways! 
 
-![Screenshot 2024-07-16 113256](https://github.com/user-attachments/assets/f6ea353e-4d0b-41f9-85cf-7adc60461007)
+![Screenshot 2024-07-19 104659](https://github.com/user-attachments/assets/1bb9f971-0174-49b4-b1fc-11cec04eaf24)
 
 #### Features
 ##### Upper Left-Hand Corner: 
