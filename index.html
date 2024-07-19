@@ -724,10 +724,6 @@
         }
             document.getElementById("menu").appendChild(
                 document.createElement("div"));
-            var lab_project = document.createElement('div');
-            lab_project.innerHTML = 'Project';
-            lab_project.className = 'filterlabel';
-            div_project.appendChild(lab_project);
             var div_project = document.createElement('div');
             div_project.id = "div_project";
             div_project.className= "filterselect";
@@ -778,10 +774,10 @@
             project_options_str  += '<option value="Yellow-cedar common garden">Yellow-cedar common garden</option>';
             sel_project.innerHTML = project_options_str;
             div_project.appendChild(sel_project);
-            /*var lab_project = document.createElement('div');
+            var lab_project = document.createElement('div');
             lab_project.innerHTML = 'Project';
             lab_project.className = 'filterlabel';
-            div_project.appendChild(lab_project); */
+            div_project.appendChild(lab_project); 
             var reset_project = document.createElement('div');
             reset_project.innerHTML = 'Clear Filter';
             reset_project.className = 'filterlabel';
