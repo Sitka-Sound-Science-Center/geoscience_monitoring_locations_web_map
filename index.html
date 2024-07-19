@@ -732,7 +732,7 @@
             sel_project.multiple = true;
             sel_project.size = 10;
             sel_project.id = "sel_project";
-            var project_options_str = "<option value='' unselected></option>";
+            var project_options_str = "<option value='NULL' unselected></option>"; // from '' to NULL ESN
             sel_project.onchange = function(){filterFunc()};
             project_options_str  += '<option value="Airport">Airport</option>';
             project_options_str  += '<option value="Alaska Road Weather Information System">Alaska Road Weather Information System</option>';
@@ -806,7 +806,7 @@
             sel_operational.innerHTML = operational_options_str;
             div_operational.appendChild(sel_operational);
             var lab_operational = document.createElement('div');
-            lab_operational.innerHTML = 'Operational';
+            lab_operational.innerHTML = 'Operational Status';
             lab_operational.className = 'filterlabel';
             div_operational.appendChild(lab_operational);
             var reset_operational = document.createElement('div');
