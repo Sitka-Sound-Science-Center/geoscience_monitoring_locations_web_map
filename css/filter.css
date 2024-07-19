@@ -48,9 +48,9 @@
 .filterlabel + .filterlabel {
     clear: none;
     text-align: center;
-    color: black;
+    color: rgb(85, 83, 83);
     font-weight: bold;
-    border: 1px solid black;
+    border: 1px solid rgb(85, 83, 83);
 }
 .slider {
   font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
