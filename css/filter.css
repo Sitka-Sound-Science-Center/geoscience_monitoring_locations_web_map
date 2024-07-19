@@ -47,10 +47,10 @@
 }
 .filterlabel + .filterlabel {
     clear: none;
-    text-align: right;
+    text-align: center;
     color: black;
     font-weight: bold;
-    border: 2px solid black;
+    border: 1px solid black;
 }
 .slider {
   font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
