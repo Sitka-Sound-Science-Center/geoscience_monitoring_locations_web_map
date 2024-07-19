@@ -23,7 +23,9 @@ This is an interactive web map of environmental monitoring locations in Southeas
 - Layers
   - Categorize monitoring locations by the status of the location (Active or Inactive)
   - Change the background layer preferences
-![Screenshot 2024-07-16 113358](https://github.com/user-attachments/assets/fac6a86f-69ba-4ec8-9302-69a998fb52f9)
+
+![Screenshot 2024-07-19 104827](https://github.com/user-attachments/assets/83eeb097-7079-40f0-8bb1-b094c785f5d6)
+
 
 ##### Right-Hand Side:
 -Filter the map by Project, Station Type, Operational Status, and/or Owner.
