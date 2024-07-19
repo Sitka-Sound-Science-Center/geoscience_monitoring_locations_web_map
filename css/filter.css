@@ -38,6 +38,7 @@
 }
 .filterlabel {
     font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
+    font-weight: bold;
     /*width: 50%;
     float: right;*/
     margin-right: 10px;
