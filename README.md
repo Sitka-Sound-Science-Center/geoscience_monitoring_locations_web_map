@@ -12,11 +12,9 @@ This is an interactive web map of environmental monitoring locations in Southeas
 - Click the minus (-) sign to zoom out
 - Click the raindrop symbol to show your location on the map and find monitoring locations around you
 - Click the ruler to measure the distance between two points on the map
-  
-![Screenshot 2024-07-16 114155](https://github.com/user-attachments/assets/33991910-5859-4267-b350-fe167f599be5)
-
 - Click the binoculars to search by monitoring location names
-  
+![Screenshot 2024-08-16 120526](https://github.com/user-attachments/assets/cdff689a-a780-40f5-b3e0-f5592cd6ff3e)
+
 ![Screenshot 2024-07-16 113821](https://github.com/user-attachments/assets/e30fc4f9-23ab-42ff-8a9e-fff353a96230)
 
 ##### Upper Right-Hand Corner:
