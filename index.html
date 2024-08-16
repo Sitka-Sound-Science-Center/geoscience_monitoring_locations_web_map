@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="css/fontawesome-all.min.css">
         <link rel="stylesheet" href="css/leaflet-search.css">
         <link rel="stylesheet" href="css/filter.css">
+        <link rel="stylesheet" href="css/splashscreen.css">
 <link rel="stylesheet" href="css/nouislider.min.css">
         <link rel="stylesheet" href="css/leaflet-measure.css">
         <style>
@@ -26,6 +27,52 @@
         <title>Southeast Alaska Environmental Monitoring Locations</title>
     </head>
     <body>
+
+
+        <div class= "container">
+            <div class="popup">
+                <div class="popup-layer"></div>
+                <div class="main-popup">
+                    <div class="popup-content">
+                        <!--<span class="close-popup">&times;</span>-->
+                        <h3 class="center">Southeast Alaska Environmental Monitoring Locations<br>Web Application</h3>
+                        <img src=".\images\sssc_logo.png" alt="Sitka Sound Science Center Logo" class="image-center">
+                         <p>Please hover over the "i" in the left hand corner of map for more information or visit the <a href="https://github.com/Sitka-Sound-Science-Center/monitoring_locations_web_map">GitHub Repository </a> for updated information. 
+                            <br>Email Ella Neumann at <a href="mailto:eneumann@sitkascience.org">eneumann@sitkascience.org</a> with questions, comments, or suggestions regarding the map.
+                        </p> 
+
+                        <p>Disclaimer: Data collected from a variety of sources and thus may not be fully up to date, accurate, and comprehensive.</p>
+                        <!--<h5>We hope this map allows you to make connections, draw conclusions, and explore Southeast Alaska in new ways!<br>
+                            Deliverable for a USGS Landslide Monitoring and Risk Reduction Grant. Data have been provided by or collected from the National Weather Service, US National Forest Services, MesoWest, and other public data repositories.
+                            <br>Map created by Sitka Sound Science Center Data Manager Ella Neumann. 
+                            <br>Please email Ella at <a href="mailto:eneumann@sitkascience.org">eneumann@sitkascience.org</a> with questions, comments, or suggestions regarding the map. </h5>
+                        <h4>Upper Left-Hand Corner:</h4>
+                        <ul>
+                            <li>Click the plus (+) sign to zoom in</li>
+                            <li>Click the minus (-) sign to zoom out</li>
+                            <li>Click the raindrop symbol to show your location on the map and find monitoring locations around you</li>
+                            <li>Click the ruler to measure the distance between two points on the map</li>
+                            <li>Click the binoculars to search by monitoring location names</li>
+                        </ul> 
+                        <h4>Upper Right-Hand Corner:</h4>
+                        <ul>
+                            <li>Layers</li>
+                            <ul>
+                                <li>Categorize monitoring locations by station owners or by the status of the location</li>
+                                <li>Change the background layer preferences</li>
+                              </ul>
+                        </ul>   
+                        <h4>Right-Hand Side:</h4>
+                        <ul>
+                            <li>Filter the map by a plethora of values</li>
+                        </ul>  -->
+                        <h4>Click on the map below to start exploring!</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="splashscreen.js"></script>
+
         <div id="map">
         </div>
         <script src="js/qgis2web_expressions.js"></script>
@@ -44,8 +91,8 @@
         <script src="js/tailDT.js"></script>
 <script src="js/nouislider.min.js"></script>
 <script src="js/wNumb.js"></script>
-        <script src="data/MonitoringLocationscopy_2.js"></script>
-        <script src="data/MonitoringLocations_3.js"></script>
+        <script src="data/MonitoringLocationsStationOwner_1.js"></script>
+        <script src="data/MonitoringLocationsOperationalStatus_2.js"></script>
         <script>
         var highlightLayer;
         function highlightFeature(e) {
@@ -64,7 +111,7 @@
         }
         var map = L.map('map', {
             zoomControl:false, maxZoom:28, minZoom:1
-        }).fitBounds([[53.92454194852394,-147.4774264939473],[60.74733790865237,-124.26315393949069]]);
+        })
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -143,33 +190,24 @@
         document.getElementsByClassName('leaflet-control-measure-toggle')[0].className += ' fas fa-ruler';
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
+            if (bounds_group.getLayers().length) {
+                map.fitBounds(bounds_group.getBounds());
+            }
         }
-        map.createPane('pane_Positronretina_0');
-        map.getPane('pane_Positronretina_0').style.zIndex = 400;
-        var layer_Positronretina_0 = L.tileLayer('https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png', {
-            pane: 'pane_Positronretina_0',
+        map.createPane('pane_TopographicMapBackground_0');
+        map.getPane('pane_TopographicMapBackground_0').style.zIndex = 400;
+        var layer_TopographicMapBackground_0 = L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+            pane: 'pane_TopographicMapBackground_0',
             opacity: 1.0,
-            attribution: '<a href="https://cartodb.com/basemaps/">Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.</a>',
+            attribution: '',
             minZoom: 1,
             maxZoom: 28,
             minNativeZoom: 0,
             maxNativeZoom: 20
         });
-        layer_Positronretina_0;
-        map.createPane('pane_OSMStandard_1');
-        map.getPane('pane_OSMStandard_1').style.zIndex = 401;
-        var layer_OSMStandard_1 = L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            pane: 'pane_OSMStandard_1',
-            opacity: 1.0,
-            attribution: '<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors, CC-BY-SA</a>',
-            minZoom: 1,
-            maxZoom: 28,
-            minNativeZoom: 0,
-            maxNativeZoom: 19
-        });
-        layer_OSMStandard_1;
-        map.addLayer(layer_OSMStandard_1);
-        function pop_MonitoringLocationscopy_2(feature, layer) {
+        layer_TopographicMapBackground_0;
+        map.addLayer(layer_TopographicMapBackground_0);
+        function pop_MonitoringLocationsStationOwner_1(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -198,8 +236,8 @@
                         <td class="visible-with-data" id="owner_2">' + (feature.properties['owner_2'] !== null ? autolinker.link(feature.properties['owner_2'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Station Type</th>\
-                        <td>' + (feature.properties['station_type'] !== null ? autolinker.link(feature.properties['station_type'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Maintainer</th>\
+                        <td class="visible-with-data" id="maintainer">' + (feature.properties['maintainer'] !== null ? autolinker.link(feature.properties['maintainer'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Project</th>\
@@ -226,20 +264,52 @@
                         <td>' + (feature.properties['transmit_time'] !== null ? autolinker.link(feature.properties['transmit_time'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Operational</th>\
-                        <td>' + (feature.properties['operational'] !== null ? autolinker.link(feature.properties['operational'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">operational</th>\
+                        <td class="visible-with-data" id="operational">' + (feature.properties['operational'] !== null ? autolinker.link(feature.properties['operational'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">MesoWest Link</th>\
                         <td>' + (feature.properties['mesowest_link'] !== null ? autolinker.link(feature.properties['mesowest_link'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Data Provider</th>\
-                        <td>' + (feature.properties['data_provider'] !== null ? autolinker.link(feature.properties['data_provider'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Station Type</th>\
+                        <td>' + (feature.properties['station_type'] !== null ? autolinker.link(feature.properties['station_type'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Hydrologic</th>\
+                        <td>' + (feature.properties['hydrologic'] !== null ? autolinker.link(feature.properties['hydrologic'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Weather</th>\
+                        <td class="visible-with-data" id="weather">' + (feature.properties['weather'] !== null ? autolinker.link(feature.properties['weather'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Coastal</th>\
+                        <td class="visible-with-data" id="coastal">' + (feature.properties['coastal'] !== null ? autolinker.link(feature.properties['coastal'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Experimental Plot</th>\
+                        <td class="visible-with-data" id="experimental_plot">' + (feature.properties['experimental_plot'] !== null ? autolinker.link(feature.properties['experimental_plot'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Seismometer</th>\
+                        <td class="visible-with-data" id="seismometer">' + (feature.properties['seismometer'] !== null ? autolinker.link(feature.properties['seismometer'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Satellite</th>\
+                        <td class="visible-with-data" id="satellite">' + (feature.properties['satellite'] !== null ? autolinker.link(feature.properties['satellite'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Precipitation</th>\
+                        <td>' + (feature.properties['precipitation'] !== null ? autolinker.link(feature.properties['precipitation'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Temperature</th>\
                         <td>' + (feature.properties['temperature'] !== null ? autolinker.link(feature.properties['temperature'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Data Provider</th>\
+                        <td>' + (feature.properties['data_provider'] !== null ? autolinker.link(feature.properties['data_provider'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Dew Point</th>\
@@ -268,10 +338,6 @@
                     <tr>\
                         <th scope="row">Altimeter Reading</th>\
                         <td>' + (feature.properties['altimeter_reading'] !== null ? autolinker.link(feature.properties['altimeter_reading'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Precipitation</th>\
-                        <td>' + (feature.properties['precipitation'] !== null ? autolinker.link(feature.properties['precipitation'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Snow Amount</th>\
@@ -333,12 +399,12 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_MonitoringLocationscopy_2_0(feature) {
-            switch(String(feature.properties['operational'])) {
-                case 'Active':
+        function style_MonitoringLocationsStationOwner_1_0(feature) {
+            switch(String(feature.properties['owner'])) {
+                case 'Alaska Avalanche Information Center':
                     return {
-                pane: 'pane_MonitoringLocationscopy_2',
-                radius: 8.0,
+                pane: 'pane_MonitoringLocationsStationOwner_1',
+                radius: 6.0,
                 opacity: 1,
                 color: 'rgba(255,255,255,1.0)',
                 dashArray: '',
@@ -347,14 +413,789 @@
                 weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(33,165,13,1.0)',
+                fillColor: 'rgba(116,203,87,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Alaska Department of Transportation':
+                    return {
+                pane: 'pane_MonitoringLocationsStationOwner_1',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(19,59,234,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Alaska Division of Geological & Geophysical Surveys':
+                    return {
+                pane: 'pane_MonitoringLocationsStationOwner_1',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(85,221,169,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Alaska Electric Light and Power Company':
+                    return {
+                pane: 'pane_MonitoringLocationsStationOwner_1',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(118,31,206,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Constantine Mine':
+                    return {
+                pane: 'pane_MonitoringLocationsStationOwner_1',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(115,226,35,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Eaglecrest':
+                    return {
+                pane: 'pane_MonitoringLocationsStationOwner_1',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(188,240,33,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Environment Canada':
+                    return {
+                pane: 'pane_MonitoringLocationsStationOwner_1',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(72,204,221,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Federal Aviation Administration':
+                    return {
+                pane: 'pane_MonitoringLocationsStationOwner_1',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(205,172,82,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Haight & Associates Inc':
+                    return {
+                pane: 'pane_MonitoringLocationsStationOwner_1',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(221,232,67,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Incorporated Research Institutions for Seismology':
+                    return {
+                pane: 'pane_MonitoringLocationsStationOwner_1',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(50,226,217,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Jeff Meucci':
+                    return {
+                pane: 'pane_MonitoringLocationsStationOwner_1',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(104,238,162,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Juneau Weather Forecast Office':
+                    return {
+                pane: 'pane_MonitoringLocationsStationOwner_1',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(67,117,203,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Ketchikan Public Utilities':
+                    return {
+                pane: 'pane_MonitoringLocationsStationOwner_1',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(119,121,203,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Marine Exchange of Alaska':
+                    return {
+                pane: 'pane_MonitoringLocationsStationOwner_1',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(92,159,218,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Metlakatla Indian Community':
+                    return {
+                pane: 'pane_MonitoringLocationsStationOwner_1',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(203,18,203,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'National Data Buoy Center':
+                    return {
+                pane: 'pane_MonitoringLocationsStationOwner_1',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(212,114,232,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'National Oceanic and Atmospheric Administration':
+                    return {
+                pane: 'pane_MonitoringLocationsStationOwner_1',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(159,123,235,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'National Park Service':
+                    return {
+                pane: 'pane_MonitoringLocationsStationOwner_1',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(214,76,141,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'National Tsunami Warning Center (NTWC)':
+                    return {
+                pane: 'pane_MonitoringLocationsStationOwner_1',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,110,36,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'National Weather Service':
+                    return {
+                pane: 'pane_MonitoringLocationsStationOwner_1',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(70,210,84,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Natural Resources Conservation Service':
+                    return {
+                pane: 'pane_MonitoringLocationsStationOwner_1',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(105,173,202,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Private':
+                    return {
+                pane: 'pane_MonitoringLocationsStationOwner_1',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(219,134,23,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Sitka Sound Science Center':
+                    return {
+                pane: 'pane_MonitoringLocationsStationOwner_1',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(203,75,39,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Southeast Alaska Power Agency':
+                    return {
+                pane: 'pane_MonitoringLocationsStationOwner_1',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(69,210,59,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'The Bureau of Land Management':
+                    return {
+                pane: 'pane_MonitoringLocationsStationOwner_1',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(170,87,211,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'U.S. Department of the Interior':
+                    return {
+                pane: 'pane_MonitoringLocationsStationOwner_1',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(49,205,171,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'U.S. Forest Service':
+                    return {
+                pane: 'pane_MonitoringLocationsStationOwner_1',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(21,208,71,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'U.S. Geological Survey':
+                    return {
+                pane: 'pane_MonitoringLocationsStationOwner_1',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(152,218,61,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'University Corporation for Atmospheric Research':
+                    return {
+                pane: 'pane_MonitoringLocationsStationOwner_1',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(219,70,115,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'University of Alaska Southeast':
+                    return {
+                pane: 'pane_MonitoringLocationsStationOwner_1',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(236,223,102,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Unknown':
+                    return {
+                pane: 'pane_MonitoringLocationsStationOwner_1',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(223,130,204,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'USArray':
+                    return {
+                pane: 'pane_MonitoringLocationsStationOwner_1',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(148,132,236,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Ward Cove Group':
+                    return {
+                pane: 'pane_MonitoringLocationsStationOwner_1',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(231,55,167,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Yukon Avalanche Association':
+                    return {
+                pane: 'pane_MonitoringLocationsStationOwner_1',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(240,72,63,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_MonitoringLocationsStationOwner_1',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(229,24,48,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_MonitoringLocationsStationOwner_1');
+        map.getPane('pane_MonitoringLocationsStationOwner_1').style.zIndex = 401;
+        map.getPane('pane_MonitoringLocationsStationOwner_1').style['mix-blend-mode'] = 'normal';
+        var layer_MonitoringLocationsStationOwner_1 = new L.geoJson(json_MonitoringLocationsStationOwner_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_MonitoringLocationsStationOwner_1',
+            layerName: 'layer_MonitoringLocationsStationOwner_1',
+            pane: 'pane_MonitoringLocationsStationOwner_1',
+            onEachFeature: pop_MonitoringLocationsStationOwner_1,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_MonitoringLocationsStationOwner_1_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_MonitoringLocationsStationOwner_1);
+        function pop_MonitoringLocationsOperationalStatus_2(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (var i in e.target._eventParents) {
+                        if (typeof e.target._eventParents[i].resetStyle === 'function') {
+                            e.target._eventParents[i].resetStyle(e.target);
+                        }
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Station Name</th>\
+                        <td>' + (feature.properties['station_name'] !== null ? autolinker.link(feature.properties['station_name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Station ID</th>\
+                        <td>' + (feature.properties['station_id'] !== null ? autolinker.link(feature.properties['station_id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Owner</th>\
+                        <td>' + (feature.properties['owner'] !== null ? autolinker.link(feature.properties['owner'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row"> </th>\
+                        <td class="visible-with-data" id="owner_2">' + (feature.properties['owner_2'] !== null ? autolinker.link(feature.properties['owner_2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Maintainer</th>\
+                        <td class="visible-with-data" id="maintainer">' + (feature.properties['maintainer'] !== null ? autolinker.link(feature.properties['maintainer'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Project</th>\
+                        <td>' + (feature.properties['project'] !== null ? autolinker.link(feature.properties['project'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Real Time</th>\
+                        <td>' + (feature.properties['real_time'] !== null ? autolinker.link(feature.properties['real_time'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Latitude</th>\
+                        <td>' + (feature.properties['latitude'] !== null ? autolinker.link(feature.properties['latitude'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Longitude</th>\
+                        <td>' + (feature.properties['longitude'] !== null ? autolinker.link(feature.properties['longitude'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Elevation (ft) </th>\
+                        <td>' + (feature.properties['elevation_ft'] !== null ? autolinker.link(feature.properties['elevation_ft'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Transmit Time</th>\
+                        <td>' + (feature.properties['transmit_time'] !== null ? autolinker.link(feature.properties['transmit_time'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Operational</th>\
+                        <td class="visible-with-data" id="operational">' + (feature.properties['operational'] !== null ? autolinker.link(feature.properties['operational'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">MesoWest Link</th>\
+                        <td>' + (feature.properties['mesowest_link'] !== null ? autolinker.link(feature.properties['mesowest_link'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Station Type</th>\
+                        <td>' + (feature.properties['station_type'] !== null ? autolinker.link(feature.properties['station_type'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Hydrologic</th>\
+                        <td>' + (feature.properties['hydrologic'] !== null ? autolinker.link(feature.properties['hydrologic'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Weather</th>\
+                        <td class="visible-with-data" id="weather">' + (feature.properties['weather'] !== null ? autolinker.link(feature.properties['weather'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Coastal</th>\
+                        <td class="visible-with-data" id="coastal">' + (feature.properties['coastal'] !== null ? autolinker.link(feature.properties['coastal'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Experimental Plot</th>\
+                        <td class="visible-with-data" id="experimental_plot">' + (feature.properties['experimental_plot'] !== null ? autolinker.link(feature.properties['experimental_plot'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Seismometer</th>\
+                        <td class="visible-with-data" id="seismometer">' + (feature.properties['seismometer'] !== null ? autolinker.link(feature.properties['seismometer'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Satellite</th>\
+                        <td class="visible-with-data" id="satellite">' + (feature.properties['satellite'] !== null ? autolinker.link(feature.properties['satellite'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Precipitation</th>\
+                        <td>' + (feature.properties['precipitation'] !== null ? autolinker.link(feature.properties['precipitation'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Temperature</th>\
+                        <td>' + (feature.properties['temperature'] !== null ? autolinker.link(feature.properties['temperature'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Data Provider</th>\
+                        <td>' + (feature.properties['data_provider'] !== null ? autolinker.link(feature.properties['data_provider'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Dew Point</th>\
+                        <td>' + (feature.properties['dew_point'] !== null ? autolinker.link(feature.properties['dew_point'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Wind</th>\
+                        <td>' + (feature.properties['wind'] !== null ? autolinker.link(feature.properties['wind'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Visability</th>\
+                        <td>' + (feature.properties['visability'] !== null ? autolinker.link(feature.properties['visability'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Sky Conditions</th>\
+                        <td>' + (feature.properties['sky_conditions'] !== null ? autolinker.link(feature.properties['sky_conditions'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Sea Level Pressure</th>\
+                        <td>' + (feature.properties['sea_level_pressure'] !== null ? autolinker.link(feature.properties['sea_level_pressure'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Wave Swell Height</th>\
+                        <td>' + (feature.properties['wave_swell_height'] !== null ? autolinker.link(feature.properties['wave_swell_height'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Altimeter Reading</th>\
+                        <td>' + (feature.properties['altimeter_reading'] !== null ? autolinker.link(feature.properties['altimeter_reading'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Snow Amount</th>\
+                        <td>' + (feature.properties['snow_amount'] !== null ? autolinker.link(feature.properties['snow_amount'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Heated</th>\
+                        <td>' + (feature.properties['heated'] !== null ? autolinker.link(feature.properties['heated'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Seasonal</th>\
+                        <td>' + (feature.properties['seasonal'] !== null ? autolinker.link(feature.properties['seasonal'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Used for Forecasting?</th>\
+                        <td>' + (feature.properties['reliable_forcsting'] !== null ? autolinker.link(feature.properties['reliable_forcsting'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Precipitation Used for Forecasting?</th>\
+                        <td>' + (feature.properties['precip_reliable'] !== null ? autolinker.link(feature.properties['precip_reliable'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Temperature Used for Forecasting?</th>\
+                        <td>' + (feature.properties['temp_reliable'] !== null ? autolinker.link(feature.properties['temp_reliable'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Wind Used for Forcasting?</th>\
+                        <td>' + (feature.properties['wind_reliable'] !== null ? autolinker.link(feature.properties['wind_reliable'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Dew Point Used for Forcasting?</th>\
+                        <td>' + (feature.properties['dewpoint_reliable'] !== null ? autolinker.link(feature.properties['dewpoint_reliable'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Additional Information</th>\
+                        <td>' + (feature.properties['additional_information'] !== null ? autolinker.link(feature.properties['additional_information'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Web Link</th>\
+                        <td>' + (feature.properties['web_link'] !== null ? autolinker.link(feature.properties['web_link'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Contact Person</th>\
+                        <td>' + (feature.properties['contact_person'] !== null ? autolinker.link(feature.properties['contact_person'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Contact Email</th>\
+                        <td>' + (feature.properties['contact_email'] !== null ? autolinker.link(feature.properties['contact_email'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Device Specific Details</th>\
+                        <td>' + (feature.properties['device_specific_details'] !== null ? autolinker.link(feature.properties['device_specific_details'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+			layer.on('popupopen', function(e) {
+				addClassToPopupIfMedia(content, e.popup);
+			});
+			layer.bindPopup(content, { maxHeight: 400 });
+        }
+
+        function style_MonitoringLocationsOperationalStatus_2_0(feature) {
+            switch(String(feature.properties['operational'])) {
+                case 'Active':
+                    return {
+                pane: 'pane_MonitoringLocationsOperationalStatus_2',
+                radius: 7.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(69,147,53,1.0)',
                 interactive: true,
             }
                     break;
                 case 'Inactive':
                     return {
-                pane: 'pane_MonitoringLocationscopy_2',
-                radius: 8.0,
+                pane: 'pane_MonitoringLocationsOperationalStatus_2',
+                radius: 7.0,
                 opacity: 1,
                 color: 'rgba(255,255,255,1.0)',
                 dashArray: '',
@@ -369,232 +1210,31 @@
                     break;
             }
         }
-        map.createPane('pane_MonitoringLocationscopy_2');
-        map.getPane('pane_MonitoringLocationscopy_2').style.zIndex = 402;
-        map.getPane('pane_MonitoringLocationscopy_2').style['mix-blend-mode'] = 'normal';
-        var layer_MonitoringLocationscopy_2 = new L.geoJson(json_MonitoringLocationscopy_2, {
+        map.createPane('pane_MonitoringLocationsOperationalStatus_2');
+        map.getPane('pane_MonitoringLocationsOperationalStatus_2').style.zIndex = 402;
+        map.getPane('pane_MonitoringLocationsOperationalStatus_2').style['mix-blend-mode'] = 'normal';
+        var layer_MonitoringLocationsOperationalStatus_2 = new L.geoJson(json_MonitoringLocationsOperationalStatus_2, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_MonitoringLocationscopy_2',
-            layerName: 'layer_MonitoringLocationscopy_2',
-            pane: 'pane_MonitoringLocationscopy_2',
-            onEachFeature: pop_MonitoringLocationscopy_2,
+            dataVar: 'json_MonitoringLocationsOperationalStatus_2',
+            layerName: 'layer_MonitoringLocationsOperationalStatus_2',
+            pane: 'pane_MonitoringLocationsOperationalStatus_2',
+            onEachFeature: pop_MonitoringLocationsOperationalStatus_2,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_MonitoringLocationscopy_2_0(feature));
+                return L.circleMarker(latlng, style_MonitoringLocationsOperationalStatus_2_0(feature));
             },
         });
-        bounds_group.addLayer(layer_MonitoringLocationscopy_2);
-        map.addLayer(layer_MonitoringLocationscopy_2);
-        function pop_MonitoringLocations_3(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    for (var i in e.target._eventParents) {
-                        if (typeof e.target._eventParents[i].resetStyle === 'function') {
-                            e.target._eventParents[i].resetStyle(e.target);
-                        }
-                    }
-                },
-                mouseover: highlightFeature,
-            });
-            var popupContent = '<table>\
-                    <tr>\
-                        <th scope="row">Station Name</th>\
-                        <td>' + (feature.properties['station_name'] !== null ? autolinker.link(feature.properties['station_name'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Station ID</th>\
-                        <td>' + (feature.properties['station_id'] !== null ? autolinker.link(feature.properties['station_id'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Owner</th>\
-                        <td>' + (feature.properties['owner'] !== null ? autolinker.link(feature.properties['owner'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row"> </th>\
-                        <td class="visible-with-data" id="owner_2">' + (feature.properties['owner_2'] !== null ? autolinker.link(feature.properties['owner_2'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Station Type</th>\
-                        <td>' + (feature.properties['station_type'] !== null ? autolinker.link(feature.properties['station_type'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Project</th>\
-                        <td>' + (feature.properties['project'] !== null ? autolinker.link(feature.properties['project'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Real Time</th>\
-                        <td>' + (feature.properties['real_time'] !== null ? autolinker.link(feature.properties['real_time'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Latitude</th>\
-                        <td>' + (feature.properties['latitude'] !== null ? autolinker.link(feature.properties['latitude'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Longitude</th>\
-                        <td>' + (feature.properties['longitude'] !== null ? autolinker.link(feature.properties['longitude'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Elevation (ft) </th>\
-                        <td>' + (feature.properties['elevation_ft'] !== null ? autolinker.link(feature.properties['elevation_ft'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Transmit Time</th>\
-                        <td>' + (feature.properties['transmit_time'] !== null ? autolinker.link(feature.properties['transmit_time'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Operational</th>\
-                        <td>' + (feature.properties['operational'] !== null ? autolinker.link(feature.properties['operational'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">MesoWest Link</th>\
-                        <td>' + (feature.properties['mesowest_link'] !== null ? autolinker.link(feature.properties['mesowest_link'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Data Provider</th>\
-                        <td>' + (feature.properties['data_provider'] !== null ? autolinker.link(feature.properties['data_provider'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Temperature</th>\
-                        <td>' + (feature.properties['temperature'] !== null ? autolinker.link(feature.properties['temperature'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Dew Point</th>\
-                        <td>' + (feature.properties['dew_point'] !== null ? autolinker.link(feature.properties['dew_point'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Wind</th>\
-                        <td>' + (feature.properties['wind'] !== null ? autolinker.link(feature.properties['wind'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Visability</th>\
-                        <td>' + (feature.properties['visability'] !== null ? autolinker.link(feature.properties['visability'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Sky Conditions</th>\
-                        <td>' + (feature.properties['sky_conditions'] !== null ? autolinker.link(feature.properties['sky_conditions'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Sea Level Pressure</th>\
-                        <td>' + (feature.properties['sea_level_pressure'] !== null ? autolinker.link(feature.properties['sea_level_pressure'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Wave Swell Height</th>\
-                        <td>' + (feature.properties['wave_swell_height'] !== null ? autolinker.link(feature.properties['wave_swell_height'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Altimeter Reading</th>\
-                        <td>' + (feature.properties['altimeter_reading'] !== null ? autolinker.link(feature.properties['altimeter_reading'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Precipitation</th>\
-                        <td>' + (feature.properties['precipitation'] !== null ? autolinker.link(feature.properties['precipitation'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Snow Amount</th>\
-                        <td>' + (feature.properties['snow_amount'] !== null ? autolinker.link(feature.properties['snow_amount'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Heated</th>\
-                        <td>' + (feature.properties['heated'] !== null ? autolinker.link(feature.properties['heated'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Seasonal</th>\
-                        <td>' + (feature.properties['seasonal'] !== null ? autolinker.link(feature.properties['seasonal'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Used for Forecasting?</th>\
-                        <td>' + (feature.properties['reliable_forcsting'] !== null ? autolinker.link(feature.properties['reliable_forcsting'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Precipitation Used for Forecasting?</th>\
-                        <td>' + (feature.properties['precip_reliable'] !== null ? autolinker.link(feature.properties['precip_reliable'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Temperature Used for Forecasting?</th>\
-                        <td>' + (feature.properties['temp_reliable'] !== null ? autolinker.link(feature.properties['temp_reliable'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Wind Used for Forcasting?</th>\
-                        <td>' + (feature.properties['wind_reliable'] !== null ? autolinker.link(feature.properties['wind_reliable'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Dew Point Used for Forcasting?</th>\
-                        <td>' + (feature.properties['dewpoint_reliable'] !== null ? autolinker.link(feature.properties['dewpoint_reliable'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Additional Information</th>\
-                        <td>' + (feature.properties['additional_information'] !== null ? autolinker.link(feature.properties['additional_information'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Web Link</th>\
-                        <td>' + (feature.properties['web_link'] !== null ? autolinker.link(feature.properties['web_link'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Contact Person</th>\
-                        <td>' + (feature.properties['contact_person'] !== null ? autolinker.link(feature.properties['contact_person'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Contact Email</th>\
-                        <td>' + (feature.properties['contact_email'] !== null ? autolinker.link(feature.properties['contact_email'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Device Specific Details</th>\
-                        <td>' + (feature.properties['device_specific_details'] !== null ? autolinker.link(feature.properties['device_specific_details'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
-			layer.on('popupopen', function(e) {
-				addClassToPopupIfMedia(content, e.popup);
-			});
-			layer.bindPopup(content, { maxHeight: 400 });
-        }
-
-        function style_MonitoringLocations_3_0() {
-            return {
-                pane: 'pane_MonitoringLocations_3',
-                radius: 4.0,
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(247,133,207,1.0)',
-                interactive: true,
-            }
-        }
-        map.createPane('pane_MonitoringLocations_3');
-        map.getPane('pane_MonitoringLocations_3').style.zIndex = 403;
-        map.getPane('pane_MonitoringLocations_3').style['mix-blend-mode'] = 'normal';
-        var layer_MonitoringLocations_3 = new L.geoJson(json_MonitoringLocations_3, {
-            attribution: '',
-            interactive: true,
-            dataVar: 'json_MonitoringLocations_3',
-            layerName: 'layer_MonitoringLocations_3',
-            pane: 'pane_MonitoringLocations_3',
-            onEachFeature: pop_MonitoringLocations_3,
-            pointToLayer: function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.circleMarker(latlng, style_MonitoringLocations_3_0(feature));
-            },
-        });
-        bounds_group.addLayer(layer_MonitoringLocations_3);
-        map.addLayer(layer_MonitoringLocations_3);
+        bounds_group.addLayer(layer_MonitoringLocationsOperationalStatus_2);
+        map.addLayer(layer_MonitoringLocationsOperationalStatus_2);
         var baseMaps = {};
         var overlaysTree = [
-            {label: '<img src="legend/MonitoringLocations_3.png" /> Monitoring Locations', layer: layer_MonitoringLocations_3},
-            {label: 'Monitoring Locations copy<br /><table><tr><td style="text-align: center;"><img src="legend/MonitoringLocationscopy_2_Active0.png" /></td><td>Active</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationscopy_2_Inactive1.png" /></td><td>Inactive</td></tr></table>', layer: layer_MonitoringLocationscopy_2},
-            {label: "OSM Standard", layer: layer_OSMStandard_1},
-            {label: "Positron (retina)", layer: layer_Positronretina_0},]
+            {label: 'Monitoring Locations (Operational Status)<br /><table><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOperationalStatus_2_Active0.png" /></td><td>Active</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsOperationalStatus_2_Inactive1.png" /></td><td>Inactive</td></tr></table>', layer: layer_MonitoringLocationsOperationalStatus_2},
+            {label: 'Monitoring Locations (Station Owner)<br /><table><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStationOwner_1_AlaskaAvalancheInformationCenter0.png" /></td><td>Alaska Avalanche Information Center</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStationOwner_1_AlaskaDepartmentofTransportation1.png" /></td><td>Alaska Department of Transportation</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStationOwner_1_AlaskaDivisionofGeologicalGeophysicalSurveys2.png" /></td><td>Alaska Division of Geological & Geophysical Surveys</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStationOwner_1_AlaskaElectricLightandPowerCompany3.png" /></td><td>Alaska Electric Light and Power Company</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStationOwner_1_ConstantineMine4.png" /></td><td>Constantine Mine</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStationOwner_1_Eaglecrest5.png" /></td><td>Eaglecrest</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStationOwner_1_EnvironmentCanada6.png" /></td><td>Environment Canada</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStationOwner_1_FederalAviationAdministration7.png" /></td><td>Federal Aviation Administration</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStationOwner_1_HaightAssociatesInc8.png" /></td><td>Haight & Associates Inc</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStationOwner_1_IncorporatedResearchInstitutionsforSeismology9.png" /></td><td>Incorporated Research Institutions for Seismology</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStationOwner_1_JeffMeucci10.png" /></td><td>Jeff Meucci</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStationOwner_1_JuneauWeatherForecastOffice11.png" /></td><td>Juneau Weather Forecast Office</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStationOwner_1_KetchikanPublicUtilities12.png" /></td><td>Ketchikan Public Utilities</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStationOwner_1_MarineExchangeofAlaska13.png" /></td><td>Marine Exchange of Alaska</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStationOwner_1_MetlakatlaIndianCommunity14.png" /></td><td>Metlakatla Indian Community</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStationOwner_1_NationalDataBuoyCenter15.png" /></td><td>National Data Buoy Center</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStationOwner_1_NationalOceanicandAtmosphericAdministration16.png" /></td><td>National Oceanic and Atmospheric Administration</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStationOwner_1_NationalParkService17.png" /></td><td>National Park Service</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStationOwner_1_NationalTsunamiWarningCenterNTWC18.png" /></td><td>National Tsunami Warning Center (NTWC)</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStationOwner_1_NationalWeatherService19.png" /></td><td>National Weather Service</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStationOwner_1_NaturalResourcesConservationService20.png" /></td><td>Natural Resources Conservation Service</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStationOwner_1_Private21.png" /></td><td>Private</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStationOwner_1_SitkaSoundScienceCenter22.png" /></td><td>Sitka Sound Science Center</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStationOwner_1_SoutheastAlaskaPowerAgency23.png" /></td><td>Southeast Alaska Power Agency</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStationOwner_1_TheBureauofLandManagement24.png" /></td><td>The Bureau of Land Management</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStationOwner_1_USDepartmentoftheInterior25.png" /></td><td>U.S. Department of the Interior</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStationOwner_1_USForestService26.png" /></td><td>U.S. Forest Service</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStationOwner_1_USGeologicalSurvey27.png" /></td><td>U.S. Geological Survey</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStationOwner_1_UniversityCorporationforAtmosphericResearch28.png" /></td><td>University Corporation for Atmospheric Research</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStationOwner_1_UniversityofAlaskaSoutheast29.png" /></td><td>University of Alaska Southeast</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStationOwner_1_Unknown30.png" /></td><td>Unknown</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStationOwner_1_USArray31.png" /></td><td>USArray</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStationOwner_1_WardCoveGroup32.png" /></td><td>Ward Cove Group</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStationOwner_1_YukonAvalancheAssociation33.png" /></td><td>Yukon Avalanche Association</td></tr><tr><td style="text-align: center;"><img src="legend/MonitoringLocationsStationOwner_1_34.png" /></td><td></td></tr></table>', layer: layer_MonitoringLocationsStationOwner_1},
+            {label: "Topographic Map Background", layer: layer_TopographicMapBackground_0},]
         var lay = L.control.layers.tree(null, overlaysTree,{
             //namedToggle: true,
             //selectorBack: false,
@@ -607,7 +1247,7 @@
         lay.addTo(map);
         setBounds();
         map.addControl(new L.Control.Search({
-            layer: layer_MonitoringLocationscopy_2,
+            layer: layer_MonitoringLocationsOperationalStatus_2,
             initial: false,
             hideMarkerOnCollapse: true,
             propertyName: 'station_name'}));
@@ -632,7 +1272,7 @@
         document.getElementById("all").appendChild(col1);
         document.getElementById("all").appendChild(col2);
         col1.appendChild(mapDiv)
-        var Filters = {"project": "str","operational": "str","station_type": "str","owner": "str"};
+        var Filters = {"satellite": "bool","visability": "str","dewpoint_reliable": "str","owner": "str","temperature": "str","seasonal": "str","reliable_forcsting": "str","heated": "str","altimeter_reading": "str","wind": "str","wave_swell_height": "str","wind_reliable": "str","snow_amount": "str","sky_conditions": "str","precip_reliable": "str","seismometer": "str","operational": "str","coastal": "str","experimental_plot": "str","station_type": "str","hydrologic": "str","weather": "str","sea_level_pressure": "str","dew_point": "str","temp_reliable": "str","precipitation": "str"};
         function filterFunc() {
           map.eachLayer(function(lyr){
           if ("options" in lyr && "dataVar" in lyr["options"]){
@@ -724,149 +1364,99 @@
         }
             document.getElementById("menu").appendChild(
                 document.createElement("div"));
-            var div_project = document.createElement('div');
-            div_project.id = "div_project";
-            div_project.className= "filterselect";
-            document.getElementById("menu").appendChild(div_project);
-            sel_project = document.createElement('select');
-            sel_project.multiple = true;
-            sel_project.size = 10;
-            sel_project.id = "sel_project";
-            //var project_options_str = "<option value='' unselected></option>";
-            var project_options_str;
-            sel_project.onchange = function(){filterFunc()};
-            project_options_str  += '<option value="Alaska Road Weather Information System">Alaska Road Weather Information System</option>';
-            project_options_str  += '<option value="Alaska Youth Stewards">Alaska Youth Stewards</option>';
-            project_options_str  += '<option value="Alternatives to Clearcutting (ATC)">Alternatives to Clearcutting (ATC)</option>';
-            project_options_str  += '<option value="Cedar Decline">Cedar Decline</option>';
-            project_options_str  += '<option value="Coastal-Marine Automated Network">Coastal-Marine Automated Network</option>';
-            project_options_str  += '<option value="Cooperative Stand-Density Study (CSDS)">Cooperative Stand-Density Study (CSDS)</option>';
-            project_options_str  += '<option value="Davis">Davis</option>';
-            project_options_str  += '<option value="Dwarf Mistletoe Plots">Dwarf Mistletoe Plots</option>';
-            project_options_str  += '<option value="Geostationary Satellite Server">Geostationary Satellite Server</option>';
-            project_options_str  += '<option value="Heceta Commercial Thinning">Heceta Commercial Thinning</option>';
-            project_options_str  += '<option value="Hydrometeorological Automated Data System">Hydrometeorological Automated Data System</option>';
-            project_options_str  += '<option value="IGage">IGage</option>';
-            project_options_str  += '<option value="Insect Monitoring">Insect Monitoring</option>';
-            project_options_str  += '<option value="Juneau Carbon">Juneau Carbon</option>';
-            project_options_str  += '<option value="Maybeso Experimental Forest">Maybeso Experimental Forest</option>';
-            project_options_str  += '<option value="National Atmospheric Deposition Program (NADP)">National Atmospheric Deposition Program (NADP)</option>';
-            project_options_str  += '<option value="National Water Level Observation Network (NWLON)">National Water Level Observation Network (NWLON)</option>';
-            project_options_str  += '<option value="Navy Oceanographic Meteorological Automatic Device (NOMAD) buoy ">Navy Oceanographic Meteorological Automatic Device (NOMAD) buoy </option>';
-            project_options_str  += '<option value="Prince of Wales Commercial Thinning (POW-CT)">Prince of Wales Commercial Thinning (POW-CT)</option>';
-            project_options_str  += '<option value="Pruning + PCT (Petruncio-JFSL)">Pruning + PCT (Petruncio-JFSL)</option>';
-            project_options_str  += '<option value="RAMOS">RAMOS</option>';
-            project_options_str  += '<option value="Remote Automated Weather Station">Remote Automated Weather Station</option>';
-            project_options_str  += '<option value="Second Growth Management Project (SGMP)">Second Growth Management Project (SGMP)</option>';
-            project_options_str  += '<option value="Sitka Mesonet: Igage Tipping Bucket Network">Sitka Mesonet: Igage Tipping Bucket Network</option>';
-            project_options_str  += '<option value="Spruce Beetle Plots">Spruce Beetle Plots</option>';
-            project_options_str  += '<option value="Taylor Even-Age Plot">Taylor Even-Age Plot</option>';
-            project_options_str  += '<option value="The ASOS Monitoring Center (AOMC)">The ASOS Monitoring Center (AOMC)</option>';
-            project_options_str  += '<option value="Tongass-Wide Young Growth Study (TWYGS)">Tongass-Wide Young Growth Study (TWYGS)</option>';
-            project_options_str  += '<option value="U.S. Climate Reference Network">U.S. Climate Reference Network</option>';
-            project_options_str  += '<option value="University of Oregon - HOBO ONSET">University of Oregon - HOBO ONSET</option>';
-            project_options_str  += '<option value="Unknown">Unknown</option>';
-            project_options_str  += '<option value="Verstovia Extended Rotation">Verstovia Extended Rotation</option>';
-            project_options_str  += '<option value="Watershed Restoration & Ecosystem Monitoring (WREM)">Watershed Restoration & Ecosystem Monitoring (WREM)</option>';
-            project_options_str  += '<option value="Wet Soil Monitoring">Wet Soil Monitoring</option>';
-            project_options_str  += '<option value="Yellow Cedar Plantings">Yellow Cedar Plantings</option>';
-            project_options_str  += '<option value="Yellow Cedar Steckling">Yellow Cedar Steckling</option>';
-            project_options_str  += '<option value="Yellow-cedar common garden">Yellow-cedar common garden</option>';
-            sel_project.innerHTML = project_options_str;
-            div_project.appendChild(sel_project);
-            var lab_project = document.createElement('div');
-            lab_project.innerHTML = 'Project';
-            lab_project.className = 'filterlabel';
-            div_project.appendChild(lab_project); 
-            var reset_project = document.createElement('div');
-            reset_project.innerHTML = 'Clear Filter';
-            reset_project.className = 'filterlabel';
-            reset_project.onclick = function() {
-                var options = document.getElementById("sel_project").options;
+            var div_satellite = document.createElement('div');
+            div_satellite.id = "div_satellite";
+            div_satellite.className= "filterselect";
+            document.getElementById("menu").appendChild(div_satellite);
+            sel_satellite = document.createElement('select');
+            sel_satellite.multiple = true;
+            sel_satellite.size = 2;
+            sel_satellite.id = "sel_satellite";
+            var satellite_options_str;
+            sel_satellite.onchange = function(){filterFunc()};
+            satellite_options_str  += '<option value="true">Yes</option>';
+            satellite_options_str  += '<option value="false">No</option>';
+            sel_satellite.innerHTML = satellite_options_str;
+            div_satellite.appendChild(sel_satellite);
+            var lab_satellite = document.createElement('div');
+            lab_satellite.innerHTML = 'Satellite';
+            lab_satellite.className = 'filterlabel';
+            div_satellite.appendChild(lab_satellite);
+            var reset_satellite = document.createElement('div');
+            reset_satellite.innerHTML = 'clear filter';
+            reset_satellite.className = 'filterlabel';
+            reset_satellite.onclick = function() {
+                var options = document.getElementById("sel_satellite").options;
                 for (var i=0; i < options.length; i++) {
                     options[i].selected = false;
                 }
                 filterFunc();
             };
-            div_project.appendChild(reset_project);
+            div_satellite.appendChild(reset_satellite);
             document.getElementById("menu").appendChild(
                 document.createElement("div"));
-            var div_operational = document.createElement('div');
-            div_operational.id = "div_operational";
-            div_operational.className= "filterselect";
-            document.getElementById("menu").appendChild(div_operational);
-            sel_operational = document.createElement('select');
-            sel_operational.multiple = true;
-            sel_operational.size = 2;
-            sel_operational.id = "sel_operational";
-            //var operational_options_str = "<option value='' unselected></option>";
-            var operational_options_str;
-            sel_operational.onchange = function(){filterFunc()};
-            operational_options_str  += '<option value="Active">Active</option>';
-            operational_options_str  += '<option value="Inactive">Inactive</option>';
-            sel_operational.innerHTML = operational_options_str;
-            div_operational.appendChild(sel_operational);
-            var lab_operational = document.createElement('div');
-            lab_operational.innerHTML = 'Operational Status';
-            lab_operational.className = 'filterlabel';
-            div_operational.appendChild(lab_operational);
-            var reset_operational = document.createElement('div');
-            reset_operational.innerHTML = 'Clear Filter';
-            reset_operational.className = 'filterlabel';
-            reset_operational.onclick = function() {
-                var options = document.getElementById("sel_operational").options;
+            var div_visability = document.createElement('div');
+            div_visability.id = "div_visability";
+            div_visability.className= "filterselect";
+            document.getElementById("menu").appendChild(div_visability);
+            sel_visability = document.createElement('select');
+            sel_visability.multiple = true;
+            sel_visability.size = 3;
+            sel_visability.id = "sel_visability";
+            var visability_options_str;
+            sel_visability.onchange = function(){filterFunc()};
+            visability_options_str  += '<option value="No">No</option>';
+            visability_options_str  += '<option value="Unknown">Unknown</option>';
+            visability_options_str  += '<option value="Yes">Yes</option>';
+            sel_visability.innerHTML = visability_options_str;
+            div_visability.appendChild(sel_visability);
+            var lab_visability = document.createElement('div');
+            lab_visability.innerHTML = 'Visability';
+            lab_visability.className = 'filterlabel';
+            div_visability.appendChild(lab_visability);
+            var reset_visability = document.createElement('div');
+            reset_visability.innerHTML = 'clear filter';
+            reset_visability.className = 'filterlabel';
+            reset_visability.onclick = function() {
+                var options = document.getElementById("sel_visability").options;
                 for (var i=0; i < options.length; i++) {
                     options[i].selected = false;
                 }
                 filterFunc();
             };
-            div_operational.appendChild(reset_operational);
+            div_visability.appendChild(reset_visability);
             document.getElementById("menu").appendChild(
                 document.createElement("div"));
-            var div_station_type = document.createElement('div');
-            div_station_type.id = "div_station_type";
-            div_station_type.className= "filterselect";
-            document.getElementById("menu").appendChild(div_station_type);
-            sel_station_type = document.createElement('select');
-            sel_station_type.multiple = true;
-            sel_station_type.size = 10;
-            sel_station_type.id = "sel_station_type";
-            //var station_type_options_str = "<option value='' unselected></option>";
-            var station_type_options_str;
-            sel_station_type.onchange = function(){filterFunc()};
-            station_type_options_str  += '<option value="Automated Weather Observing System">Automated Weather Observing System</option>';
-            station_type_options_str  += '<option value="Coastal-Marine Automated Network">Coastal-Marine Automated Network</option>';
-            station_type_options_str  += '<option value="Dam level">Dam level</option>';
-            station_type_options_str  += '<option value="Forest Practices">Forest Practices</option>';
-            station_type_options_str  += '<option value="Geostationary Satellite Server">Geostationary Satellite Server</option>';
-            station_type_options_str  += '<option value="Rain Gauge">Rain Gauge</option>';
-            station_type_options_str  += '<option value="Rain Gauge/Piezometer">Rain Gauge/Piezometer</option>';
-            station_type_options_str  += '<option value="Seismometer">Seismometer</option>';
-            station_type_options_str  += '<option value="Snow Telemetry (SNOTEL) Network">Snow Telemetry (SNOTEL) Network</option>';
-            station_type_options_str  += '<option value="Soil Hydrology Monitoring">Soil Hydrology Monitoring</option>';
-            station_type_options_str  += '<option value="Staff Gauge">Staff Gauge</option>';
-            station_type_options_str  += '<option value="Stream Gauge">Stream Gauge</option>';
-            station_type_options_str  += '<option value="Tide Gauge">Tide Gauge</option>';
-            station_type_options_str  += '<option value="Weather Station">Weather Station</option>';
-            station_type_options_str  += '<option value="Wind Profiler">Wind Profiler</option>';
-            station_type_options_str  += '<option value="Unknown">Unknown</option>';
-            sel_station_type.innerHTML = station_type_options_str;
-            div_station_type.appendChild(sel_station_type);
-            var lab_station_type = document.createElement('div');
-            lab_station_type.innerHTML = 'Station Type';
-            lab_station_type.className = 'filterlabel';
-            div_station_type.appendChild(lab_station_type);
-            var reset_station_type = document.createElement('div');
-            reset_station_type.innerHTML = 'Clear Filter';
-            reset_station_type.className = 'filterlabel';
-            reset_station_type.onclick = function() {
-                var options = document.getElementById("sel_station_type").options;
+            var div_dewpoint_reliable = document.createElement('div');
+            div_dewpoint_reliable.id = "div_dewpoint_reliable";
+            div_dewpoint_reliable.className= "filterselect";
+            document.getElementById("menu").appendChild(div_dewpoint_reliable);
+            sel_dewpoint_reliable = document.createElement('select');
+            sel_dewpoint_reliable.multiple = true;
+            sel_dewpoint_reliable.size = 3;
+            sel_dewpoint_reliable.id = "sel_dewpoint_reliable";
+            var dewpoint_reliable_options_str;
+            sel_dewpoint_reliable.onchange = function(){filterFunc()};
+            dewpoint_reliable_options_str  += '<option value="No">No</option>';
+            dewpoint_reliable_options_str  += '<option value="Yes">Yes</option>';
+            dewpoint_reliable_options_str  += '<option value="Unknown">Unknown</option>';
+            sel_dewpoint_reliable.innerHTML = dewpoint_reliable_options_str;
+            div_dewpoint_reliable.appendChild(sel_dewpoint_reliable);
+            var lab_dewpoint_reliable = document.createElement('div');
+            lab_dewpoint_reliable.innerHTML = 'Dew Point for Forecasting?';
+            lab_dewpoint_reliable.className = 'filterlabel';
+            div_dewpoint_reliable.appendChild(lab_dewpoint_reliable);
+            var reset_dewpoint_reliable = document.createElement('div');
+            reset_dewpoint_reliable.innerHTML = 'clear filter';
+            reset_dewpoint_reliable.className = 'filterlabel';
+            reset_dewpoint_reliable.onclick = function() {
+                var options = document.getElementById("sel_dewpoint_reliable").options;
                 for (var i=0; i < options.length; i++) {
                     options[i].selected = false;
                 }
                 filterFunc();
             };
-            div_station_type.appendChild(reset_station_type);
+            div_dewpoint_reliable.appendChild(reset_dewpoint_reliable);
             document.getElementById("menu").appendChild(
                 document.createElement("div"));
             var div_owner = document.createElement('div');
@@ -877,7 +1467,6 @@
             sel_owner.multiple = true;
             sel_owner.size = 10;
             sel_owner.id = "sel_owner";
-            //var owner_options_str = "<option value='' unselected></option>";
             var owner_options_str;
             sel_owner.onchange = function(){filterFunc()};
             owner_options_str  += '<option value="Alaska Avalanche Information Center">Alaska Avalanche Information Center</option>';
@@ -890,6 +1479,7 @@
             owner_options_str  += '<option value="Federal Aviation Administration">Federal Aviation Administration</option>';
             owner_options_str  += '<option value="Haight & Associates Inc">Haight & Associates Inc</option>';
             owner_options_str  += '<option value="Incorporated Research Institutions for Seismology">Incorporated Research Institutions for Seismology</option>';
+            owner_options_str  += '<option value="Jeff Meucci">Jeff Meucci</option>';
             owner_options_str  += '<option value="Juneau Weather Forecast Office">Juneau Weather Forecast Office</option>';
             owner_options_str  += '<option value="Ketchikan Public Utilities">Ketchikan Public Utilities</option>';
             owner_options_str  += '<option value="Marine Exchange of Alaska">Marine Exchange of Alaska</option>';
@@ -910,9 +1500,9 @@
             owner_options_str  += '<option value="USArray">USArray</option>';
             owner_options_str  += '<option value="University Corporation for Atmospheric Research">University Corporation for Atmospheric Research</option>';
             owner_options_str  += '<option value="University of Alaska Southeast">University of Alaska Southeast</option>';
+            owner_options_str  += '<option value="Unknown">Unknown</option>';
             owner_options_str  += '<option value="Ward Cove Group">Ward Cove Group</option>';
             owner_options_str  += '<option value="Yukon Avalanche Association">Yukon Avalanche Association</option>';
-            owner_options_str  += '<option value="Unknown">Unknown</option>';
             sel_owner.innerHTML = owner_options_str;
             div_owner.appendChild(sel_owner);
             var lab_owner = document.createElement('div');
@@ -920,7 +1510,7 @@
             lab_owner.className = 'filterlabel';
             div_owner.appendChild(lab_owner);
             var reset_owner = document.createElement('div');
-            reset_owner.innerHTML = 'Clear Filter';
+            reset_owner.innerHTML = 'clear filter';
             reset_owner.className = 'filterlabel';
             reset_owner.onclick = function() {
                 var options = document.getElementById("sel_owner").options;
@@ -930,6 +1520,719 @@
                 filterFunc();
             };
             div_owner.appendChild(reset_owner);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_temperature = document.createElement('div');
+            div_temperature.id = "div_temperature";
+            div_temperature.className= "filterselect";
+            document.getElementById("menu").appendChild(div_temperature);
+            sel_temperature = document.createElement('select');
+            sel_temperature.multiple = true;
+            sel_temperature.size = 3;
+            sel_temperature.id = "sel_temperature";
+            var temperature_options_str;
+            sel_temperature.onchange = function(){filterFunc()};
+            temperature_options_str  += '<option value="No">No</option>';
+            temperature_options_str  += '<option value="Unknown">Unknown</option>';
+            temperature_options_str  += '<option value="Yes">Yes</option>';
+            sel_temperature.innerHTML = temperature_options_str;
+            div_temperature.appendChild(sel_temperature);
+            var lab_temperature = document.createElement('div');
+            lab_temperature.innerHTML = 'Temperature';
+            lab_temperature.className = 'filterlabel';
+            div_temperature.appendChild(lab_temperature);
+            var reset_temperature = document.createElement('div');
+            reset_temperature.innerHTML = 'clear filter';
+            reset_temperature.className = 'filterlabel';
+            reset_temperature.onclick = function() {
+                var options = document.getElementById("sel_temperature").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_temperature.appendChild(reset_temperature);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_seasonal = document.createElement('div');
+            div_seasonal.id = "div_seasonal";
+            div_seasonal.className= "filterselect";
+            document.getElementById("menu").appendChild(div_seasonal);
+            sel_seasonal = document.createElement('select');
+            sel_seasonal.multiple = true;
+            sel_seasonal.size = 3;
+            sel_seasonal.id = "sel_seasonal";
+            var seasonal_options_str;
+            sel_seasonal.onchange = function(){filterFunc()};
+            seasonal_options_str  += '<option value="No">No</option>';
+            seasonal_options_str  += '<option value="Unknown">Unknown</option>';
+            seasonal_options_str  += '<option value="Yes">Yes</option>';
+            sel_seasonal.innerHTML = seasonal_options_str;
+            div_seasonal.appendChild(sel_seasonal);
+            var lab_seasonal = document.createElement('div');
+            lab_seasonal.innerHTML = 'Seasonal';
+            lab_seasonal.className = 'filterlabel';
+            div_seasonal.appendChild(lab_seasonal);
+            var reset_seasonal = document.createElement('div');
+            reset_seasonal.innerHTML = 'clear filter';
+            reset_seasonal.className = 'filterlabel';
+            reset_seasonal.onclick = function() {
+                var options = document.getElementById("sel_seasonal").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_seasonal.appendChild(reset_seasonal);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_reliable_forcsting = document.createElement('div');
+            div_reliable_forcsting.id = "div_reliable_forcsting";
+            div_reliable_forcsting.className= "filterselect";
+            document.getElementById("menu").appendChild(div_reliable_forcsting);
+            sel_reliable_forcsting = document.createElement('select');
+            sel_reliable_forcsting.multiple = true;
+            sel_reliable_forcsting.size = 3;
+            sel_reliable_forcsting.id = "sel_reliable_forcsting";
+            var reliable_forcsting_options_str;
+            sel_reliable_forcsting.onchange = function(){filterFunc()};
+            reliable_forcsting_options_str  += '<option value="No">No</option>';
+            reliable_forcsting_options_str  += '<option value="Unknown">Unknown</option>';
+            reliable_forcsting_options_str  += '<option value="Yes">Yes</option>';
+            sel_reliable_forcsting.innerHTML = reliable_forcsting_options_str;
+            div_reliable_forcsting.appendChild(sel_reliable_forcsting);
+            var lab_reliable_forcsting = document.createElement('div');
+            lab_reliable_forcsting.innerHTML = 'Used for Forecasts';
+            lab_reliable_forcsting.className = 'filterlabel';
+            div_reliable_forcsting.appendChild(lab_reliable_forcsting);
+            var reset_reliable_forcsting = document.createElement('div');
+            reset_reliable_forcsting.innerHTML = 'clear filter';
+            reset_reliable_forcsting.className = 'filterlabel';
+            reset_reliable_forcsting.onclick = function() {
+                var options = document.getElementById("sel_reliable_forcsting").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_reliable_forcsting.appendChild(reset_reliable_forcsting);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_heated = document.createElement('div');
+            div_heated.id = "div_heated";
+            div_heated.className= "filterselect";
+            document.getElementById("menu").appendChild(div_heated);
+            sel_heated = document.createElement('select');
+            sel_heated.multiple = true;
+            sel_heated.size = 3;
+            sel_heated.id = "sel_heated";
+            var heated_options_str;
+            sel_heated.onchange = function(){filterFunc()};
+            heated_options_str  += '<option value="No">No</option>';
+            heated_options_str  += '<option value="Unknown">Unknown</option>';
+            heated_options_str  += '<option value="Yes">Yes</option>';
+            sel_heated.innerHTML = heated_options_str;
+            div_heated.appendChild(sel_heated);
+            var lab_heated = document.createElement('div');
+            lab_heated.innerHTML = 'Heated';
+            lab_heated.className = 'filterlabel';
+            div_heated.appendChild(lab_heated);
+            var reset_heated = document.createElement('div');
+            reset_heated.innerHTML = 'clear filter';
+            reset_heated.className = 'filterlabel';
+            reset_heated.onclick = function() {
+                var options = document.getElementById("sel_heated").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_heated.appendChild(reset_heated);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_altimeter_reading = document.createElement('div');
+            div_altimeter_reading.id = "div_altimeter_reading";
+            div_altimeter_reading.className= "filterselect";
+            document.getElementById("menu").appendChild(div_altimeter_reading);
+            sel_altimeter_reading = document.createElement('select');
+            sel_altimeter_reading.multiple = true;
+            sel_altimeter_reading.size = 3;
+            sel_altimeter_reading.id = "sel_altimeter_reading";
+            var altimeter_reading_options_str;
+            sel_altimeter_reading.onchange = function(){filterFunc()};
+            altimeter_reading_options_str  += '<option value="No">No</option>';
+            altimeter_reading_options_str  += '<option value="Unknown">Unknown</option>';
+            altimeter_reading_options_str  += '<option value="Yes">Yes</option>';
+            sel_altimeter_reading.innerHTML = altimeter_reading_options_str;
+            div_altimeter_reading.appendChild(sel_altimeter_reading);
+            var lab_altimeter_reading = document.createElement('div');
+            lab_altimeter_reading.innerHTML = 'Altimeter Reading';
+            lab_altimeter_reading.className = 'filterlabel';
+            div_altimeter_reading.appendChild(lab_altimeter_reading);
+            var reset_altimeter_reading = document.createElement('div');
+            reset_altimeter_reading.innerHTML = 'clear filter';
+            reset_altimeter_reading.className = 'filterlabel';
+            reset_altimeter_reading.onclick = function() {
+                var options = document.getElementById("sel_altimeter_reading").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_altimeter_reading.appendChild(reset_altimeter_reading);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_wind = document.createElement('div');
+            div_wind.id = "div_wind";
+            div_wind.className= "filterselect";
+            document.getElementById("menu").appendChild(div_wind);
+            sel_wind = document.createElement('select');
+            sel_wind.multiple = true;
+            sel_wind.size = 4;
+            sel_wind.id = "sel_wind";
+            var wind_options_str;
+            sel_wind.onchange = function(){filterFunc()};
+            wind_options_str  += '<option value="No">No</option>';
+            wind_options_str  += '<option value="Unknown">Unknown</option>';
+            wind_options_str  += '<option value="Yes">Yes</option>';
+            sel_wind.innerHTML = wind_options_str;
+            div_wind.appendChild(sel_wind);
+            var lab_wind = document.createElement('div');
+            lab_wind.innerHTML = 'Wind';
+            lab_wind.className = 'filterlabel';
+            div_wind.appendChild(lab_wind);
+            var reset_wind = document.createElement('div');
+            reset_wind.innerHTML = 'clear filter';
+            reset_wind.className = 'filterlabel';
+            reset_wind.onclick = function() {
+                var options = document.getElementById("sel_wind").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_wind.appendChild(reset_wind);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_wave_swell_height = document.createElement('div');
+            div_wave_swell_height.id = "div_wave_swell_height";
+            div_wave_swell_height.className= "filterselect";
+            document.getElementById("menu").appendChild(div_wave_swell_height);
+            sel_wave_swell_height = document.createElement('select');
+            sel_wave_swell_height.multiple = true;
+            sel_wave_swell_height.size = 3;
+            sel_wave_swell_height.id = "sel_wave_swell_height";
+            var wave_swell_height_options_str;
+            sel_wave_swell_height.onchange = function(){filterFunc()};
+            wave_swell_height_options_str  += '<option value="No">No</option>';
+            wave_swell_height_options_str  += '<option value="Unknown">Unknown</option>';
+            wave_swell_height_options_str  += '<option value="Yes">Yes</option>';
+            sel_wave_swell_height.innerHTML = wave_swell_height_options_str;
+            div_wave_swell_height.appendChild(sel_wave_swell_height);
+            var lab_wave_swell_height = document.createElement('div');
+            lab_wave_swell_height.innerHTML = 'Wave Swell Height';
+            lab_wave_swell_height.className = 'filterlabel';
+            div_wave_swell_height.appendChild(lab_wave_swell_height);
+            var reset_wave_swell_height = document.createElement('div');
+            reset_wave_swell_height.innerHTML = 'clear filter';
+            reset_wave_swell_height.className = 'filterlabel';
+            reset_wave_swell_height.onclick = function() {
+                var options = document.getElementById("sel_wave_swell_height").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_wave_swell_height.appendChild(reset_wave_swell_height);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_wind_reliable = document.createElement('div');
+            div_wind_reliable.id = "div_wind_reliable";
+            div_wind_reliable.className= "filterselect";
+            document.getElementById("menu").appendChild(div_wind_reliable);
+            sel_wind_reliable = document.createElement('select');
+            sel_wind_reliable.multiple = true;
+            sel_wind_reliable.size = 4;
+            sel_wind_reliable.id = "sel_wind_reliable";
+            var wind_reliable_options_str;
+            sel_wind_reliable.onchange = function(){filterFunc()};
+            wind_reliable_options_str  += '<option value="No">No</option>';
+            wind_reliable_options_str  += '<option value="Unknown">Unknown</option>';
+            wind_reliable_options_str  += '<option value="Yes">Yes</option>';
+            sel_wind_reliable.innerHTML = wind_reliable_options_str;
+            div_wind_reliable.appendChild(sel_wind_reliable);
+            var lab_wind_reliable = document.createElement('div');
+            lab_wind_reliable.innerHTML = 'Wind for forecasting?';
+            lab_wind_reliable.className = 'filterlabel';
+            div_wind_reliable.appendChild(lab_wind_reliable);
+            var reset_wind_reliable = document.createElement('div');
+            reset_wind_reliable.innerHTML = 'clear filter';
+            reset_wind_reliable.className = 'filterlabel';
+            reset_wind_reliable.onclick = function() {
+                var options = document.getElementById("sel_wind_reliable").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_wind_reliable.appendChild(reset_wind_reliable);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_snow_amount = document.createElement('div');
+            div_snow_amount.id = "div_snow_amount";
+            div_snow_amount.className= "filterselect";
+            document.getElementById("menu").appendChild(div_snow_amount);
+            sel_snow_amount = document.createElement('select');
+            sel_snow_amount.multiple = true;
+            sel_snow_amount.size = 3;
+            sel_snow_amount.id = "sel_snow_amount";
+            var snow_amount_options_str;
+            sel_snow_amount.onchange = function(){filterFunc()};
+            snow_amount_options_str  += '<option value="No">No</option>';
+            snow_amount_options_str  += '<option value="Unknown">Unknown</option>';
+            snow_amount_options_str  += '<option value="Yes">Yes</option>';
+            sel_snow_amount.innerHTML = snow_amount_options_str;
+            div_snow_amount.appendChild(sel_snow_amount);
+            var lab_snow_amount = document.createElement('div');
+            lab_snow_amount.innerHTML = 'Snow Amount';
+            lab_snow_amount.className = 'filterlabel';
+            div_snow_amount.appendChild(lab_snow_amount);
+            var reset_snow_amount = document.createElement('div');
+            reset_snow_amount.innerHTML = 'clear filter';
+            reset_snow_amount.className = 'filterlabel';
+            reset_snow_amount.onclick = function() {
+                var options = document.getElementById("sel_snow_amount").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_snow_amount.appendChild(reset_snow_amount);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_sky_conditions = document.createElement('div');
+            div_sky_conditions.id = "div_sky_conditions";
+            div_sky_conditions.className= "filterselect";
+            document.getElementById("menu").appendChild(div_sky_conditions);
+            sel_sky_conditions = document.createElement('select');
+            sel_sky_conditions.multiple = true;
+            sel_sky_conditions.size = 3;
+            sel_sky_conditions.id = "sel_sky_conditions";
+            var sky_conditions_options_str;
+            sel_sky_conditions.onchange = function(){filterFunc()};
+            sky_conditions_options_str  += '<option value="No">No</option>';
+            sky_conditions_options_str  += '<option value="Unknown">Unknown</option>';
+            sky_conditions_options_str  += '<option value="Yes">Yes</option>';
+            sel_sky_conditions.innerHTML = sky_conditions_options_str;
+            div_sky_conditions.appendChild(sel_sky_conditions);
+            var lab_sky_conditions = document.createElement('div');
+            lab_sky_conditions.innerHTML = 'Sky Conditions';
+            lab_sky_conditions.className = 'filterlabel';
+            div_sky_conditions.appendChild(lab_sky_conditions);
+            var reset_sky_conditions = document.createElement('div');
+            reset_sky_conditions.innerHTML = 'clear filter';
+            reset_sky_conditions.className = 'filterlabel';
+            reset_sky_conditions.onclick = function() {
+                var options = document.getElementById("sel_sky_conditions").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_sky_conditions.appendChild(reset_sky_conditions);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_precip_reliable = document.createElement('div');
+            div_precip_reliable.id = "div_precip_reliable";
+            div_precip_reliable.className= "filterselect";
+            document.getElementById("menu").appendChild(div_precip_reliable);
+            sel_precip_reliable = document.createElement('select');
+            sel_precip_reliable.multiple = true;
+            sel_precip_reliable.size = 3;
+            sel_precip_reliable.id = "sel_precip_reliable";
+            var precip_reliable_options_str;
+            sel_precip_reliable.onchange = function(){filterFunc()};
+            precip_reliable_options_str  += '<option value="No">No</option>';
+            precip_reliable_options_str  += '<option value="Unknown">Unknown</option>';
+            precip_reliable_options_str  += '<option value="Yes">Yes</option>';
+            sel_precip_reliable.innerHTML = precip_reliable_options_str;
+            div_precip_reliable.appendChild(sel_precip_reliable);
+            var lab_precip_reliable = document.createElement('div');
+            lab_precip_reliable.innerHTML = 'Precipitation for Forecasts?';
+            lab_precip_reliable.className = 'filterlabel';
+            div_precip_reliable.appendChild(lab_precip_reliable);
+            var reset_precip_reliable = document.createElement('div');
+            reset_precip_reliable.innerHTML = 'clear filter';
+            reset_precip_reliable.className = 'filterlabel';
+            reset_precip_reliable.onclick = function() {
+                var options = document.getElementById("sel_precip_reliable").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_precip_reliable.appendChild(reset_precip_reliable);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_seismometer = document.createElement('div');
+            div_seismometer.id = "div_seismometer";
+            div_seismometer.className= "filterselect";
+            document.getElementById("menu").appendChild(div_seismometer);
+            sel_seismometer = document.createElement('select');
+            sel_seismometer.multiple = true;
+            sel_seismometer.size = 2;
+            sel_seismometer.id = "sel_seismometer";
+            var seismometer_options_str;
+            sel_seismometer.onchange = function(){filterFunc()};
+            seismometer_options_str  += '<option value="No">No</option>';
+            seismometer_options_str  += '<option value="Yes">Yes</option>';
+            sel_seismometer.innerHTML = seismometer_options_str;
+            div_seismometer.appendChild(sel_seismometer);
+            var lab_seismometer = document.createElement('div');
+            lab_seismometer.innerHTML = 'Seismometer';
+            lab_seismometer.className = 'filterlabel';
+            div_seismometer.appendChild(lab_seismometer);
+            var reset_seismometer = document.createElement('div');
+            reset_seismometer.innerHTML = 'clear filter';
+            reset_seismometer.className = 'filterlabel';
+            reset_seismometer.onclick = function() {
+                var options = document.getElementById("sel_seismometer").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_seismometer.appendChild(reset_seismometer);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_operational = document.createElement('div');
+            div_operational.id = "div_operational";
+            div_operational.className= "filterselect";
+            document.getElementById("menu").appendChild(div_operational);
+            sel_operational = document.createElement('select');
+            sel_operational.multiple = true;
+            sel_operational.size = 2;
+            sel_operational.id = "sel_operational";
+            var operational_options_str;
+            sel_operational.onchange = function(){filterFunc()};
+            operational_options_str  += '<option value="Active">Active</option>';
+            operational_options_str  += '<option value="Inactive">Inactive</option>';
+            sel_operational.innerHTML = operational_options_str;
+            div_operational.appendChild(sel_operational);
+            var lab_operational = document.createElement('div');
+            lab_operational.innerHTML = 'Operational';
+            lab_operational.className = 'filterlabel';
+            div_operational.appendChild(lab_operational);
+            var reset_operational = document.createElement('div');
+            reset_operational.innerHTML = 'clear filter';
+            reset_operational.className = 'filterlabel';
+            reset_operational.onclick = function() {
+                var options = document.getElementById("sel_operational").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_operational.appendChild(reset_operational);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_coastal = document.createElement('div');
+            div_coastal.id = "div_coastal";
+            div_coastal.className= "filterselect";
+            document.getElementById("menu").appendChild(div_coastal);
+            sel_coastal = document.createElement('select');
+            sel_coastal.multiple = true;
+            sel_coastal.size = 2;
+            sel_coastal.id = "sel_coastal";
+            var coastal_options_str;
+            sel_coastal.onchange = function(){filterFunc()};
+            coastal_options_str  += '<option value="No">No</option>';
+            coastal_options_str  += '<option value="Yes">Yes</option>';
+            sel_coastal.innerHTML = coastal_options_str;
+            div_coastal.appendChild(sel_coastal);
+            var lab_coastal = document.createElement('div');
+            lab_coastal.innerHTML = 'Coastal';
+            lab_coastal.className = 'filterlabel';
+            div_coastal.appendChild(lab_coastal);
+            var reset_coastal = document.createElement('div');
+            reset_coastal.innerHTML = 'clear filter';
+            reset_coastal.className = 'filterlabel';
+            reset_coastal.onclick = function() {
+                var options = document.getElementById("sel_coastal").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_coastal.appendChild(reset_coastal);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_experimental_plot = document.createElement('div');
+            div_experimental_plot.id = "div_experimental_plot";
+            div_experimental_plot.className= "filterselect";
+            document.getElementById("menu").appendChild(div_experimental_plot);
+            sel_experimental_plot = document.createElement('select');
+            sel_experimental_plot.multiple = true;
+            sel_experimental_plot.size = 2;
+            sel_experimental_plot.id = "sel_experimental_plot";
+            var experimental_plot_options_str;
+            sel_experimental_plot.onchange = function(){filterFunc()};
+            experimental_plot_options_str  += '<option value="No">No</option>';
+            experimental_plot_options_str  += '<option value="Yes">Yes</option>';
+            sel_experimental_plot.innerHTML = experimental_plot_options_str;
+            div_experimental_plot.appendChild(sel_experimental_plot);
+            var lab_experimental_plot = document.createElement('div');
+            lab_experimental_plot.innerHTML = 'Experimental Plot';
+            lab_experimental_plot.className = 'filterlabel';
+            div_experimental_plot.appendChild(lab_experimental_plot);
+            var reset_experimental_plot = document.createElement('div');
+            reset_experimental_plot.innerHTML = 'clear filter';
+            reset_experimental_plot.className = 'filterlabel';
+            reset_experimental_plot.onclick = function() {
+                var options = document.getElementById("sel_experimental_plot").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_experimental_plot.appendChild(reset_experimental_plot);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_station_type = document.createElement('div');
+            div_station_type.id = "div_station_type";
+            div_station_type.className= "filterselect";
+            document.getElementById("menu").appendChild(div_station_type);
+            sel_station_type = document.createElement('select');
+            sel_station_type.multiple = true;
+            sel_station_type.size = 10;
+            sel_station_type.id = "sel_station_type";
+            var station_type_options_str;
+            sel_station_type.onchange = function(){filterFunc()};
+            station_type_options_str  += '<option value="Automated Weather Observing System">Automated Weather Observing System</option>';
+            station_type_options_str  += '<option value="Coastal-Marine Automated Network">Coastal-Marine Automated Network</option>';
+            station_type_options_str  += '<option value="Dam level">Dam level</option>';
+            station_type_options_str  += '<option value="Experimental Plot">Experimental Plot</option>';
+            station_type_options_str  += '<option value="Geostationary Satellite">Geostationary Satellite</option>';
+            station_type_options_str  += '<option value="Rain Gauge">Rain Gauge</option>';
+            station_type_options_str  += '<option value="RainWise MK-lll and 2 each Tempest TH-TWDR-01">RainWise MK-lll and 2 each Tempest TH-TWDR-01</option>';
+            station_type_options_str  += '<option value="Seismometer">Seismometer</option>';
+            station_type_options_str  += '<option value="Snow Telemetry (SNOTEL) Network">Snow Telemetry (SNOTEL) Network</option>';
+            station_type_options_str  += '<option value="Staff Gauge">Staff Gauge</option>';
+            station_type_options_str  += '<option value="Stream Gauge">Stream Gauge</option>';
+            station_type_options_str  += '<option value="Tide Gauge">Tide Gauge</option>';
+            station_type_options_str  += '<option value="Unknown">Unknown</option>';
+            station_type_options_str  += '<option value="Weather Station">Weather Station</option>';
+            station_type_options_str  += '<option value="Wind Profiler">Wind Profiler</option>';
+            sel_station_type.innerHTML = station_type_options_str;
+            div_station_type.appendChild(sel_station_type);
+            var lab_station_type = document.createElement('div');
+            lab_station_type.innerHTML = 'Station Type';
+            lab_station_type.className = 'filterlabel';
+            div_station_type.appendChild(lab_station_type);
+            var reset_station_type = document.createElement('div');
+            reset_station_type.innerHTML = 'clear filter';
+            reset_station_type.className = 'filterlabel';
+            reset_station_type.onclick = function() {
+                var options = document.getElementById("sel_station_type").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_station_type.appendChild(reset_station_type);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_hydrologic = document.createElement('div');
+            div_hydrologic.id = "div_hydrologic";
+            div_hydrologic.className= "filterselect";
+            document.getElementById("menu").appendChild(div_hydrologic);
+            sel_hydrologic = document.createElement('select');
+            sel_hydrologic.multiple = true;
+            sel_hydrologic.size = 3;
+            sel_hydrologic.id = "sel_hydrologic";
+            var hydrologic_options_str;
+            sel_hydrologic.onchange = function(){filterFunc()};
+            hydrologic_options_str  += '<option value="No">No</option>';
+            hydrologic_options_str  += '<option value="Unknown">Unknown</option>';
+            hydrologic_options_str  += '<option value="Yes">Yes</option>';
+            sel_hydrologic.innerHTML = hydrologic_options_str;
+            div_hydrologic.appendChild(sel_hydrologic);
+            var lab_hydrologic = document.createElement('div');
+            lab_hydrologic.innerHTML = 'Hydrologic';
+            lab_hydrologic.className = 'filterlabel';
+            div_hydrologic.appendChild(lab_hydrologic);
+            var reset_hydrologic = document.createElement('div');
+            reset_hydrologic.innerHTML = 'clear filter';
+            reset_hydrologic.className = 'filterlabel';
+            reset_hydrologic.onclick = function() {
+                var options = document.getElementById("sel_hydrologic").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_hydrologic.appendChild(reset_hydrologic);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_weather = document.createElement('div');
+            div_weather.id = "div_weather";
+            div_weather.className= "filterselect";
+            document.getElementById("menu").appendChild(div_weather);
+            sel_weather = document.createElement('select');
+            sel_weather.multiple = true;
+            sel_weather.size = 4;
+            sel_weather.id = "sel_weather";
+            var weather_options_str;
+            sel_weather.onchange = function(){filterFunc()};
+            weather_options_str  += '<option value="No">No</option>';
+            weather_options_str  += '<option value="Unknown">Unknown</option>';
+            weather_options_str  += '<option value="Yes">Yes</option>';
+            sel_weather.innerHTML = weather_options_str;
+            div_weather.appendChild(sel_weather);
+            var lab_weather = document.createElement('div');
+            lab_weather.innerHTML = 'Weather';
+            lab_weather.className = 'filterlabel';
+            div_weather.appendChild(lab_weather);
+            var reset_weather = document.createElement('div');
+            reset_weather.innerHTML = 'clear filter';
+            reset_weather.className = 'filterlabel';
+            reset_weather.onclick = function() {
+                var options = document.getElementById("sel_weather").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_weather.appendChild(reset_weather);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_sea_level_pressure = document.createElement('div');
+            div_sea_level_pressure.id = "div_sea_level_pressure";
+            div_sea_level_pressure.className= "filterselect";
+            document.getElementById("menu").appendChild(div_sea_level_pressure);
+            sel_sea_level_pressure = document.createElement('select');
+            sel_sea_level_pressure.multiple = true;
+            sel_sea_level_pressure.size = 3;
+            sel_sea_level_pressure.id = "sel_sea_level_pressure";
+            var sea_level_pressure_options_str;
+            sel_sea_level_pressure.onchange = function(){filterFunc()};
+            sea_level_pressure_options_str  += '<option value="No">No</option>';
+            sea_level_pressure_options_str  += '<option value="Unknown">Unknown</option>';
+            sea_level_pressure_options_str  += '<option value="Yes">Yes</option>';
+            sel_sea_level_pressure.innerHTML = sea_level_pressure_options_str;
+            div_sea_level_pressure.appendChild(sel_sea_level_pressure);
+            var lab_sea_level_pressure = document.createElement('div');
+            lab_sea_level_pressure.innerHTML = 'Sea Level Pressure';
+            lab_sea_level_pressure.className = 'filterlabel';
+            div_sea_level_pressure.appendChild(lab_sea_level_pressure);
+            var reset_sea_level_pressure = document.createElement('div');
+            reset_sea_level_pressure.innerHTML = 'clear filter';
+            reset_sea_level_pressure.className = 'filterlabel';
+            reset_sea_level_pressure.onclick = function() {
+                var options = document.getElementById("sel_sea_level_pressure").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_sea_level_pressure.appendChild(reset_sea_level_pressure);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_dew_point = document.createElement('div');
+            div_dew_point.id = "div_dew_point";
+            div_dew_point.className= "filterselect";
+            document.getElementById("menu").appendChild(div_dew_point);
+            sel_dew_point = document.createElement('select');
+            sel_dew_point.multiple = true;
+            sel_dew_point.size = 3;
+            sel_dew_point.id = "sel_dew_point";
+            var dew_point_options_str;
+            sel_dew_point.onchange = function(){filterFunc()};
+            dew_point_options_str  += '<option value="No">No</option>';
+            dew_point_options_str  += '<option value="Unknown">Unknown</option>';
+            dew_point_options_str  += '<option value="Yes">Yes</option>';
+            sel_dew_point.innerHTML = dew_point_options_str;
+            div_dew_point.appendChild(sel_dew_point);
+            var lab_dew_point = document.createElement('div');
+            lab_dew_point.innerHTML = 'Dew Point';
+            lab_dew_point.className = 'filterlabel';
+            div_dew_point.appendChild(lab_dew_point);
+            var reset_dew_point = document.createElement('div');
+            reset_dew_point.innerHTML = 'clear filter';
+            reset_dew_point.className = 'filterlabel';
+            reset_dew_point.onclick = function() {
+                var options = document.getElementById("sel_dew_point").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_dew_point.appendChild(reset_dew_point);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_temp_reliable = document.createElement('div');
+            div_temp_reliable.id = "div_temp_reliable";
+            div_temp_reliable.className= "filterselect";
+            document.getElementById("menu").appendChild(div_temp_reliable);
+            sel_temp_reliable = document.createElement('select');
+            sel_temp_reliable.multiple = true;
+            sel_temp_reliable.size = 3;
+            sel_temp_reliable.id = "sel_temp_reliable";
+            var temp_reliable_options_str;
+            sel_temp_reliable.onchange = function(){filterFunc()};
+            temp_reliable_options_str  += '<option value="No">No</option>';
+            temp_reliable_options_str  += '<option value="Unknown">Unknown</option>';
+            temp_reliable_options_str  += '<option value="Yes">Yes</option>';
+            sel_temp_reliable.innerHTML = temp_reliable_options_str;
+            div_temp_reliable.appendChild(sel_temp_reliable);
+            var lab_temp_reliable = document.createElement('div');
+            lab_temp_reliable.innerHTML = 'Temp for forecasting?';
+            lab_temp_reliable.className = 'filterlabel';
+            div_temp_reliable.appendChild(lab_temp_reliable);
+            var reset_temp_reliable = document.createElement('div');
+            reset_temp_reliable.innerHTML = 'clear filter';
+            reset_temp_reliable.className = 'filterlabel';
+            reset_temp_reliable.onclick = function() {
+                var options = document.getElementById("sel_temp_reliable").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_temp_reliable.appendChild(reset_temp_reliable);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_precipitation = document.createElement('div');
+            div_precipitation.id = "div_precipitation";
+            div_precipitation.className= "filterselect";
+            document.getElementById("menu").appendChild(div_precipitation);
+            sel_precipitation = document.createElement('select');
+            sel_precipitation.multiple = true;
+            sel_precipitation.size = 4;
+            sel_precipitation.id = "sel_precipitation";
+            var precipitation_options_str;
+            sel_precipitation.onchange = function(){filterFunc()};
+            precipitation_options_str  += '<option value=" "> </option>';
+            precipitation_options_str  += '<option value="No">No</option>';
+            precipitation_options_str  += '<option value="Unknown">Unknown</option>';
+            precipitation_options_str  += '<option value="Yes">Yes</option>';
+            sel_precipitation.innerHTML = precipitation_options_str;
+            div_precipitation.appendChild(sel_precipitation);
+            var lab_precipitation = document.createElement('div');
+            lab_precipitation.innerHTML = 'Precipitation';
+            lab_precipitation.className = 'filterlabel';
+            div_precipitation.appendChild(lab_precipitation);
+            var reset_precipitation = document.createElement('div');
+            reset_precipitation.innerHTML = 'clear filter';
+            reset_precipitation.className = 'filterlabel';
+            reset_precipitation.onclick = function() {
+                var options = document.getElementById("sel_precipitation").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_precipitation.appendChild(reset_precipitation);
         </script>
     </body>
 </html>
